@@ -1,0 +1,36 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/noser/STM32/GPIO_LED/User/app/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+Blink_led	main.c	/^    Blink_led$/;"	e	enum:__anon0d38083b0103	file:
+FILTER_DOWN	key.h	/^    FILTER_DOWN,$/;"	e	enum:__anon0fc8a9640103
+FILTER_UP	key.h	/^    FILTER_UP$/;"	e	enum:__anon0fc8a9640103
+IDLE	key.h	/^    IDLE,$/;"	e	enum:__anon0fc8a9640103
+KEY_H_	key.h	/^#define KEY_H_$/;"	d
+Key_state	key.h	/^}Key_state;$/;"	t	typeref:enum:__anon0fc8a9640103
+LED_H	led.h	/^#define LED_H$/;"	d
+LED_PINS	main.c	/^#define LED_PINS /;"	d	file:
+PRESSED	key.h	/^    PRESSED,$/;"	e	enum:__anon0fc8a9640103
+Systate	main.c	/^}Systate;$/;"	t	typeref:enum:__anon0d38083b0103	file:
+__anon0d38083b0103	main.c	/^typedef enum {$/;"	g	file:
+__anon0fc8a9640103	key.h	/^typedef enum {$/;"	g
+__anon0fda68900108	led.h	/^typedef struct {$/;"	s
+default_	main.c	/^    default_,$/;"	e	enum:__anon0d38083b0103	file:
+gpio	led.h	/^    gpio_port_t *gpio;$/;"	m	struct:__anon0fda68900108	typeref:typename:gpio_port_t *
+gpioa_ctx	main.c	/^static stm32_gpio_ctx_t gpioa_ctx = {$/;"	v	typeref:typename:stm32_gpio_ctx_t	file:
+gpioa_port	main.c	/^static gpio_port_t gpioa_port = {$/;"	v	typeref:typename:gpio_port_t	file:
+led_init	led.c	/^void led_init(led_t *led)$/;"	f	typeref:typename:void
+led_off	led.c	/^void led_off(led_t *led)$/;"	f	typeref:typename:void
+led_on	led.c	/^void led_on(led_t *led)$/;"	f	typeref:typename:void
+led_t	led.h	/^}led_t;$/;"	t	typeref:struct:__anon0fda68900108
+led_toggle	led.c	/^void led_toggle(led_t *led)$/;"	f	typeref:typename:void
+leds	main.c	/^static led_t leds = {$/;"	v	typeref:typename:led_t	file:
+main	main.c	/^int main(void)$/;"	f	typeref:typename:int
+pins	led.h	/^    uint16_t pins;$/;"	m	struct:__anon0fda68900108	typeref:typename:uint16_t
