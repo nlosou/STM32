@@ -6,11 +6,22 @@ TARGET = main
 DEFS = -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER 
 CFLAGS = -mcpu=cortex-m3 -mthumb -O2 -g -Wall $(DEFS)
 
+CFLAGS += -ICMSIS
+CFLAGS += -IStdPeriph/inc
+CFLAGS += -IUser
+CFLAGS += -IUser/app
+CFLAGS += -IUser/drivers
+CFLAGS += -IUser/hal
+CFLAGS += -IUser/platform/stm32f103
 INCLUDES = -ICMSIS -IStdPeriph/inc -IUser
+
 
 SRCS = $(wildcard CMSIS/*.c) \
        $(wildcard StdPeriph/src/*.c) \
        $(wildcard User/*.c) \
+       $(wildcard User/app/*.c) \
+       $(wildcard User/osal/*.c) \
+       $(wildcard User/platform/stm32f103/*.c) \
        CMSIS/startup_stm32f10x_md.s
 
 LDSCRIPT = stm32_flash.ld
