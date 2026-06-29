@@ -6,8 +6,10 @@
 #define NULL 0
 typedef struct {
     void (*init)(void* ctx);
-    int (*write)(void* ctx,uint8_t dev_addr,const uint8_t *buf,uint32_t len);
-    int (*read)(void* ctx,uint8_t dev_addr,uint8_t *buf,uint32_t len);
+    uint8_t (*write)(void* ctx, uint8_t buf);
+    uint8_t (*read)(void* ctx);
+    void (*start)(void*ctx);
+    void (*stop)(void*ctx);
 }i2c_ops_t;
 
 typedef struct {
@@ -22,19 +24,34 @@ static inline void i2c_init(i2c_port_t *port)
         port->ops->init(port->ctx);
     }
 }
-static inline int i2c_write(i2c_port_t *port,uint8_t dev_addr,uint8_t *buf,uint32_t len)
+static inline uint8_t i2c_write(i2c_port_t *port,uint8_t buf)
 {
-    if(port!=NULL && port->ctx!=NULL  && port->ops->write!=NULL)
+    return port->ops->write(port->ctx,buf);
+}
+
+static inline uint8_t i2c_read(i2c_port_t *port)
+{
+    if(port!=NULL && port->ctx!=NULL  && port->ops->read!=NULL)
     {
-        port->ops->write(port->ctx,dev_addr,buf,len);
+       return  port->ops->read(port->ctx);
+    }
+    return 0;
+}
+
+static inline void i2c_start(i2c_port_t *port)
+{
+    if(port!=NULL && port->ctx!=NULL  && port->ops->start!=NULL)
+    {
+       return  port->ops->start(port->ctx);
     }
 }
 
-static inline int i2c_read(i2c_port_t *port,uint8_t dev_addr,uint8_t *buf,uint32_t len)
+
+static inline void i2c_stop(i2c_port_t *port)
 {
-    if(port!=NULL && port->ctx!=NULL  && port->ops->write!=NULL)
+    if(port!=NULL && port->ctx!=NULL  && port->ops->stop!=NULL)
     {
-        port->ops->read(port->ctx,dev_addr,buf,len);
+       return  port->ops->stop(port->ctx);
     }
 }
 

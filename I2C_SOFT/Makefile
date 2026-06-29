@@ -20,6 +20,7 @@ SRCS = $(wildcard CMSIS/*.c) \
        $(wildcard StdPeriph/src/*.c) \
        $(wildcard User/*.c) \
        $(wildcard User/app/*.c) \
+       $(wildcard User/protocol/*.c) \
        $(wildcard User/osal/*.c) \
        $(wildcard User/platform/stm32f103/*.c) \
        CMSIS/startup_stm32f10x_md.s

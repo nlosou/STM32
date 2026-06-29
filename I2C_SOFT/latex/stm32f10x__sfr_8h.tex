@@ -1,0 +1,320 @@
+\doxysection{User/drivers/stm32f10x\+\_\+sfr.h File Reference}
+\hypertarget{stm32f10x__sfr_8h}{}\label{stm32f10x__sfr_8h}\index{User/drivers/stm32f10x\_sfr.h@{User/drivers/stm32f10x\_sfr.h}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+Include dependency graph for stm32f10x\+\_\+sfr.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{stm32f10x__sfr_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{stm32f10x__sfr_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structRCC__TypeDef}{RCC\+\_\+\+Type\+Def}}
+\item 
+struct \mbox{\hyperlink{structGPIOx__TypeDef}{GPIOx\+\_\+\+Type\+Def}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a0e681b03f364532055d88f63fec0d99d}{RCC\+\_\+\+BASE}}~(0x40021000\+UL)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_ad7723846cc5db8e43a44d78cf21f6efa}{GPIOA\+\_\+\+BASE}}~(0x40010800\+UL)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_ac944a89eb789000ece920c0f89cb6a68}{GPIOB\+\_\+\+BASE}}~(0x40010\+C00\+UL)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a26f267dc35338eef219544c51f1e6b3f}{GPIOC\+\_\+\+BASE}}~(0x40011000\+UL)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a74944438a086975793d26ae48d5882d4}{RCC}}~((\mbox{\hyperlink{structRCC__TypeDef}{RCC\+\_\+\+Type\+Def}}\texorpdfstring{$\ast$}{*})\mbox{\hyperlink{stm32f10x__sfr_8h_a0e681b03f364532055d88f63fec0d99d}{RCC\+\_\+\+BASE}})
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_ac485358099728ddae050db37924dd6b7}{GPIOA}}~((\mbox{\hyperlink{structGPIOx__TypeDef}{GPIOx\+\_\+\+Type\+Def}}\texorpdfstring{$\ast$}{*})\mbox{\hyperlink{stm32f10x__sfr_8h_ad7723846cc5db8e43a44d78cf21f6efa}{GPIOA\+\_\+\+BASE}})
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a68b66ac73be4c836db878a42e1fea3cd}{GPIOB}}~((\mbox{\hyperlink{structGPIOx__TypeDef}{GPIOx\+\_\+\+Type\+Def}}\texorpdfstring{$\ast$}{*})\mbox{\hyperlink{stm32f10x__sfr_8h_ac944a89eb789000ece920c0f89cb6a68}{GPIOB\+\_\+\+BASE}})
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a2dca03332d620196ba943bc2346eaa08}{GPIOC}}~((\mbox{\hyperlink{structGPIOx__TypeDef}{GPIOx\+\_\+\+Type\+Def}}\texorpdfstring{$\ast$}{*})\mbox{\hyperlink{stm32f10x__sfr_8h_a26f267dc35338eef219544c51f1e6b3f}{GPIOC\+\_\+\+BASE}})
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_ad7b860fbeb386425bd7d4ef00ce17c27}{RCC\+\_\+\+APB2\+ENR\+\_\+\+IOPAEN}}~(1UL $<$$<$ 2)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_aa9ba85777143e752841c2e6a6977deb9}{RCC\+\_\+\+APB2\+ENR\+\_\+\+IOPBEN}}~(1UL $<$$<$ 3)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a443ef1518a62fa7ecee3f1386b545d8c}{RCC\+\_\+\+APB2\+ENR\+\_\+\+IOPCEN}}~(1UL $<$$<$ 4)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a6b455a40063f158a0fb2bb18cda9359c}{ANALOG\+\_\+\+MODE}}~(0x00)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a594d417399294603a5b66de1a6559ec1}{FLOATING\+\_\+\+INPUT}}~(0x04)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_ae671cf5683fae1d22db9a7c98963d8dd}{INPUT\+\_\+\+WITH\+\_\+\+PULLUP\+\_\+\+PULLDOWN}}~(0x08)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a87e455a3b96f794c73238f765cca1c73}{OUTPUT\+\_\+\+MODE\+\_\+10\+MHZ\+\_\+\+General\+\_\+push\+\_\+pull}}~(0x01)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_af929cd338f4005b8f7024441a8ccd2fd}{OUTPUT\+\_\+\+MODE\+\_\+10\+MHZ\+\_\+\+General\+\_\+open\+\_\+drain}}~(0x05)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_aa21879b68e9866118de49c20ba75a6ce}{OUTPUT\+\_\+\+MODE\+\_\+2\+MHZ\+\_\+\+General\+\_\+push\+\_\+pull}}~(0x02)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a46891381cf32882314301f4a57b8b94a}{OUTPUT\+\_\+\+MODE\+\_\+2\+MHZ\+\_\+\+General\+\_\+open\+\_\+drain}}~(0x06)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_ab3c20acf76edce41c0d2b20e0cf90e62}{OUTPUT\+\_\+\+MODE\+\_\+50\+MHZ\+\_\+\+General\+\_\+push\+\_\+pull}}~(0x03)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a80dbacdeb160b64a6f7d6dc6d2517f0d}{OUTPUT\+\_\+\+MODE\+\_\+50\+MHZ\+\_\+\+General\+\_\+open\+\_\+drain}}~(0x07)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_adbf4041a7565bb1234b6d0c0eca7e951}{GPIOx\+\_\+\+PIN\+\_\+0}}~(1$<$$<$0)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a6cdfeedaebd0918c9066ca27d41efde3}{GPIOx\+\_\+\+PIN\+\_\+1}}~(1$<$$<$1)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a116faae5061f64d3751418bcff9f841d}{GPIOx\+\_\+\+PIN\+\_\+2}}~(1$<$$<$2)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a6fe376ff77d6b58340e5f0ac498bf4b7}{GPIOx\+\_\+\+PIN\+\_\+3}}~(1$<$$<$3)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_ac9e5e77c2e1c48583a84920013211528}{GPIOx\+\_\+\+PIN\+\_\+4}}~(1$<$$<$4)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_ac97f11107facbb0ac252b9f233999139}{GPIOx\+\_\+\+PIN\+\_\+5}}~(1$<$$<$5)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_aeba1a479b945e7157607cbbcc1de4ac0}{GPIOx\+\_\+\+PIN\+\_\+6}}~(1$<$$<$6)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_adc590910df5f89fcce89c5e98c76d80a}{GPIOx\+\_\+\+PIN\+\_\+7}}~(1$<$$<$7)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a810244de8ece9b8a64b6caa2a97dc280}{GPIOx\+\_\+\+PIN\+\_\+8}}~(1$<$$<$8)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_ab2ca80b639328d2fe39213cf6b141d06}{GPIOx\+\_\+\+PIN\+\_\+9}}~(1$<$$<$9)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a96fc86f7a22d4bda17a1d60bb4a8152f}{GPIOx\+\_\+\+PIN\+\_\+10}}~(1$<$$<$10)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a23c5dbb755bfa4e498deef08b0f39320}{GPIOx\+\_\+\+PIN\+\_\+11}}~(1$<$$<$11)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a3db57e864797d5c5210d925265885945}{GPIOx\+\_\+\+PIN\+\_\+12}}~(1$<$$<$12)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a877fa591093d77f371411b2536d3669d}{GPIOx\+\_\+\+PIN\+\_\+13}}~(1$<$$<$13)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a98f4642d54549596a2ffc4164b3333b7}{GPIOx\+\_\+\+PIN\+\_\+14}}~(1$<$$<$14)
+\item 
+\#define \mbox{\hyperlink{stm32f10x__sfr_8h_a35a0473013a2527275bf8f0161fe8abe}{GPIOx\+\_\+\+PIN\+\_\+15}}~(1$<$$<$15)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{stm32f10x__sfr_8h_a6b455a40063f158a0fb2bb18cda9359c}\label{stm32f10x__sfr_8h_a6b455a40063f158a0fb2bb18cda9359c} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!ANALOG\_MODE@{ANALOG\_MODE}}
+\index{ANALOG\_MODE@{ANALOG\_MODE}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{ANALOG\_MODE}{ANALOG\_MODE}}
+{\footnotesize\ttfamily \#define ANALOG\+\_\+\+MODE~(0x00)}
+
+\Hypertarget{stm32f10x__sfr_8h_a594d417399294603a5b66de1a6559ec1}\label{stm32f10x__sfr_8h_a594d417399294603a5b66de1a6559ec1} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!FLOATING\_INPUT@{FLOATING\_INPUT}}
+\index{FLOATING\_INPUT@{FLOATING\_INPUT}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{FLOATING\_INPUT}{FLOATING\_INPUT}}
+{\footnotesize\ttfamily \#define FLOATING\+\_\+\+INPUT~(0x04)}
+
+\Hypertarget{stm32f10x__sfr_8h_ac485358099728ddae050db37924dd6b7}\label{stm32f10x__sfr_8h_ac485358099728ddae050db37924dd6b7} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOA@{GPIOA}}
+\index{GPIOA@{GPIOA}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOA}{GPIOA}}
+{\footnotesize\ttfamily \#define GPIOA~((\mbox{\hyperlink{structGPIOx__TypeDef}{GPIOx\+\_\+\+Type\+Def}}\texorpdfstring{$\ast$}{*})\mbox{\hyperlink{stm32f10x__sfr_8h_ad7723846cc5db8e43a44d78cf21f6efa}{GPIOA\+\_\+\+BASE}})}
+
+\Hypertarget{stm32f10x__sfr_8h_ad7723846cc5db8e43a44d78cf21f6efa}\label{stm32f10x__sfr_8h_ad7723846cc5db8e43a44d78cf21f6efa} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOA\_BASE@{GPIOA\_BASE}}
+\index{GPIOA\_BASE@{GPIOA\_BASE}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOA\_BASE}{GPIOA\_BASE}}
+{\footnotesize\ttfamily \#define GPIOA\+\_\+\+BASE~(0x40010800\+UL)}
+
+\Hypertarget{stm32f10x__sfr_8h_a68b66ac73be4c836db878a42e1fea3cd}\label{stm32f10x__sfr_8h_a68b66ac73be4c836db878a42e1fea3cd} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOB@{GPIOB}}
+\index{GPIOB@{GPIOB}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOB}{GPIOB}}
+{\footnotesize\ttfamily \#define GPIOB~((\mbox{\hyperlink{structGPIOx__TypeDef}{GPIOx\+\_\+\+Type\+Def}}\texorpdfstring{$\ast$}{*})\mbox{\hyperlink{stm32f10x__sfr_8h_ac944a89eb789000ece920c0f89cb6a68}{GPIOB\+\_\+\+BASE}})}
+
+\Hypertarget{stm32f10x__sfr_8h_ac944a89eb789000ece920c0f89cb6a68}\label{stm32f10x__sfr_8h_ac944a89eb789000ece920c0f89cb6a68} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOB\_BASE@{GPIOB\_BASE}}
+\index{GPIOB\_BASE@{GPIOB\_BASE}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOB\_BASE}{GPIOB\_BASE}}
+{\footnotesize\ttfamily \#define GPIOB\+\_\+\+BASE~(0x40010\+C00\+UL)}
+
+\Hypertarget{stm32f10x__sfr_8h_a2dca03332d620196ba943bc2346eaa08}\label{stm32f10x__sfr_8h_a2dca03332d620196ba943bc2346eaa08} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOC@{GPIOC}}
+\index{GPIOC@{GPIOC}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOC}{GPIOC}}
+{\footnotesize\ttfamily \#define GPIOC~((\mbox{\hyperlink{structGPIOx__TypeDef}{GPIOx\+\_\+\+Type\+Def}}\texorpdfstring{$\ast$}{*})\mbox{\hyperlink{stm32f10x__sfr_8h_a26f267dc35338eef219544c51f1e6b3f}{GPIOC\+\_\+\+BASE}})}
+
+\Hypertarget{stm32f10x__sfr_8h_a26f267dc35338eef219544c51f1e6b3f}\label{stm32f10x__sfr_8h_a26f267dc35338eef219544c51f1e6b3f} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOC\_BASE@{GPIOC\_BASE}}
+\index{GPIOC\_BASE@{GPIOC\_BASE}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOC\_BASE}{GPIOC\_BASE}}
+{\footnotesize\ttfamily \#define GPIOC\+\_\+\+BASE~(0x40011000\+UL)}
+
+\Hypertarget{stm32f10x__sfr_8h_adbf4041a7565bb1234b6d0c0eca7e951}\label{stm32f10x__sfr_8h_adbf4041a7565bb1234b6d0c0eca7e951} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOx\_PIN\_0@{GPIOx\_PIN\_0}}
+\index{GPIOx\_PIN\_0@{GPIOx\_PIN\_0}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOx\_PIN\_0}{GPIOx\_PIN\_0}}
+{\footnotesize\ttfamily \#define GPIOx\+\_\+\+PIN\+\_\+0~(1$<$$<$0)}
+
+\Hypertarget{stm32f10x__sfr_8h_a6cdfeedaebd0918c9066ca27d41efde3}\label{stm32f10x__sfr_8h_a6cdfeedaebd0918c9066ca27d41efde3} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOx\_PIN\_1@{GPIOx\_PIN\_1}}
+\index{GPIOx\_PIN\_1@{GPIOx\_PIN\_1}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOx\_PIN\_1}{GPIOx\_PIN\_1}}
+{\footnotesize\ttfamily \#define GPIOx\+\_\+\+PIN\+\_\+1~(1$<$$<$1)}
+
+\Hypertarget{stm32f10x__sfr_8h_a96fc86f7a22d4bda17a1d60bb4a8152f}\label{stm32f10x__sfr_8h_a96fc86f7a22d4bda17a1d60bb4a8152f} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOx\_PIN\_10@{GPIOx\_PIN\_10}}
+\index{GPIOx\_PIN\_10@{GPIOx\_PIN\_10}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOx\_PIN\_10}{GPIOx\_PIN\_10}}
+{\footnotesize\ttfamily \#define GPIOx\+\_\+\+PIN\+\_\+10~(1$<$$<$10)}
+
+\Hypertarget{stm32f10x__sfr_8h_a23c5dbb755bfa4e498deef08b0f39320}\label{stm32f10x__sfr_8h_a23c5dbb755bfa4e498deef08b0f39320} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOx\_PIN\_11@{GPIOx\_PIN\_11}}
+\index{GPIOx\_PIN\_11@{GPIOx\_PIN\_11}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOx\_PIN\_11}{GPIOx\_PIN\_11}}
+{\footnotesize\ttfamily \#define GPIOx\+\_\+\+PIN\+\_\+11~(1$<$$<$11)}
+
+\Hypertarget{stm32f10x__sfr_8h_a3db57e864797d5c5210d925265885945}\label{stm32f10x__sfr_8h_a3db57e864797d5c5210d925265885945} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOx\_PIN\_12@{GPIOx\_PIN\_12}}
+\index{GPIOx\_PIN\_12@{GPIOx\_PIN\_12}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOx\_PIN\_12}{GPIOx\_PIN\_12}}
+{\footnotesize\ttfamily \#define GPIOx\+\_\+\+PIN\+\_\+12~(1$<$$<$12)}
+
+\Hypertarget{stm32f10x__sfr_8h_a877fa591093d77f371411b2536d3669d}\label{stm32f10x__sfr_8h_a877fa591093d77f371411b2536d3669d} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOx\_PIN\_13@{GPIOx\_PIN\_13}}
+\index{GPIOx\_PIN\_13@{GPIOx\_PIN\_13}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOx\_PIN\_13}{GPIOx\_PIN\_13}}
+{\footnotesize\ttfamily \#define GPIOx\+\_\+\+PIN\+\_\+13~(1$<$$<$13)}
+
+\Hypertarget{stm32f10x__sfr_8h_a98f4642d54549596a2ffc4164b3333b7}\label{stm32f10x__sfr_8h_a98f4642d54549596a2ffc4164b3333b7} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOx\_PIN\_14@{GPIOx\_PIN\_14}}
+\index{GPIOx\_PIN\_14@{GPIOx\_PIN\_14}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOx\_PIN\_14}{GPIOx\_PIN\_14}}
+{\footnotesize\ttfamily \#define GPIOx\+\_\+\+PIN\+\_\+14~(1$<$$<$14)}
+
+\Hypertarget{stm32f10x__sfr_8h_a35a0473013a2527275bf8f0161fe8abe}\label{stm32f10x__sfr_8h_a35a0473013a2527275bf8f0161fe8abe} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOx\_PIN\_15@{GPIOx\_PIN\_15}}
+\index{GPIOx\_PIN\_15@{GPIOx\_PIN\_15}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOx\_PIN\_15}{GPIOx\_PIN\_15}}
+{\footnotesize\ttfamily \#define GPIOx\+\_\+\+PIN\+\_\+15~(1$<$$<$15)}
+
+\Hypertarget{stm32f10x__sfr_8h_a116faae5061f64d3751418bcff9f841d}\label{stm32f10x__sfr_8h_a116faae5061f64d3751418bcff9f841d} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOx\_PIN\_2@{GPIOx\_PIN\_2}}
+\index{GPIOx\_PIN\_2@{GPIOx\_PIN\_2}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOx\_PIN\_2}{GPIOx\_PIN\_2}}
+{\footnotesize\ttfamily \#define GPIOx\+\_\+\+PIN\+\_\+2~(1$<$$<$2)}
+
+\Hypertarget{stm32f10x__sfr_8h_a6fe376ff77d6b58340e5f0ac498bf4b7}\label{stm32f10x__sfr_8h_a6fe376ff77d6b58340e5f0ac498bf4b7} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOx\_PIN\_3@{GPIOx\_PIN\_3}}
+\index{GPIOx\_PIN\_3@{GPIOx\_PIN\_3}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOx\_PIN\_3}{GPIOx\_PIN\_3}}
+{\footnotesize\ttfamily \#define GPIOx\+\_\+\+PIN\+\_\+3~(1$<$$<$3)}
+
+\Hypertarget{stm32f10x__sfr_8h_ac9e5e77c2e1c48583a84920013211528}\label{stm32f10x__sfr_8h_ac9e5e77c2e1c48583a84920013211528} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOx\_PIN\_4@{GPIOx\_PIN\_4}}
+\index{GPIOx\_PIN\_4@{GPIOx\_PIN\_4}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOx\_PIN\_4}{GPIOx\_PIN\_4}}
+{\footnotesize\ttfamily \#define GPIOx\+\_\+\+PIN\+\_\+4~(1$<$$<$4)}
+
+\Hypertarget{stm32f10x__sfr_8h_ac97f11107facbb0ac252b9f233999139}\label{stm32f10x__sfr_8h_ac97f11107facbb0ac252b9f233999139} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOx\_PIN\_5@{GPIOx\_PIN\_5}}
+\index{GPIOx\_PIN\_5@{GPIOx\_PIN\_5}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOx\_PIN\_5}{GPIOx\_PIN\_5}}
+{\footnotesize\ttfamily \#define GPIOx\+\_\+\+PIN\+\_\+5~(1$<$$<$5)}
+
+\Hypertarget{stm32f10x__sfr_8h_aeba1a479b945e7157607cbbcc1de4ac0}\label{stm32f10x__sfr_8h_aeba1a479b945e7157607cbbcc1de4ac0} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOx\_PIN\_6@{GPIOx\_PIN\_6}}
+\index{GPIOx\_PIN\_6@{GPIOx\_PIN\_6}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOx\_PIN\_6}{GPIOx\_PIN\_6}}
+{\footnotesize\ttfamily \#define GPIOx\+\_\+\+PIN\+\_\+6~(1$<$$<$6)}
+
+\Hypertarget{stm32f10x__sfr_8h_adc590910df5f89fcce89c5e98c76d80a}\label{stm32f10x__sfr_8h_adc590910df5f89fcce89c5e98c76d80a} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOx\_PIN\_7@{GPIOx\_PIN\_7}}
+\index{GPIOx\_PIN\_7@{GPIOx\_PIN\_7}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOx\_PIN\_7}{GPIOx\_PIN\_7}}
+{\footnotesize\ttfamily \#define GPIOx\+\_\+\+PIN\+\_\+7~(1$<$$<$7)}
+
+\Hypertarget{stm32f10x__sfr_8h_a810244de8ece9b8a64b6caa2a97dc280}\label{stm32f10x__sfr_8h_a810244de8ece9b8a64b6caa2a97dc280} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOx\_PIN\_8@{GPIOx\_PIN\_8}}
+\index{GPIOx\_PIN\_8@{GPIOx\_PIN\_8}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOx\_PIN\_8}{GPIOx\_PIN\_8}}
+{\footnotesize\ttfamily \#define GPIOx\+\_\+\+PIN\+\_\+8~(1$<$$<$8)}
+
+\Hypertarget{stm32f10x__sfr_8h_ab2ca80b639328d2fe39213cf6b141d06}\label{stm32f10x__sfr_8h_ab2ca80b639328d2fe39213cf6b141d06} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!GPIOx\_PIN\_9@{GPIOx\_PIN\_9}}
+\index{GPIOx\_PIN\_9@{GPIOx\_PIN\_9}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{GPIOx\_PIN\_9}{GPIOx\_PIN\_9}}
+{\footnotesize\ttfamily \#define GPIOx\+\_\+\+PIN\+\_\+9~(1$<$$<$9)}
+
+\Hypertarget{stm32f10x__sfr_8h_ae671cf5683fae1d22db9a7c98963d8dd}\label{stm32f10x__sfr_8h_ae671cf5683fae1d22db9a7c98963d8dd} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!INPUT\_WITH\_PULLUP\_PULLDOWN@{INPUT\_WITH\_PULLUP\_PULLDOWN}}
+\index{INPUT\_WITH\_PULLUP\_PULLDOWN@{INPUT\_WITH\_PULLUP\_PULLDOWN}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{INPUT\_WITH\_PULLUP\_PULLDOWN}{INPUT\_WITH\_PULLUP\_PULLDOWN}}
+{\footnotesize\ttfamily \#define INPUT\+\_\+\+WITH\+\_\+\+PULLUP\+\_\+\+PULLDOWN~(0x08)}
+
+\Hypertarget{stm32f10x__sfr_8h_af929cd338f4005b8f7024441a8ccd2fd}\label{stm32f10x__sfr_8h_af929cd338f4005b8f7024441a8ccd2fd} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!OUTPUT\_MODE\_10MHZ\_General\_open\_drain@{OUTPUT\_MODE\_10MHZ\_General\_open\_drain}}
+\index{OUTPUT\_MODE\_10MHZ\_General\_open\_drain@{OUTPUT\_MODE\_10MHZ\_General\_open\_drain}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{OUTPUT\_MODE\_10MHZ\_General\_open\_drain}{OUTPUT\_MODE\_10MHZ\_General\_open\_drain}}
+{\footnotesize\ttfamily \#define OUTPUT\+\_\+\+MODE\+\_\+10\+MHZ\+\_\+\+General\+\_\+open\+\_\+drain~(0x05)}
+
+\Hypertarget{stm32f10x__sfr_8h_a87e455a3b96f794c73238f765cca1c73}\label{stm32f10x__sfr_8h_a87e455a3b96f794c73238f765cca1c73} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!OUTPUT\_MODE\_10MHZ\_General\_push\_pull@{OUTPUT\_MODE\_10MHZ\_General\_push\_pull}}
+\index{OUTPUT\_MODE\_10MHZ\_General\_push\_pull@{OUTPUT\_MODE\_10MHZ\_General\_push\_pull}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{OUTPUT\_MODE\_10MHZ\_General\_push\_pull}{OUTPUT\_MODE\_10MHZ\_General\_push\_pull}}
+{\footnotesize\ttfamily \#define OUTPUT\+\_\+\+MODE\+\_\+10\+MHZ\+\_\+\+General\+\_\+push\+\_\+pull~(0x01)}
+
+\Hypertarget{stm32f10x__sfr_8h_a46891381cf32882314301f4a57b8b94a}\label{stm32f10x__sfr_8h_a46891381cf32882314301f4a57b8b94a} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!OUTPUT\_MODE\_2MHZ\_General\_open\_drain@{OUTPUT\_MODE\_2MHZ\_General\_open\_drain}}
+\index{OUTPUT\_MODE\_2MHZ\_General\_open\_drain@{OUTPUT\_MODE\_2MHZ\_General\_open\_drain}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{OUTPUT\_MODE\_2MHZ\_General\_open\_drain}{OUTPUT\_MODE\_2MHZ\_General\_open\_drain}}
+{\footnotesize\ttfamily \#define OUTPUT\+\_\+\+MODE\+\_\+2\+MHZ\+\_\+\+General\+\_\+open\+\_\+drain~(0x06)}
+
+\Hypertarget{stm32f10x__sfr_8h_aa21879b68e9866118de49c20ba75a6ce}\label{stm32f10x__sfr_8h_aa21879b68e9866118de49c20ba75a6ce} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!OUTPUT\_MODE\_2MHZ\_General\_push\_pull@{OUTPUT\_MODE\_2MHZ\_General\_push\_pull}}
+\index{OUTPUT\_MODE\_2MHZ\_General\_push\_pull@{OUTPUT\_MODE\_2MHZ\_General\_push\_pull}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{OUTPUT\_MODE\_2MHZ\_General\_push\_pull}{OUTPUT\_MODE\_2MHZ\_General\_push\_pull}}
+{\footnotesize\ttfamily \#define OUTPUT\+\_\+\+MODE\+\_\+2\+MHZ\+\_\+\+General\+\_\+push\+\_\+pull~(0x02)}
+
+\Hypertarget{stm32f10x__sfr_8h_a80dbacdeb160b64a6f7d6dc6d2517f0d}\label{stm32f10x__sfr_8h_a80dbacdeb160b64a6f7d6dc6d2517f0d} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!OUTPUT\_MODE\_50MHZ\_General\_open\_drain@{OUTPUT\_MODE\_50MHZ\_General\_open\_drain}}
+\index{OUTPUT\_MODE\_50MHZ\_General\_open\_drain@{OUTPUT\_MODE\_50MHZ\_General\_open\_drain}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{OUTPUT\_MODE\_50MHZ\_General\_open\_drain}{OUTPUT\_MODE\_50MHZ\_General\_open\_drain}}
+{\footnotesize\ttfamily \#define OUTPUT\+\_\+\+MODE\+\_\+50\+MHZ\+\_\+\+General\+\_\+open\+\_\+drain~(0x07)}
+
+\Hypertarget{stm32f10x__sfr_8h_ab3c20acf76edce41c0d2b20e0cf90e62}\label{stm32f10x__sfr_8h_ab3c20acf76edce41c0d2b20e0cf90e62} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!OUTPUT\_MODE\_50MHZ\_General\_push\_pull@{OUTPUT\_MODE\_50MHZ\_General\_push\_pull}}
+\index{OUTPUT\_MODE\_50MHZ\_General\_push\_pull@{OUTPUT\_MODE\_50MHZ\_General\_push\_pull}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{OUTPUT\_MODE\_50MHZ\_General\_push\_pull}{OUTPUT\_MODE\_50MHZ\_General\_push\_pull}}
+{\footnotesize\ttfamily \#define OUTPUT\+\_\+\+MODE\+\_\+50\+MHZ\+\_\+\+General\+\_\+push\+\_\+pull~(0x03)}
+
+\Hypertarget{stm32f10x__sfr_8h_a74944438a086975793d26ae48d5882d4}\label{stm32f10x__sfr_8h_a74944438a086975793d26ae48d5882d4} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!RCC@{RCC}}
+\index{RCC@{RCC}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{RCC}{RCC}}
+{\footnotesize\ttfamily \#define RCC~((\mbox{\hyperlink{structRCC__TypeDef}{RCC\+\_\+\+Type\+Def}}\texorpdfstring{$\ast$}{*})\mbox{\hyperlink{stm32f10x__sfr_8h_a0e681b03f364532055d88f63fec0d99d}{RCC\+\_\+\+BASE}})}
+
+\Hypertarget{stm32f10x__sfr_8h_ad7b860fbeb386425bd7d4ef00ce17c27}\label{stm32f10x__sfr_8h_ad7b860fbeb386425bd7d4ef00ce17c27} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!RCC\_APB2ENR\_IOPAEN@{RCC\_APB2ENR\_IOPAEN}}
+\index{RCC\_APB2ENR\_IOPAEN@{RCC\_APB2ENR\_IOPAEN}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{RCC\_APB2ENR\_IOPAEN}{RCC\_APB2ENR\_IOPAEN}}
+{\footnotesize\ttfamily \#define RCC\+\_\+\+APB2\+ENR\+\_\+\+IOPAEN~(1UL $<$$<$ 2)}
+
+\Hypertarget{stm32f10x__sfr_8h_aa9ba85777143e752841c2e6a6977deb9}\label{stm32f10x__sfr_8h_aa9ba85777143e752841c2e6a6977deb9} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!RCC\_APB2ENR\_IOPBEN@{RCC\_APB2ENR\_IOPBEN}}
+\index{RCC\_APB2ENR\_IOPBEN@{RCC\_APB2ENR\_IOPBEN}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{RCC\_APB2ENR\_IOPBEN}{RCC\_APB2ENR\_IOPBEN}}
+{\footnotesize\ttfamily \#define RCC\+\_\+\+APB2\+ENR\+\_\+\+IOPBEN~(1UL $<$$<$ 3)}
+
+\Hypertarget{stm32f10x__sfr_8h_a443ef1518a62fa7ecee3f1386b545d8c}\label{stm32f10x__sfr_8h_a443ef1518a62fa7ecee3f1386b545d8c} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!RCC\_APB2ENR\_IOPCEN@{RCC\_APB2ENR\_IOPCEN}}
+\index{RCC\_APB2ENR\_IOPCEN@{RCC\_APB2ENR\_IOPCEN}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{RCC\_APB2ENR\_IOPCEN}{RCC\_APB2ENR\_IOPCEN}}
+{\footnotesize\ttfamily \#define RCC\+\_\+\+APB2\+ENR\+\_\+\+IOPCEN~(1UL $<$$<$ 4)}
+
+\Hypertarget{stm32f10x__sfr_8h_a0e681b03f364532055d88f63fec0d99d}\label{stm32f10x__sfr_8h_a0e681b03f364532055d88f63fec0d99d} 
+\index{stm32f10x\_sfr.h@{stm32f10x\_sfr.h}!RCC\_BASE@{RCC\_BASE}}
+\index{RCC\_BASE@{RCC\_BASE}!stm32f10x\_sfr.h@{stm32f10x\_sfr.h}}
+\doxysubsubsection{\texorpdfstring{RCC\_BASE}{RCC\_BASE}}
+{\footnotesize\ttfamily \#define RCC\+\_\+\+BASE~(0x40021000\+UL)}
+

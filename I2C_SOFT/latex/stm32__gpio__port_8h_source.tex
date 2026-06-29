@@ -1,0 +1,23 @@
+\doxysection{stm32\+\_\+gpio\+\_\+port.\+h}
+\hypertarget{stm32__gpio__port_8h_source}{}\label{stm32__gpio__port_8h_source}\index{User/platform/stm32f103/stm32\_gpio\_port.h@{User/platform/stm32f103/stm32\_gpio\_port.h}}
+\mbox{\hyperlink{stm32__gpio__port_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ STM32\_GPIO\_PORT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ STM32\_GPIO\_PORT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{gpio__port_8h}{gpio\_port.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{stm32f10x__sfr_8h}{stm32f10x\_sfr.h}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}\{}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{structGPIOx__TypeDef}{GPIOx\_TypeDef}}\ *\mbox{\hyperlink{structstm32__gpio__ctx__t_a0a337b00bb8bfb8827ec8882aca8d84f}{gpio}};}
+\DoxyCodeLine{00010\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structstm32__gpio__ctx__t_a546ec9801655a220705a91c2dcfc83c9}{rcc\_enable\_bit}};}
+\DoxyCodeLine{00011\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structstm32__gpio__ctx__t_ab15a1ced0966d67795e17a6c99dc44bd}{use\_pins}};\ \textcolor{comment}{//可以选择0到15}}
+\DoxyCodeLine{00012\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structstm32__gpio__ctx__t_a9f959ecc575ef834cd7a4d1255b1d563}{mode\_select}};}
+\DoxyCodeLine{00013\ \}\mbox{\hyperlink{structstm32__gpio__ctx__t}{stm32\_gpio\_ctx\_t}};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structgpio__ops__t}{gpio\_ops\_t}}\ \mbox{\hyperlink{stm32__gpio__port_8h_aed7dbe9eedad5d40ef2b035cf35fd9c6}{stm32\_gpio\_ops}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

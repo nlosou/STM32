@@ -1,0 +1,58 @@
+\doxysection{User/platform/stm32f103/stm32\+\_\+gpio\+\_\+port.c File Reference}
+\hypertarget{stm32__gpio__port_8c}{}\label{stm32__gpio__port_8c}\index{User/platform/stm32f103/stm32\_gpio\_port.c@{User/platform/stm32f103/stm32\_gpio\_port.c}}
+{\ttfamily \#include "{}stm32\+\_\+gpio\+\_\+port.\+h"{}}\newline
+{\ttfamily \#include "{}stm32f10x\+\_\+sfr.\+h"{}}\newline
+Include dependency graph for stm32\+\_\+gpio\+\_\+port.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=305pt]{stm32__gpio__port_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{stm32__gpio__port_8c_a803966890d1e61bb068b8cf796f49166}{BASE\+\_\+\+MASK}}~(0x0F)
+\item 
+\#define \mbox{\hyperlink{stm32__gpio__port_8c_a51aaf792e3cc8ed8097af2ec109e223e}{BASE\+\_\+\+ONE}}~(0x01)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{structgpio__ops__t}{gpio\+\_\+ops\+\_\+t}} \mbox{\hyperlink{stm32__gpio__port_8c_aed7dbe9eedad5d40ef2b035cf35fd9c6}{stm32\+\_\+gpio\+\_\+ops}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{stm32__gpio__port_8c_a803966890d1e61bb068b8cf796f49166}\label{stm32__gpio__port_8c_a803966890d1e61bb068b8cf796f49166} 
+\index{stm32\_gpio\_port.c@{stm32\_gpio\_port.c}!BASE\_MASK@{BASE\_MASK}}
+\index{BASE\_MASK@{BASE\_MASK}!stm32\_gpio\_port.c@{stm32\_gpio\_port.c}}
+\doxysubsubsection{\texorpdfstring{BASE\_MASK}{BASE\_MASK}}
+{\footnotesize\ttfamily \#define BASE\+\_\+\+MASK~(0x0F)}
+
+\Hypertarget{stm32__gpio__port_8c_a51aaf792e3cc8ed8097af2ec109e223e}\label{stm32__gpio__port_8c_a51aaf792e3cc8ed8097af2ec109e223e} 
+\index{stm32\_gpio\_port.c@{stm32\_gpio\_port.c}!BASE\_ONE@{BASE\_ONE}}
+\index{BASE\_ONE@{BASE\_ONE}!stm32\_gpio\_port.c@{stm32\_gpio\_port.c}}
+\doxysubsubsection{\texorpdfstring{BASE\_ONE}{BASE\_ONE}}
+{\footnotesize\ttfamily \#define BASE\+\_\+\+ONE~(0x01)}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{stm32__gpio__port_8c_aed7dbe9eedad5d40ef2b035cf35fd9c6}\label{stm32__gpio__port_8c_aed7dbe9eedad5d40ef2b035cf35fd9c6} 
+\index{stm32\_gpio\_port.c@{stm32\_gpio\_port.c}!stm32\_gpio\_ops@{stm32\_gpio\_ops}}
+\index{stm32\_gpio\_ops@{stm32\_gpio\_ops}!stm32\_gpio\_port.c@{stm32\_gpio\_port.c}}
+\doxysubsubsection{\texorpdfstring{stm32\_gpio\_ops}{stm32\_gpio\_ops}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structgpio__ops__t}{gpio\+\_\+ops\+\_\+t}} stm32\+\_\+gpio\+\_\+ops}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ .init\ =\ stm32\_gpioa\_\_init,}
+\DoxyCodeLine{\ \ \ .write\ =\ stm32\_gpioa\_write,}
+\DoxyCodeLine{\ \ \ \ .toggle\ =\ stm32\_gpio\_toggle,}
+\DoxyCodeLine{\ \ \ \ .read\ =\ stm32\_gpioa\_read}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

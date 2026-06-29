@@ -1,0 +1,34 @@
+\doxysection{key.\+h}
+\hypertarget{key_8h_source}{}\label{key_8h_source}\index{User/app/key.h@{User/app/key.h}}
+\mbox{\hyperlink{key_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ KEY\_H\_}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ KEY\_H\_}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{gpio__port_8h}{gpio\_port.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00006\ \ \ \ \ \mbox{\hyperlink{key_8h_a57ec1c5080f3a34bb87c51c562598c75afd6a0e4343048b10646dd2976cc5ad18}{IDLE}},}
+\DoxyCodeLine{00007\ \ \ \ \ \mbox{\hyperlink{key_8h_a57ec1c5080f3a34bb87c51c562598c75a84d5f7a8613f7939ccf27d637a18bdd1}{FILTER\_DOWN}},}
+\DoxyCodeLine{00008\ \ \ \ \ \mbox{\hyperlink{key_8h_a57ec1c5080f3a34bb87c51c562598c75a5ef9a100ac8b4b8d6dec477c377b7901}{PRESSED}},}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{key_8h_a57ec1c5080f3a34bb87c51c562598c75afe0aebd3ea4756723933797966013dd7}{FILTER\_UP}}}
+\DoxyCodeLine{00010\ \}\mbox{\hyperlink{key_8h_a57ec1c5080f3a34bb87c51c562598c75}{Key\_state}};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{key_8h_a26b852c8ce090d96ffd1a10d4ad3ac81a19b62ccb3e2217a4466ac576fee41145}{default\_}},}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{key_8h_a26b852c8ce090d96ffd1a10d4ad3ac81a55011d41daa63292315e1e807feb858f}{Blink\_led}}}
+\DoxyCodeLine{00015\ \}\mbox{\hyperlink{key_8h_a26b852c8ce090d96ffd1a10d4ad3ac81}{Sys\_state}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{structgpio__port__t}{gpio\_port\_t}}\ *\mbox{\hyperlink{structkey__t_ae147bdbb8ddb906eef94334f2e43c319}{gpio}};}
+\DoxyCodeLine{00019\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structkey__t_adb439ac35e61aa20e9b9d217bd9ee09f}{pins}};}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{key_8h_a57ec1c5080f3a34bb87c51c562598c75}{Key\_state}}\ \mbox{\hyperlink{structkey__t_a6c1ab5a503d8e65c75f602164c7c5393}{key\_state}};\ \ \ \ }
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{key_8h_a26b852c8ce090d96ffd1a10d4ad3ac81}{Sys\_state}}\ \mbox{\hyperlink{structkey__t_ab3e8440b380597ab1b42fbcd9210169c}{key\_represent}};}
+\DoxyCodeLine{00022\ \}\mbox{\hyperlink{structkey__t}{key\_t}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{key_8h_a7dafd08cbb0b7859f6f8f838d0287d75}{key\_machine}}(\mbox{\hyperlink{structkey__t}{key\_t}}\ *key\_pins,\mbox{\hyperlink{key_8h_a26b852c8ce090d96ffd1a10d4ad3ac81}{Sys\_state}}\ *sys\_state);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{key_8h_a965b47e32122ff97ee7e231f00c7b593}{key\_init}}(\mbox{\hyperlink{structkey__t}{key\_t}}\ *key);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

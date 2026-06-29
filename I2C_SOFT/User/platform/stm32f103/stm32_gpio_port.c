@@ -77,7 +77,7 @@ static uint32_t stm32_gpioa_read(void *ctx,uint16_t use_pins)
     {
         return 0;
     }
-    return (gpio_ctx->gpio->IDR >> use_pins) & 0x01;
+    return (gpio_ctx->gpio->IDR & use_pins)?1:0;
 }
 static void stm32_gpio_toggle(void *ctx, uint16_t pins)
 {

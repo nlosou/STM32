@@ -1,0 +1,23 @@
+\doxysection{board\+\_\+config.\+h}
+\hypertarget{board__config_8h_source}{}\label{board__config_8h_source}\index{User/board\_config.h@{User/board\_config.h}}
+\mbox{\hyperlink{board__config_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ board\_config.h}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ BOARD\_CONFIG\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ BOARD\_CONFIG\_H}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{stm32f10x__sfr_8h}{stm32f10x\_sfr.h}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ =================\ EEPROM\ 1\ (AT24C02)\ 硬件配置\ =================}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ EEPROM1\_GPIO\_PORT\ \ \ \ \ \ \ \ \ \ \ GPIOB}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ EEPROM1\_RCC\_BIT\ \ \ \ \ \ \ \ \ \ \ \ \ RCC\_APB2ENR\_IOPBEN}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ EEPROM1\_GPIO\_MODE\ \ \ \ \ \ \ \ \ \ \ OUTPUT\_MODE\_10MHZ\_General\_open\_drain}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ EEPROM1\_SCL\_PIN\ \ \ \ \ \ \ \ \ \ \ \ \ GPIOx\_PIN\_5}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ EEPROM1\_SDA\_PIN\ \ \ \ \ \ \ \ \ \ \ \ \ GPIOx\_PIN\_6}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ EEPROM1\_DEV\_ADDR\_READ\ \ \ \ \ \ \ 0xA1}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ EEPROM1\_DEV\_ADDR\_WRITE\ \ \ \ \ \ 0xA0}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,120 @@
+\doxysection{User/protocol/sw\+\_\+\+I2C.c File Reference}
+\hypertarget{sw__I2C_8c}{}\label{sw__I2C_8c}\index{User/protocol/sw\_I2C.c@{User/protocol/sw\_I2C.c}}
+{\ttfamily \#include "{}sw\+\_\+\+I2\+C.\+h"{}}\newline
+Include dependency graph for sw\+\_\+\+I2\+C.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{sw__I2C_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{sw__I2C_8c_ae7c3821734ad56e05a93daa3dbcb22b9}{SDA}}(x)~gpio\+\_\+port\+\_\+write(i2c\+\_\+sda.\+port,i2c\+\_\+sda.\+use\+\_\+pins,x)
+\item 
+\#define \mbox{\hyperlink{sw__I2C_8c_a63ea19a979f537a91421605e24969007}{SCL}}(x)~gpio\+\_\+port\+\_\+write(i2c\+\_\+scl.\+port,i2c\+\_\+scl.\+use\+\_\+pins,x)
+\item 
+\#define \mbox{\hyperlink{sw__I2C_8c_a803966890d1e61bb068b8cf796f49166}{BASE\+\_\+\+MASK}}~(0x0F)
+\item 
+\#define \mbox{\hyperlink{sw__I2C_8c_a51aaf792e3cc8ed8097af2ec109e223e}{BASE\+\_\+\+ONE}}~(0x01)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{sw__I2C_8c_a83df3624aeddc700f8f025f3f1372059}{sw\+\_\+i2c\+\_\+init}} (void \texorpdfstring{$\ast$}{*}ctx)
+\item 
+void \mbox{\hyperlink{sw__I2C_8c_a7f9438145f500dc6e138d33c37f1777f}{sw\+\_\+i2c\+\_\+start}} (void \texorpdfstring{$\ast$}{*}ctx)
+\item 
+void \mbox{\hyperlink{sw__I2C_8c_a5eab67031802aafe00985f4ec478131b}{sw\+\_\+i2c\+\_\+stop}} (void \texorpdfstring{$\ast$}{*}ctx)
+\item 
+uint8\+\_\+t \mbox{\hyperlink{sw__I2C_8c_a8e0d024a476726f56006daa6665e8803}{sw\+\_\+i2c\+\_\+sent\+\_\+byte}} (void \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t data)
+\item 
+uint8\+\_\+t \mbox{\hyperlink{sw__I2C_8c_a100ea5d50d6c215427d851fd8c1f2ad9}{sw\+\_\+i2c\+\_\+receive\+\_\+byte}} (void \texorpdfstring{$\ast$}{*}ctx)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{structi2c__ops__t}{i2c\+\_\+ops\+\_\+t}} \mbox{\hyperlink{sw__I2C_8c_ab4a80cb25b179a2cdb662a0b17290891}{sw\+\_\+i2c\+\_\+ops}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{sw__I2C_8c_a803966890d1e61bb068b8cf796f49166}\label{sw__I2C_8c_a803966890d1e61bb068b8cf796f49166} 
+\index{sw\_I2C.c@{sw\_I2C.c}!BASE\_MASK@{BASE\_MASK}}
+\index{BASE\_MASK@{BASE\_MASK}!sw\_I2C.c@{sw\_I2C.c}}
+\doxysubsubsection{\texorpdfstring{BASE\_MASK}{BASE\_MASK}}
+{\footnotesize\ttfamily \#define BASE\+\_\+\+MASK~(0x0F)}
+
+\Hypertarget{sw__I2C_8c_a51aaf792e3cc8ed8097af2ec109e223e}\label{sw__I2C_8c_a51aaf792e3cc8ed8097af2ec109e223e} 
+\index{sw\_I2C.c@{sw\_I2C.c}!BASE\_ONE@{BASE\_ONE}}
+\index{BASE\_ONE@{BASE\_ONE}!sw\_I2C.c@{sw\_I2C.c}}
+\doxysubsubsection{\texorpdfstring{BASE\_ONE}{BASE\_ONE}}
+{\footnotesize\ttfamily \#define BASE\+\_\+\+ONE~(0x01)}
+
+\Hypertarget{sw__I2C_8c_a63ea19a979f537a91421605e24969007}\label{sw__I2C_8c_a63ea19a979f537a91421605e24969007} 
+\index{sw\_I2C.c@{sw\_I2C.c}!SCL@{SCL}}
+\index{SCL@{SCL}!sw\_I2C.c@{sw\_I2C.c}}
+\doxysubsubsection{\texorpdfstring{SCL}{SCL}}
+{\footnotesize\ttfamily \#define SCL(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~gpio\+\_\+port\+\_\+write(i2c\+\_\+scl.\+port,i2c\+\_\+scl.\+use\+\_\+pins,x)}
+
+\Hypertarget{sw__I2C_8c_ae7c3821734ad56e05a93daa3dbcb22b9}\label{sw__I2C_8c_ae7c3821734ad56e05a93daa3dbcb22b9} 
+\index{sw\_I2C.c@{sw\_I2C.c}!SDA@{SDA}}
+\index{SDA@{SDA}!sw\_I2C.c@{sw\_I2C.c}}
+\doxysubsubsection{\texorpdfstring{SDA}{SDA}}
+{\footnotesize\ttfamily \#define SDA(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~gpio\+\_\+port\+\_\+write(i2c\+\_\+sda.\+port,i2c\+\_\+sda.\+use\+\_\+pins,x)}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{sw__I2C_8c_a83df3624aeddc700f8f025f3f1372059}\label{sw__I2C_8c_a83df3624aeddc700f8f025f3f1372059} 
+\index{sw\_I2C.c@{sw\_I2C.c}!sw\_i2c\_init@{sw\_i2c\_init}}
+\index{sw\_i2c\_init@{sw\_i2c\_init}!sw\_I2C.c@{sw\_I2C.c}}
+\doxysubsubsection{\texorpdfstring{sw\_i2c\_init()}{sw\_i2c\_init()}}
+{\footnotesize\ttfamily void sw\+\_\+i2c\+\_\+init (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{ctx }\end{DoxyParamCaption})}
+
+\Hypertarget{sw__I2C_8c_a100ea5d50d6c215427d851fd8c1f2ad9}\label{sw__I2C_8c_a100ea5d50d6c215427d851fd8c1f2ad9} 
+\index{sw\_I2C.c@{sw\_I2C.c}!sw\_i2c\_receive\_byte@{sw\_i2c\_receive\_byte}}
+\index{sw\_i2c\_receive\_byte@{sw\_i2c\_receive\_byte}!sw\_I2C.c@{sw\_I2C.c}}
+\doxysubsubsection{\texorpdfstring{sw\_i2c\_receive\_byte()}{sw\_i2c\_receive\_byte()}}
+{\footnotesize\ttfamily uint8\+\_\+t sw\+\_\+i2c\+\_\+receive\+\_\+byte (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{ctx }\end{DoxyParamCaption})}
+
+\Hypertarget{sw__I2C_8c_a8e0d024a476726f56006daa6665e8803}\label{sw__I2C_8c_a8e0d024a476726f56006daa6665e8803} 
+\index{sw\_I2C.c@{sw\_I2C.c}!sw\_i2c\_sent\_byte@{sw\_i2c\_sent\_byte}}
+\index{sw\_i2c\_sent\_byte@{sw\_i2c\_sent\_byte}!sw\_I2C.c@{sw\_I2C.c}}
+\doxysubsubsection{\texorpdfstring{sw\_i2c\_sent\_byte()}{sw\_i2c\_sent\_byte()}}
+{\footnotesize\ttfamily uint8\+\_\+t sw\+\_\+i2c\+\_\+sent\+\_\+byte (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{ctx,  }\item[{uint8\+\_\+t}]{data }\end{DoxyParamCaption})}
+
+\Hypertarget{sw__I2C_8c_a7f9438145f500dc6e138d33c37f1777f}\label{sw__I2C_8c_a7f9438145f500dc6e138d33c37f1777f} 
+\index{sw\_I2C.c@{sw\_I2C.c}!sw\_i2c\_start@{sw\_i2c\_start}}
+\index{sw\_i2c\_start@{sw\_i2c\_start}!sw\_I2C.c@{sw\_I2C.c}}
+\doxysubsubsection{\texorpdfstring{sw\_i2c\_start()}{sw\_i2c\_start()}}
+{\footnotesize\ttfamily void sw\+\_\+i2c\+\_\+start (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{ctx }\end{DoxyParamCaption})}
+
+\Hypertarget{sw__I2C_8c_a5eab67031802aafe00985f4ec478131b}\label{sw__I2C_8c_a5eab67031802aafe00985f4ec478131b} 
+\index{sw\_I2C.c@{sw\_I2C.c}!sw\_i2c\_stop@{sw\_i2c\_stop}}
+\index{sw\_i2c\_stop@{sw\_i2c\_stop}!sw\_I2C.c@{sw\_I2C.c}}
+\doxysubsubsection{\texorpdfstring{sw\_i2c\_stop()}{sw\_i2c\_stop()}}
+{\footnotesize\ttfamily void sw\+\_\+i2c\+\_\+stop (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{ctx }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{sw__I2C_8c_ab4a80cb25b179a2cdb662a0b17290891}\label{sw__I2C_8c_ab4a80cb25b179a2cdb662a0b17290891} 
+\index{sw\_I2C.c@{sw\_I2C.c}!sw\_i2c\_ops@{sw\_i2c\_ops}}
+\index{sw\_i2c\_ops@{sw\_i2c\_ops}!sw\_I2C.c@{sw\_I2C.c}}
+\doxysubsubsection{\texorpdfstring{sw\_i2c\_ops}{sw\_i2c\_ops}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structi2c__ops__t}{i2c\+\_\+ops\+\_\+t}} sw\+\_\+i2c\+\_\+ops}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ .init\ =\ \mbox{\hyperlink{sw__I2C_8c_a83df3624aeddc700f8f025f3f1372059}{sw\_i2c\_init}},}
+\DoxyCodeLine{\ \ \ \ .read\ =\ \mbox{\hyperlink{sw__I2C_8c_a100ea5d50d6c215427d851fd8c1f2ad9}{sw\_i2c\_receive\_byte}},}
+\DoxyCodeLine{\ \ \ \ .write\ =\ \mbox{\hyperlink{sw__I2C_8c_a8e0d024a476726f56006daa6665e8803}{sw\_i2c\_sent\_byte}},}
+\DoxyCodeLine{\ \ \ \ .start\ =\ \mbox{\hyperlink{sw__I2C_8c_a7f9438145f500dc6e138d33c37f1777f}{sw\_i2c\_start}},}
+\DoxyCodeLine{\ \ \ \ .stop\ =\ \mbox{\hyperlink{sw__I2C_8c_a5eab67031802aafe00985f4ec478131b}{sw\_i2c\_stop}},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

@@ -1,0 +1,66 @@
+\doxysection{gpio\+\_\+port.\+h}
+\hypertarget{gpio__port_8h_source}{}\label{gpio__port_8h_source}\index{User/hal/gpio\_port.h@{User/hal/gpio\_port.h}}
+\mbox{\hyperlink{gpio__port_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ GPIO\_PORT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ GPIO\_PORT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00008\ \ \ \ \ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ NULL\ 0}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{gpio__port_8h_ac36e21ae6c134bf7d2aaa72933f1d7dda0227e43a6201c3330b2e6e9f71b74d6f}{GPIO\_LEVEL\_LOW}}\ =\ 0,}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{gpio__port_8h_ac36e21ae6c134bf7d2aaa72933f1d7dda5a87f4701da8987969657f9ffb2563e0}{GPIO\_LEVEL\_HIGH}}=\ 1}
+\DoxyCodeLine{00014\ \}\mbox{\hyperlink{gpio__port_8h_ac36e21ae6c134bf7d2aaa72933f1d7dd}{gpio\_level\_t}};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00017\ \ \ \ \ void\ (*init)(\textcolor{keywordtype}{void}\ *ctx);}
+\DoxyCodeLine{00018\ \ \ \ \ void\ (*write)(\textcolor{keywordtype}{void}\ *ctx,uint16\_t\ pins,\mbox{\hyperlink{gpio__port_8h_ac36e21ae6c134bf7d2aaa72933f1d7dd}{gpio\_level\_t}}\ level);}
+\DoxyCodeLine{00019\ \ \ \ \ uint32\_t\ (*read)(\textcolor{keywordtype}{void}\ *ctx,uint16\_t\ pins);}
+\DoxyCodeLine{00020\ \ \ \ \ void\ (*toggle)(\textcolor{keywordtype}{void}\ *ctx,uint16\_t\ pins);}
+\DoxyCodeLine{00021\ \}\mbox{\hyperlink{structgpio__ops__t}{gpio\_ops\_t}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structgpio__ops__t}{gpio\_ops\_t}}\ *\mbox{\hyperlink{structgpio__port__t_ab3fc055138c990202edf25c8ce72c488}{ops}};}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{structgpio__port__t_a1f6d09b30c54854dfca659b7463ac207}{ctx}};}
+\DoxyCodeLine{00026\ \}\mbox{\hyperlink{structgpio__port__t}{gpio\_port\_t}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ gpio\_port\_init(\mbox{\hyperlink{structgpio__port__t}{gpio\_port\_t}}\ *port)}
+\DoxyCodeLine{00029\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordflow}{if}((port!=\ \mbox{\hyperlink{gpio__port_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})\ \&\&\ (port-\/>\mbox{\hyperlink{structgpio__port__t_ab3fc055138c990202edf25c8ce72c488}{ops}}!=\mbox{\hyperlink{gpio__port_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})\ \&\&\ (port-\/>\mbox{\hyperlink{structgpio__port__t_ab3fc055138c990202edf25c8ce72c488}{ops}}-\/>\mbox{\hyperlink{structgpio__ops__t_a117b244cf6bf75d6f0a9670a918b41bd}{init}}\ !=\ \mbox{\hyperlink{gpio__port_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}))}
+\DoxyCodeLine{00031\ \ \ \ \ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ port-\/>\mbox{\hyperlink{structgpio__port__t_ab3fc055138c990202edf25c8ce72c488}{ops}}-\/>\mbox{\hyperlink{structgpio__ops__t_a117b244cf6bf75d6f0a9670a918b41bd}{init}}(port-\/>\mbox{\hyperlink{structgpio__port__t_a1f6d09b30c54854dfca659b7463ac207}{ctx}});\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ \ \ \}}
+\DoxyCodeLine{00034\ \}}
+\DoxyCodeLine{00035\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ gpio\_port\_write(\mbox{\hyperlink{structgpio__port__t}{gpio\_port\_t}}\ *port,\ uint16\_t\ pins,\ \mbox{\hyperlink{gpio__port_8h_ac36e21ae6c134bf7d2aaa72933f1d7dd}{gpio\_level\_t}}\ level)}
+\DoxyCodeLine{00036\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{if}\ ((port\ !=\ \mbox{\hyperlink{gpio__port_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})\ \&\&\ (port-\/>\mbox{\hyperlink{structgpio__port__t_ab3fc055138c990202edf25c8ce72c488}{ops}}\ !=\ \mbox{\hyperlink{gpio__port_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})\ \&\&\ (port-\/>\mbox{\hyperlink{structgpio__port__t_ab3fc055138c990202edf25c8ce72c488}{ops}}-\/>\mbox{\hyperlink{structgpio__ops__t_aac34c50e55605a4895fd296ee73ea2a6}{write}}\ !=\ \mbox{\hyperlink{gpio__port_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}))\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ port-\/>\mbox{\hyperlink{structgpio__port__t_ab3fc055138c990202edf25c8ce72c488}{ops}}-\/>\mbox{\hyperlink{structgpio__ops__t_aac34c50e55605a4895fd296ee73ea2a6}{write}}(port-\/>\mbox{\hyperlink{structgpio__port__t_a1f6d09b30c54854dfca659b7463ac207}{ctx}},\ pins,\ level);}
+\DoxyCodeLine{00039\ \ \ \ \ \}}
+\DoxyCodeLine{00040\ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ gpio\_port\_read(\mbox{\hyperlink{structgpio__port__t}{gpio\_port\_t}}\ *port,uint16\_t\ pins)}
+\DoxyCodeLine{00043\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ uint32\_t\ bit\ =\ 0;}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{if}\ ((port\ !=\ \mbox{\hyperlink{gpio__port_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})\ \&\&\ (port-\/>\mbox{\hyperlink{structgpio__port__t_ab3fc055138c990202edf25c8ce72c488}{ops}}\ !=\ \mbox{\hyperlink{gpio__port_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})\ \&\&\ (port-\/>\mbox{\hyperlink{structgpio__port__t_ab3fc055138c990202edf25c8ce72c488}{ops}}-\/>\mbox{\hyperlink{structgpio__ops__t_aac34c50e55605a4895fd296ee73ea2a6}{write}}\ !=\ \mbox{\hyperlink{gpio__port_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}))\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ bit\ =\ port-\/>\mbox{\hyperlink{structgpio__port__t_ab3fc055138c990202edf25c8ce72c488}{ops}}-\/>\mbox{\hyperlink{structgpio__ops__t_aed755ac157596f16d3432edef68e1dc0}{read}}(port-\/>\mbox{\hyperlink{structgpio__port__t_a1f6d09b30c54854dfca659b7463ac207}{ctx}},\ pins);}
+\DoxyCodeLine{00047\ \ \ \ \ \}}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordflow}{return}\ bit;}
+\DoxyCodeLine{00049\ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ gpio\_port\_toggle(\mbox{\hyperlink{structgpio__port__t}{gpio\_port\_t}}\ *port,\ uint16\_t\ pins)}
+\DoxyCodeLine{00052\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{if}\ ((port\ !=\ \mbox{\hyperlink{gpio__port_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})\ \&\&\ (port-\/>\mbox{\hyperlink{structgpio__port__t_ab3fc055138c990202edf25c8ce72c488}{ops}}\ !=\ \mbox{\hyperlink{gpio__port_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})\ \&\&\ (port-\/>\mbox{\hyperlink{structgpio__port__t_ab3fc055138c990202edf25c8ce72c488}{ops}}-\/>\mbox{\hyperlink{structgpio__ops__t_a829e37496fceaadfd4ba1cdbc54b6981}{toggle}}\ !=\ \mbox{\hyperlink{gpio__port_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}))\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ port-\/>\mbox{\hyperlink{structgpio__port__t_ab3fc055138c990202edf25c8ce72c488}{ops}}-\/>\mbox{\hyperlink{structgpio__ops__t_a829e37496fceaadfd4ba1cdbc54b6981}{toggle}}(port-\/>\mbox{\hyperlink{structgpio__port__t_a1f6d09b30c54854dfca659b7463ac207}{ctx}},\ pins);}
+\DoxyCodeLine{00055\ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

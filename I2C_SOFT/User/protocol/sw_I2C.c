@@ -4,86 +4,167 @@
 #define BASE_MASK (0x0F)
 #define BASE_ONE (0x01)
 
-
-typedef struct {
-    gpio_port_t* SCL_PIN;
-    gpio_port_t* SDA_PIN;
-}sw_i2c_ctx;
-
-
-
-static void sw_i2c_init(void *ctx)
+//这里可以直接调用抽象的gpio函数吗?
+void sw_i2c_init(void* ctx)
 {
-
-    sw_i2c_ctx *sw_i2c = (sw_i2c_ctx*)ctx;
-    //特定port的遮罩 
-
-    if(sw_i2c== NULL)
+    sw_i2c_ctx_t* sw_i2c_ctx = (sw_i2c_ctx_t*)ctx;
+    if(sw_i2c_ctx == NULL)
     {
         return;
     }
-
+    gpio_port_init(sw_i2c_ctx->gpio);
 }
-static void sw_i2c_SDA(void *ctx,gpio_level_t level)
-{
-    sw_i2c_ctx *sw_i2c = (sw_i2c_ctx*)ctx;
 
-    if(sw_i2c == NULL)
-    {
-        return;
-    } 
-    gpio_port_t *sda = sw_i2c->SDA_PIN;
-    //sda->ops->write(sda->ops,)
+
+
+static void sw_i2c_scl(void*ctx,gpio_level_t level)
+{
     
-}
-static void sw_i2c_SCL(void *ctx,gpio_level_t level)
-{
-   sw_i2c_ctx *sw_i2c = (sw_i2c_ctx*)ctx;
-
-    if(sw_i2c == NULL)
+    sw_i2c_ctx_t* sw_i2c_ctx = (sw_i2c_ctx_t*)ctx;
+    if(sw_i2c_ctx == NULL)
     {
         return;
     }
+
+    gpio_port_write(sw_i2c_ctx->gpio,sw_i2c_ctx->scl,level);
+
 }
-
-
-void sw_i2c_start(void* ctx)
+static void sw_i2c_sda(void*ctx,gpio_level_t level)
 {
-    sw_i2c_SDA(ctx,1);
-    sw_i2c_SCL(ctx,1);
-    sw_i2c_SDA(ctx,0);
-    sw_i2c_SCL(ctx,0);
+    sw_i2c_ctx_t* sw_i2c_ctx = (sw_i2c_ctx_t*)ctx;
+    if(sw_i2c_ctx == NULL)
+    {
+        return;
+    }
+    gpio_port_write(sw_i2c_ctx->gpio,sw_i2c_ctx->sda,level);
 }
 
-
-void sw_i2c_stop(void* ctx)
+void sw_i2c_start(void*ctx)
 {
-    sw_i2c_SDA(ctx,0);
-    sw_i2c_SCL(ctx,0);
-    sw_i2c_SCL(ctx,1);
-    sw_i2c_SDA(ctx,1);
+
+   sw_i2c_ctx_t* sw_i2c_ctx = (sw_i2c_ctx_t*)ctx;
+
+   sw_i2c_sda(ctx, 1);
+   sw_i2c_scl(ctx, 1);
+   sw_i2c_ctx->i2c_delay(5);
+   sw_i2c_sda(ctx, 0);
+   sw_i2c_ctx->i2c_delay(5);
+   sw_i2c_scl(ctx, 0);
 }
 
-void sw_i2c_sent_one(void* ctx)
+void sw_i2c_stop(void*ctx)
 {
-    sw_i2c_SDA(ctx,1);
-    sw_i2c_SCL(ctx,1);
-    sw_i2c_SCL(ctx,0);
-    sw_i2c_SDA(ctx,0);
+    
+   sw_i2c_ctx_t* sw_i2c_ctx = (sw_i2c_ctx_t*)ctx;
+   sw_i2c_sda(ctx, 0);
+   sw_i2c_scl(ctx, 0);
+
+   sw_i2c_ctx->i2c_delay(5);
+
+   sw_i2c_scl(ctx, 1);
+
+   sw_i2c_ctx->i2c_delay(5);
+
+   sw_i2c_sda(ctx, 1);
 }
-void sw_i2c_sent_zero(void* ctx)
+static void sw_i2c_sent_bit1(void*ctx)
 {
-    sw_i2c_SDA(ctx,0);
-    sw_i2c_SCL(ctx,1);
-    sw_i2c_SCL(ctx,0);
-    sw_i2c_SDA(ctx,0);
+   sw_i2c_ctx_t* sw_i2c_ctx = (sw_i2c_ctx_t*)ctx;
+   sw_i2c_sda(ctx, 1);
+
+   sw_i2c_ctx->i2c_delay(5);
+
+   sw_i2c_scl(ctx, 1);
+   sw_i2c_ctx->i2c_delay(5);
+   sw_i2c_scl(ctx, 0);
+   sw_i2c_ctx->i2c_delay(5);
+   sw_i2c_sda(ctx, 0);
 }
 
-uint8_t sw_i2c_receive_one_or_zero(void*ctx)
+static void sw_i2c_sent_bit0(void*ctx)
 {
-   sw_i2c_ctx *sw_i2c = (sw_i2c_ctx*)ctx;
-//   return sw_i2c->SDA_PIN & sw_i2c->gpio->ODR;
-    return 0;
+   sw_i2c_ctx_t* sw_i2c_ctx = (sw_i2c_ctx_t*)ctx;
+   sw_i2c_sda(ctx, 0);
+   sw_i2c_scl(ctx, 1);
+   sw_i2c_ctx->i2c_delay(5);
+   sw_i2c_scl(ctx, 0);
+
+}
+static uint8_t sw_i2c_receive_bit0_or_bit1(void*ctx)
+{
+
+    uint8_t bit = 0;
+    sw_i2c_sda(ctx,1);
+    sw_i2c_scl(ctx,1);
+    sw_i2c_ctx_t* sw_i2c_ctx = (sw_i2c_ctx_t*)ctx;
+    if(gpio_port_read(sw_i2c_ctx->gpio,sw_i2c_ctx->sda))
+    {
+        bit = 1;        
+    }
+    sw_i2c_scl(ctx,0);
+    return bit;
+}
+static uint8_t sw_i2c_sent_ack(void*ctx)
+{
+    uint8_t bit = 1;
+    sw_i2c_sda(ctx,1);
+    sw_i2c_scl(ctx,1);
+    sw_i2c_ctx_t* sw_i2c_ctx = (sw_i2c_ctx_t*)ctx;
+    if(gpio_port_read(sw_i2c_ctx->gpio,sw_i2c_ctx->sda))
+    {
+        bit = 0;        
+    }
+    sw_i2c_scl(ctx,0);
+    return bit;
+}
+static void sw_i2c_receive_ack(void*ctx)
+{
+    sw_i2c_sda(ctx,0);
+    sw_i2c_scl(ctx,1);
+    sw_i2c_scl(ctx,0);
+}
+
+uint8_t sw_i2c_sent_byte(void*ctx,uint8_t data)
+{
+    sw_i2c_ctx_t* sw_i2c_ctx = (sw_i2c_ctx_t*)ctx;
+    uint8_t success = 1;
+    for(uint8_t i = 0 ;  i < 8 ; i++)
+    {
+        if((data>>(7-i))&0x01)
+        {
+            sw_i2c_sent_bit1(ctx);
+        }
+        else
+        {
+            sw_i2c_sent_bit0(ctx);
+        }
+    }
+    if(sw_i2c_sent_ack(ctx) == 1)
+    {
+        success = 0;
+    }
+    sw_i2c_ctx->i2c_delay(5);
+    return success;
+}
+
+uint8_t sw_i2c_receive_byte(void*ctx)
+{
+    uint8_t data = 0x00;
+    for(uint8_t i = 0 ; i < 8 ; i++)
+    {
+        if(sw_i2c_receive_bit0_or_bit1(ctx)==1)
+        {
+            data|=0x01 << (7-i);
+        }
+    }
+    return data;
 }
 
 
+const i2c_ops_t sw_i2c_ops = {
+    .init = sw_i2c_init,
+    .read = sw_i2c_receive_byte,
+    .write = sw_i2c_sent_byte,
+    .start = sw_i2c_start,
+    .stop = sw_i2c_stop,
+};

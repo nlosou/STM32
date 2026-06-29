@@ -1,0 +1,70 @@
+\doxysection{User/app/at24c02.h File Reference}
+\hypertarget{at24c02_8h}{}\label{at24c02_8h}\index{User/app/at24c02.h@{User/app/at24c02.h}}
+{\ttfamily \#include "{}./protocol/i2c\+\_\+port.\+h"{}}\newline
+Include dependency graph for at24c02.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=193pt]{at24c02_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{at24c02_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structat24c02__t}{at24c02\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{at24c02_8h_a7026a764185c5a9217dd412612a7775d}{at24c02\+\_\+init}} (\mbox{\hyperlink{structat24c02__t}{at24c02\+\_\+t}} \texorpdfstring{$\ast$}{*}at24)
+\item 
+uint8\+\_\+t \mbox{\hyperlink{at24c02_8h_a98b2c7fa56eeb4d7c2e482b0b87c2f1d}{at24c02\+\_\+read}} (\mbox{\hyperlink{structat24c02__t}{at24c02\+\_\+t}} \texorpdfstring{$\ast$}{*}at24, uint8\+\_\+t data\+\_\+address)
+\item 
+void \mbox{\hyperlink{at24c02_8h_a3cfec194532e699de8b807fe2a670735}{at24c02\+\_\+write}} (\mbox{\hyperlink{structat24c02__t}{at24c02\+\_\+t}} \texorpdfstring{$\ast$}{*}at24, uint8\+\_\+t data, uint8\+\_\+t address)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{at24c02_8h_a7026a764185c5a9217dd412612a7775d}\label{at24c02_8h_a7026a764185c5a9217dd412612a7775d} 
+\index{at24c02.h@{at24c02.h}!at24c02\_init@{at24c02\_init}}
+\index{at24c02\_init@{at24c02\_init}!at24c02.h@{at24c02.h}}
+\doxysubsubsection{\texorpdfstring{at24c02\_init()}{at24c02\_init()}}
+{\footnotesize\ttfamily void at24c02\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structat24c02__t}{at24c02\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{at24 }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{at24c02_8h_a7026a764185c5a9217dd412612a7775d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{at24c02_8h_a98b2c7fa56eeb4d7c2e482b0b87c2f1d}\label{at24c02_8h_a98b2c7fa56eeb4d7c2e482b0b87c2f1d} 
+\index{at24c02.h@{at24c02.h}!at24c02\_read@{at24c02\_read}}
+\index{at24c02\_read@{at24c02\_read}!at24c02.h@{at24c02.h}}
+\doxysubsubsection{\texorpdfstring{at24c02\_read()}{at24c02\_read()}}
+{\footnotesize\ttfamily uint8\+\_\+t at24c02\+\_\+read (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structat24c02__t}{at24c02\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{at24,  }\item[{uint8\+\_\+t}]{data\+\_\+address }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{at24c02_8h_a98b2c7fa56eeb4d7c2e482b0b87c2f1d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{at24c02_8h_a3cfec194532e699de8b807fe2a670735}\label{at24c02_8h_a3cfec194532e699de8b807fe2a670735} 
+\index{at24c02.h@{at24c02.h}!at24c02\_write@{at24c02\_write}}
+\index{at24c02\_write@{at24c02\_write}!at24c02.h@{at24c02.h}}
+\doxysubsubsection{\texorpdfstring{at24c02\_write()}{at24c02\_write()}}
+{\footnotesize\ttfamily void at24c02\+\_\+write (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structat24c02__t}{at24c02\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{at24,  }\item[{uint8\+\_\+t}]{data,  }\item[{uint8\+\_\+t}]{address }\end{DoxyParamCaption})}
+
