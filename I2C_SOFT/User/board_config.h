@@ -11,7 +11,7 @@
 #define EEPROM1_SCL_PIN             GPIOx_PIN_5
 #define EEPROM1_SDA_PIN             GPIOx_PIN_6
 
-#define EEPROM1_DEV_ADDR_READ       0xA1
+#define EEPROM1_DEV_ADDR_READ       0xA0
 #define EEPROM1_DEV_ADDR_WRITE      0xA0
 
 #endif

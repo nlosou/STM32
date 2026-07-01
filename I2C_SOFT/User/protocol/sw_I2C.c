@@ -39,7 +39,7 @@ static void sw_i2c_sda(void*ctx,gpio_level_t level)
     gpio_port_write(sw_i2c_ctx->gpio,sw_i2c_ctx->sda,level);
 }
 
-void sw_i2c_start(void*ctx)
+static void sw_i2c_start(void*ctx)
 {
 
    sw_i2c_ctx_t* sw_i2c_ctx = (sw_i2c_ctx_t*)ctx;
@@ -52,10 +52,11 @@ void sw_i2c_start(void*ctx)
    sw_i2c_scl(ctx, 0);
 }
 
-void sw_i2c_stop(void*ctx)
+static void sw_i2c_stop(void*ctx)
 {
     
    sw_i2c_ctx_t* sw_i2c_ctx = (sw_i2c_ctx_t*)ctx;
+
    sw_i2c_sda(ctx, 0);
    sw_i2c_scl(ctx, 0);
 
@@ -117,14 +118,14 @@ static uint8_t sw_i2c_sent_ack(void*ctx)
     sw_i2c_scl(ctx,0);
     return bit;
 }
-static void sw_i2c_receive_ack(void*ctx)
+static  void sw_i2c_receive_NOACK(void*ctx)
 {
-    sw_i2c_sda(ctx,0);
+    sw_i2c_sda(ctx,1);
     sw_i2c_scl(ctx,1);
     sw_i2c_scl(ctx,0);
 }
 
-uint8_t sw_i2c_sent_byte(void*ctx,uint8_t data)
+static void sw_i2c_sent_byte(void*ctx,uint8_t data)
 {
     sw_i2c_ctx_t* sw_i2c_ctx = (sw_i2c_ctx_t*)ctx;
     uint8_t success = 1;
@@ -139,15 +140,9 @@ uint8_t sw_i2c_sent_byte(void*ctx,uint8_t data)
             sw_i2c_sent_bit0(ctx);
         }
     }
-    if(sw_i2c_sent_ack(ctx) == 1)
-    {
-        success = 0;
-    }
-    sw_i2c_ctx->i2c_delay(5);
-    return success;
 }
 
-uint8_t sw_i2c_receive_byte(void*ctx)
+static uint8_t sw_i2c_receive_byte(void*ctx)
 {
     uint8_t data = 0x00;
     for(uint8_t i = 0 ; i < 8 ; i++)
@@ -161,10 +156,37 @@ uint8_t sw_i2c_receive_byte(void*ctx)
 }
 
 
+uint16_t sw_i2c_transfer(void*ctx,i2c_msg_t* msgs,uint16_t num)
+{
+    for(uint16_t i = 0 ; i < num; i++)
+    {
+        i2c_msg_t *msg = &msgs[i];
+
+        sw_i2c_start(ctx);
+
+        uint8_t addr_byte = msg->addr |((msg->flags & I2C_M_RD) ? 1 : 0);
+        sw_i2c_sent_byte(ctx,addr_byte);
+        sw_i2c_sent_ack(ctx);
+        for(uint16_t j = 0 ; j < msg->len;j++)
+        {
+            if(msg->flags & I2C_M_RD)
+            {
+                uint8_t ack = (j == msg->len - 1) ? 0 : 1;
+                msg->buf[j] = sw_i2c_receive_byte(ctx);
+                sw_i2c_receive_NOACK(ctx);
+            }
+            else
+            {
+                sw_i2c_sent_byte(ctx,msg->buf[j]);
+                sw_i2c_sent_ack(ctx);
+            }
+        }
+    }
+    sw_i2c_stop(ctx);
+    return num;
+}
+
 const i2c_ops_t sw_i2c_ops = {
     .init = sw_i2c_init,
-    .read = sw_i2c_receive_byte,
-    .write = sw_i2c_sent_byte,
-    .start = sw_i2c_start,
-    .stop = sw_i2c_stop,
+    .transfer = sw_i2c_transfer
 };
