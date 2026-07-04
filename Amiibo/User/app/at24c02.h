@@ -3,7 +3,7 @@
 
 
 
-#include "./protocol/i2c_port.h"
+#include "./hal/i2c_port.h"
 
 typedef struct {
     i2c_port_t* i2c;

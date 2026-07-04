@@ -73,7 +73,7 @@ static void sw_i2c_sent_bit1(void*ctx)
    sw_i2c_ctx_t* sw_i2c_ctx = (sw_i2c_ctx_t*)ctx;
    sw_i2c_sda(ctx, 1);
 
-   sw_i2c_ctx->i2c_delay(5);
+   sw_i2c_ctx->i2c_delay(10);
 
    sw_i2c_scl(ctx, 1);
    sw_i2c_ctx->i2c_delay(5);

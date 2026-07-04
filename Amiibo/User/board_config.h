@@ -14,4 +14,17 @@
 #define EEPROM1_DEV_ADDR_READ       0xA0
 #define EEPROM1_DEV_ADDR_WRITE      0xA0
 
+
+
+
+// ================= OLED (ssd1306) 硬件配置 =================
+#define OLED_GPIO_PORT           GPIOB
+#define OLED_BIT                 RCC_APB2ENR_IOPBEN
+#define OLED_GPIO_MODE           OUTPUT_MODE_10MHZ_General_open_drain
+#define OLED_SCL_PIN             GPIOx_PIN_5
+#define OLED_SDA_PIN             GPIOx_PIN_6
+
+#define OLED_DEV_ADDRESSS        0x78
+
+
 #endif
