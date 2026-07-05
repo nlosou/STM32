@@ -22,4 +22,13 @@ void OLED_ShowString(uint8_t row,uint8_t colum,char* string);
 void OLED_ShowHex(uint8_t row ,uint8_t colum,uint16_t num);
 void OLED_ShowBin(uint8_t row ,uint8_t colum,uint16_t num);
 
+//以下为函数调用顺序
+/*
+    oled_t *oled = bsp_get_oled();
+    oled_init_hal(oled);
+    oled_init(oled);
+    OLED_ShowHex(0,0  ,0x13);
+    oled_point(oled);
+*/
+
 #endif

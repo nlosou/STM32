@@ -123,7 +123,7 @@ void OLED_ShowHex(uint8_t row ,uint8_t colum,uint16_t num)
                 OLED_DrawPoint((row+ idx) * 8 + (j & 0x07) ,y+k,(HexNumbers[temp][j] >>(k)) & 0x01 );
             }
         }
-        y = 0;
+     y = colum*16;
     }
 }
 
