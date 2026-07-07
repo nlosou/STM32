@@ -10,6 +10,7 @@ typedef struct {
     uint16_t len;
     uint8_t *buf;
 }i2c_msg_t;
+
 typedef struct {
     void (*init)(void* ctx);
     uint16_t (*transfer)(void*ctx,i2c_msg_t *msgs,uint16_t num);
