@@ -5,6 +5,7 @@
 #include "at24c02.h"
 #include "oled.h"
 #include "osal/OSAL.h"
+#include "W25Q64FV.h"
 
 
 
@@ -82,15 +83,20 @@ static oled_t oled_inst = {
 };
 
 
+static W25Q64xx_ctx_t W25Qxx = {
+    .port = &spi_port
+};
+
 // 只有最外层的设备对象可以被外界感知
 oled_t* bsp_get_oled(void)
 {
     return &oled_inst;
 }
 
-spi_port_t* bsp_get_spi(void)
+
+W25Q64xx_ctx_t* bsp_get_w25Q64(void)
 {
-    return &spi_port;
+    return &W25Qxx;
 }
 
 /*

@@ -1,32 +1,24 @@
 #include "bsp_devices.h"
-#include "board_config.h"
 #include <stdint.h>
-
-
-
-
 
 
 
 int main(void)
 {   
+
     
-    uint8_t cmd[4] = {0x90,0x00,0x00,0x00};
-    spi_msg_t msg[1] = {
-        4,cmd
-    };
     oled_t *oled = bsp_get_oled();
-    spi_port_t *spi = bsp_get_spi();
-    spi->ops->init(spi->ctx);
+    W25Q64xx_ctx_t *W25Q64xx = bsp_get_w25Q64();
+    
+    W25Q64FV_init(W25Q64xx);
+
     oled_init_hal(oled);
     oled_init(oled);
-    spi->ops->transmit(spi->ctx,msg,1);
+    W25Q64FV_Read_ManuID_DeviceID(W25Q64xx);
     OLED_ShowString(1,1,"OK");
     oled_point(oled);
     while (1)
     {
-
-
            
     }
     return 0;

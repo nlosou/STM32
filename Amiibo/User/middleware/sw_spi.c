@@ -15,6 +15,7 @@ void sw_spi_init(void *ctx)
 
 static void sw_spi_sent_byte(void*ctx,uint8_t data)
 {
+   //OLED_ShowHex(0,0,1);
    sw_spi_ctx_t*  sw_spi = (sw_spi_ctx_t*)ctx; 
    for(uint8_t idx = 0 ; idx < 8 ;idx++)
    {
@@ -25,7 +26,7 @@ static void sw_spi_sent_byte(void*ctx,uint8_t data)
        gpio_port_write(sw_spi->gpio_output,sw_spi->CLK,GPIO_LEVEL_LOW);
    }
 }
-static uint8_t sw_spi_recieve_byte(void*ctx,uint8_t data)
+static uint8_t sw_spi_recieve_byte(void*ctx)
 {
     if(ctx==NULL)
     {
@@ -40,6 +41,7 @@ static uint8_t sw_spi_recieve_byte(void*ctx,uint8_t data)
        gpio_port_write(sw_spi->gpio_output,sw_spi->CLK,GPIO_LEVEL_HIGH);
        temp_data |= gpio_port_read(sw_spi->gpio_input,sw_spi->MISO) << (7 - idx); 
    }
+   //OLED_ShowBin(0,0,temp_data);
    return temp_data;
 }
 
@@ -57,13 +59,21 @@ uint32_t sw_spi_transmit(void*ctx ,spi_msg_t *msg,uint16_t num)
     {
         for(uint8_t cmd_count = 0 ; cmd_count < msg->len ; cmd_count++) 
         {
+            //OLED_ShowHex(0,0,msg->len);
             sw_spi_sent_byte(ctx,(msg + idx)->buf[cmd_count]);
         }
+        if(msg->flags == Read)
+        {
+            for(uint8_t receive_data_count = 0 ; receive_data_count < msg->get_buf_len ; receive_data_count ++)
+            {
+                sw_spi_recieve_byte(ctx);
+            }
+        }
+        
     }
     gpio_port_write(sw_spi->gpio_output,sw_spi->CS,GPIO_LEVEL_HIGH);
     return num;
 }
-
 
 const spi_ops_t sw_spi_ops = {
     .init = sw_spi_init,

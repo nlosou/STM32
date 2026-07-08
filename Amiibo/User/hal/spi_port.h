@@ -1,10 +1,13 @@
 #ifndef SPI_PORT_H
 #define SPI_PORT_H
-
 #include <stdint.h>
 #define NULL 0
+#define Read  1
+#define Write 0
 typedef struct {
     uint8_t len;
+    uint8_t flags;
+    uint8_t get_buf_len;
     uint8_t *buf;
 }spi_msg_t;
 
