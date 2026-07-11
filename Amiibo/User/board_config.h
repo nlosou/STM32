@@ -32,14 +32,13 @@
 // ================= W25QXX (软件SPI) 硬件配置 =================
 #define W25QXX_GPIO_PORT            GPIOA
 #define W25QXX__BIT                 RCC_APB2ENR_IOPAEN
-#define W25QXX__GPIO_MODE           OUTPUT_MODE_50MHZ_General_push_pull 
+#define W25QXX__GPIO_MODE           OUTPUT_MODE_10MHZ_General_push_pull 
 #define W25QXX__GPIO_MODE1          INPUT_WITH_PULLUP_PULLDOWN
-#define W25QXX_DI_PIN               GPIOx_PIN_0
-#define W25QXX_CLK_PIN              GPIOx_PIN_1
-#define W25QXX_DO_PIN               GPIOx_PIN_2
-#define W25QXX_CS_PIN               GPIOx_PIN_3
+#define W25QXX_DI_PIN               GPIOx_PIN_8
+#define W25QXX_CLK_PIN              GPIOx_PIN_9
+#define W25QXX_DO_PIN               GPIOx_PIN_10
+#define W25QXX_CS_PIN               GPIOx_PIN_11
 
-#define OLED_DEV_ADDRESSS        0x78
 
 
 

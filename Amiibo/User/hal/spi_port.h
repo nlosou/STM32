@@ -4,18 +4,19 @@
 #define NULL 0
 #define Read  1
 #define Write 0
+
 typedef struct {
     uint8_t len;
     uint8_t flags;
     uint8_t get_buf_len;
     uint8_t *buf;
+    uint8_t *getbuf;
 }spi_msg_t;
 
 typedef struct {
     void (*init)(void*ctx);
     uint32_t (*transmit)(void*ctx,spi_msg_t *msg,uint16_t num);
 }spi_ops_t;
-
 
 typedef struct {
     const spi_ops_t *ops;

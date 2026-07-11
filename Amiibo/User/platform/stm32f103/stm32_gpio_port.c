@@ -54,20 +54,17 @@ static void stm32_gpioa_write(void *ctx,uint16_t use_pins,gpio_level_t level)
     {
         return;
     }
-    for(uint8_t idx = 0 ; idx < 16 ; idx++)
+    if(level == GPIO_LEVEL_HIGH)
     {
-        if((use_pins >> idx) & 0x01)
-        {
-            if(level == GPIO_LEVEL_HIGH)
-            {
-                gpio_ctx->gpio->BSRR = BASE_ONE <<idx;
-            }
-            else
-            {
-                gpio_ctx->gpio->BRR = BASE_ONE <<idx;
-            }    
-        }
+        gpio_ctx->gpio->BSRR = use_pins;
+
     }
+    else
+    {
+        gpio_ctx->gpio->BRR= use_pins;
+
+    }    
+    __asm__ volatile("" : : : "memory");
 }
 //input
 static uint32_t stm32_gpioa_read(void *ctx,uint16_t use_pins)

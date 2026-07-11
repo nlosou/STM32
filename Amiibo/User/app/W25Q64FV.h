@@ -9,6 +9,6 @@ typedef struct {
 
 void W25Q64FV_init(W25Q64xx_ctx_t *ctx);
 
-uint32_t W25Q64FV_Read_ManuID_DeviceID(W25Q64xx_ctx_t *ctx);
+uint8_t* W25Q64FV_Read_ManuID_DeviceID(W25Q64xx_ctx_t *ctx);
 
 #endif

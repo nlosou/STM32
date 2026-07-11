@@ -17,6 +17,7 @@ static stm32_gpio_ctx_t i2c_gpio = {
     .use_pins = OLED_SCL_PIN | OLED_SDA_PIN 
 };
 
+
 static stm32_gpio_ctx_t SPI_gpio_out = {
     .gpio = W25QXX_GPIO_PORT,
     .rcc_enable_bit = W25QXX__BIT,
