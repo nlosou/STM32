@@ -19,16 +19,16 @@ static stm32_gpio_ctx_t i2c_gpio = {
 
 
 static stm32_gpio_ctx_t SPI_gpio_out = {
-    .gpio = W25QXX_GPIO_PORT,
-    .rcc_enable_bit = W25QXX__BIT,
-    .mode_select = W25QXX__GPIO_MODE,
-    .use_pins = W25QXX_CLK_PIN | W25QXX_CS_PIN | W25QXX_DI_PIN
+    .gpio = spi_GPIO_PORT,
+    .rcc_enable_bit = spi_BIT,
+    .mode_select = spi_GPIO_MODE,
+    .use_pins = spi_bus_CLK_PIN | W25QXX_CS_PIN | spi_bus_DI_PIN
 };
 static stm32_gpio_ctx_t SPI_gpio_input = {
-    .gpio = W25QXX_GPIO_PORT,
-    .rcc_enable_bit = W25QXX__BIT,
-    .mode_select = W25QXX__GPIO_MODE1,
-    .use_pins = W25QXX_DO_PIN
+    .gpio = spi_GPIO_PORT,
+    .rcc_enable_bit = spi_BIT,
+    .mode_select = spi_GPIO_MODE1,
+    .use_pins = spi_bus_DO_PIN
 };
 
 static gpio_port_t gpio_port_ctx = {
@@ -64,10 +64,10 @@ static i2c_port_t i2c_port = {
 static sw_spi_ctx_t sw_spi_ctx = {
     .gpio_input = &spi_gpio_port_ctx_input,
     .gpio_output = &spi_gpio_port_ctx_out,
-    .CLK = W25QXX_CLK_PIN,
+    .CLK = spi_bus_CLK_PIN,
     .CS = W25QXX_CS_PIN,
-    .MISO = W25QXX_DO_PIN,
-    .MOSI = W25QXX_DI_PIN
+    .MISO = spi_bus_DO_PIN,
+    .MOSI = spi_bus_DI_PIN
 };
 
 static spi_port_t spi_port = {
@@ -85,9 +85,10 @@ static oled_t oled_inst = {
 
 
 static W25Q64xx_ctx_t W25Qxx = {
-    .port = &spi_port
+    .port = &spi_port,
+    .CS = W25QXX_CS_PIN,
+    .bit_order =MSB
 };
-
 // 只有最外层的设备对象可以被外界感知
 oled_t* bsp_get_oled(void)
 {

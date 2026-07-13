@@ -9,3 +9,28 @@ CompileFlags:
     - -IUser/platform/stm32f103
     - -DSTM32F10X_MD
     - -DUSE_STDPERIPH_DRIVER
+
+Diagnostics:
+  ClangTidy:
+    Add: [
+      bugprone-*,       # 捕获潜在的逻辑 Bug（如悬空指针、内存泄漏、位移溢出）
+      performance-*,    # 性能优化检查（减少不必要的内存拷贝、低效循环）
+      portability-*,    # 移植性检查（检查由于数据类型大小、字节序带来的问题，对嵌入式至关重要）
+      cert-* # CERT 安全编码标准（适合对稳定性要求高的嵌入式场景）
+    ]
+    Remove: [
+      # 1. 禁用魔术数字检查（嵌入式开发中操作寄存器，如 (*(volatile uint32_t *)0x40021000) 极其常见）
+      readability-magic-numbers, 
+      
+      # 2. 禁用指针算术限制（嵌入式中通过指针偏移访问 DMA 缓冲区或外设寄存器是标准操作）
+      cppcoreguidelines-pro-bounds-pointer-arithmetic,
+      
+      # 3. 禁用变长参数限制（如果你在串口打印中频繁使用 printf/sprintf 的话）
+      cppcoreguidelines-pro-type-vararg,
+      
+      # 4. 如果你写的是纯 C，建议关掉 C++ 特有的现代特征检查
+      modernize-*
+    ]
+    CheckOptions:
+      # 限制函数的复杂度（防止单片机里的中断服务函数 ISR 写得过长）
+      readability-function-cognitive-complexity.Threshold: 25

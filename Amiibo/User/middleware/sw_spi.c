@@ -1,5 +1,5 @@
 #include "sw_spi.h"
-#include "oled.h"
+
 void sw_spi_init(void *ctx)
 {
     if(ctx==NULL)
@@ -11,14 +11,17 @@ void sw_spi_init(void *ctx)
     gpio_port_init(sw_spi->gpio_output);
 }
 
-static void sw_spi_sent_byte(void*ctx,uint8_t data)
+static uint8_t sw_spi_sent_byte(void*ctx,uint8_t data)
 {
    //OLED_ShowHex(0,1,1);
    sw_spi_ctx_t*  sw_spi = (sw_spi_ctx_t*)ctx; 
    gpio_port_t *port = sw_spi->gpio_output; 
+   gpio_port_t *port_intput = sw_spi->gpio_input; 
    uint16_t clk_pin = sw_spi->CLK;
    uint16_t mosi_pin = sw_spi->MOSI;
+   uint16_t miso_pin = sw_spi->MISO;
    uint8_t temp_level[8] = {0};
+   uint8_t temp_data = 0x00; 
    for(uint8_t idx = 0 ; idx < 8 ;idx++)
    {
 
@@ -29,10 +32,13 @@ static void sw_spi_sent_byte(void*ctx,uint8_t data)
        gpio_port_write(port,mosi_pin,temp_level[idx]);
        //gpio_port_write(port,clk_pin,GPIO_LEVEL_LOW);
        gpio_port_write(port,clk_pin,GPIO_LEVEL_HIGH);
+       temp_data |= gpio_port_read(port_intput,miso_pin) << (7 - idx); 
        gpio_port_write(port,clk_pin,GPIO_LEVEL_LOW);
    }
+   return temp_data;
 }
-static uint8_t sw_spi_recieve_byte(void*ctx)
+
+uint32_t sw_spi_transmit(void*ctx ,spi_msg_t *msg,uint16_t num)
 {
     if(ctx==NULL)
     {
@@ -41,51 +47,22 @@ static uint8_t sw_spi_recieve_byte(void*ctx)
 
    sw_spi_ctx_t*  sw_spi = (sw_spi_ctx_t*)ctx; 
    gpio_port_t *port_output = sw_spi->gpio_output; 
-   gpio_port_t *port_intput = sw_spi->gpio_input; 
    uint16_t clk_pin = sw_spi->CLK;
-   uint16_t miso_pin = sw_spi->MISO;
-   uint16_t mosi_pin = sw_spi->MOSI;
-   uint8_t temp_data = 0x00; 
-
-   for(uint8_t idx = 0 ; idx < 8 ;idx++)
-   {
-       gpio_port_write(port_output,clk_pin,GPIO_LEVEL_LOW);
-       gpio_port_write(port_output,clk_pin,GPIO_LEVEL_HIGH);
-//     gpio_port_write(port_output,mosi_pin,GPIO_LEVEL_HIGH);
-       temp_data |= gpio_port_read(port_intput,miso_pin) << (7 - idx); 
-   }
-   //OLED_ShowBin(0,0,temp_data);
-   return temp_data;
-}
-
-
-uint32_t sw_spi_transmit(void*ctx ,spi_msg_t *msg,uint16_t num)
-{
-    if(ctx==NULL)
-    {
-        return 0;
-    }
-    sw_spi_ctx_t*  sw_spi = (sw_spi_ctx_t*)ctx; 
-   gpio_port_t *port_output = sw_spi->gpio_output; 
-   gpio_port_t *port_intput = sw_spi->gpio_input; 
-   uint16_t clk_pin = sw_spi->CLK;
-   uint16_t miso_pin = sw_spi->MISO;
-   uint16_t mosi_pin = sw_spi->MOSI;
    uint16_t cs_pin = sw_spi->CS;
 
-    for(uint8_t idx = 0 ; idx < num ; idx ++)
+    for(uint16_t idx = 0 ; idx < num ; idx ++)
     {
         gpio_port_write(port_output,cs_pin,GPIO_LEVEL_HIGH);
         gpio_port_write(port_output,cs_pin,GPIO_LEVEL_LOW);
-        for(uint8_t cmd_count = 0 ; cmd_count < msg[idx].len ; cmd_count++) 
+        for(uint8_t cmd_count = 0 ; cmd_count < msg[idx].len + msg[idx].get_buf_len ; cmd_count++) 
         {
-            sw_spi_sent_byte(ctx,(msg + idx)->buf[cmd_count]);
-        }
-        if(msg[idx].flags == Read)
-        {
-            for(uint8_t receive_data_count = 0 ; receive_data_count < msg[idx].get_buf_len ; receive_data_count ++)
+            if(cmd_count < msg[idx].len)
             {
-                msg[idx].getbuf[receive_data_count] = sw_spi_recieve_byte(ctx);
+                sw_spi_sent_byte(ctx,(msg + idx)->buf[cmd_count]);
+            }
+            else
+            {
+               msg[idx].getbuf[cmd_count - msg[idx].len] = sw_spi_sent_byte(ctx,0x00);
             }
         }
         gpio_port_write(port_output,cs_pin,GPIO_LEVEL_HIGH);

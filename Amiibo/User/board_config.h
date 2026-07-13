@@ -29,14 +29,19 @@
 
 
 
-// ================= W25QXX (软件SPI) 硬件配置 =================
-#define W25QXX_GPIO_PORT            GPIOA
-#define W25QXX__BIT                 RCC_APB2ENR_IOPAEN
-#define W25QXX__GPIO_MODE           OUTPUT_MODE_10MHZ_General_push_pull 
-#define W25QXX__GPIO_MODE1          INPUT_WITH_PULLUP_PULLDOWN
-#define W25QXX_DI_PIN               GPIOx_PIN_8
-#define W25QXX_CLK_PIN              GPIOx_PIN_9
-#define W25QXX_DO_PIN               GPIOx_PIN_10
+// ================= 软件SPI 硬件配置 =================
+#define spi_GPIO_PORT           GPIOA
+#define spi_BIT                 RCC_APB2ENR_IOPAEN
+#define spi_GPIO_MODE           OUTPUT_MODE_10MHZ_General_push_pull 
+#define spi_GPIO_MODE1          INPUT_WITH_PULLUP_PULLDOWN
+#define spi_bus_DI_PIN          GPIOx_PIN_8
+#define spi_bus_CLK_PIN         GPIOx_PIN_9
+#define spi_bus_DO_PIN          GPIOx_PIN_10
+
+
+
+
+// =================spi设备的片选 ====================
 #define W25QXX_CS_PIN               GPIOx_PIN_11
 
 

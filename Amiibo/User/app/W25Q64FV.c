@@ -1,7 +1,5 @@
 #include "W25Q64FV.h"
 #include <string.h>
-#include "osal/OSAL.h"
-#include "oled.h""
 
 void W25Q64FV_init(W25Q64xx_ctx_t *ctx)
 {
@@ -78,9 +76,9 @@ uint8_t* W25Q64FV_Write(W25Q64xx_ctx_t *ctx,uint32_t data_address,uint8_t data[]
 
     //擦除
     spi_msg_t  msg_Sector_Erase[2] = {
-         sizeof(Write_enable),  Write, 1,Write_enable,getbuf,
+         sizeof(Write_enable),  Write, 0,Write_enable,getbuf,
 
-         sizeof(Sector_Erase),  Write, 1,Sector_Erase,getbuf+1
+         sizeof(Sector_Erase),  Write, 0,Sector_Erase,getbuf+1
     };
     spi_transmit(ctx->port,msg_Sector_Erase,2);
         
@@ -90,9 +88,9 @@ uint8_t* W25Q64FV_Write(W25Q64xx_ctx_t *ctx,uint32_t data_address,uint8_t data[]
     }
     //写入
     spi_msg_t  msg_Page_Program[2] = {
-         sizeof(Write_enable),  Write, 1,Write_enable,getbuf,
+         sizeof(Write_enable),  Write, 0,Write_enable,getbuf,
 
-         sizeof(Page_Program) + length,  Write, 1,Page_Program,getbuf+1
+         sizeof(Page_Program) + length,  Write, 0,Page_Program,getbuf+1
     };
     spi_transmit(ctx->port,msg_Page_Program,2);
 
