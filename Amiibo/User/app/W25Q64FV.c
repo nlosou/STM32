@@ -107,6 +107,7 @@ uint8_t* W25Q64FV_Read(W25Q64xx_ctx_t *ctx,uint32_t data_address,uint8_t length)
     {
         return 0;
     }
+    //组装命令
     uint8_t Read_data[] = {0x03,(data_address>>16) & 0xFF,(data_address>>8) & 0xFF,data_address & 0xFF};
     static uint8_t getbuf[] = {0};
     //擦除
@@ -114,7 +115,11 @@ uint8_t* W25Q64FV_Read(W25Q64xx_ctx_t *ctx,uint32_t data_address,uint8_t length)
          sizeof(Read_data),  Read, length,Read_data,getbuf,
 
     };
-    spi_transmit(ctx->port,msg_Read_data,1);
-        
+
+    spi_select(ctx->select,ctx->CS,1);//片选
+    spi_select(ctx->select,ctx->CS,0);
+    spi_transmit(ctx->port,msg_Read_data,1);//发起事务
+    spi_select(ctx->select,ctx->CS,1);
+
     return getbuf;
 }

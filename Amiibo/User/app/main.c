@@ -14,7 +14,6 @@ int main(void)
      uint8_t *getbuf = W25Q64FV_Read(W25Q64xx,0x123,sizeof(data));
     OLED_ShowHex(0,0,getbuf[1]);
     oled_point(oled);
-
     while (1)
     {
         

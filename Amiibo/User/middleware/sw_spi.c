@@ -22,6 +22,8 @@ static uint8_t sw_spi_sent_byte(void*ctx,uint8_t data)
    uint16_t miso_pin = sw_spi->MISO;
    uint8_t temp_level[8] = {0};
    uint8_t temp_data = 0x00; 
+
+
    for(uint8_t idx = 0 ; idx < 8 ;idx++)
    {
 
@@ -48,12 +50,8 @@ uint32_t sw_spi_transmit(void*ctx ,spi_msg_t *msg,uint16_t num)
    sw_spi_ctx_t*  sw_spi = (sw_spi_ctx_t*)ctx; 
    gpio_port_t *port_output = sw_spi->gpio_output; 
    uint16_t clk_pin = sw_spi->CLK;
-   uint16_t cs_pin = sw_spi->CS;
-
-    for(uint16_t idx = 0 ; idx < num ; idx ++)
+   for(uint16_t idx = 0 ; idx < num ; idx ++)
     {
-        gpio_port_write(port_output,cs_pin,GPIO_LEVEL_HIGH);
-        gpio_port_write(port_output,cs_pin,GPIO_LEVEL_LOW);
         for(uint8_t cmd_count = 0 ; cmd_count < msg[idx].len + msg[idx].get_buf_len ; cmd_count++) 
         {
             if(cmd_count < msg[idx].len)
@@ -65,8 +63,6 @@ uint32_t sw_spi_transmit(void*ctx ,spi_msg_t *msg,uint16_t num)
                msg[idx].getbuf[cmd_count - msg[idx].len] = sw_spi_sent_byte(ctx,0x00);
             }
         }
-        gpio_port_write(port_output,cs_pin,GPIO_LEVEL_HIGH);
-        gpio_port_write(port_output,clk_pin,GPIO_LEVEL_LOW);
     }
     return num;
 }

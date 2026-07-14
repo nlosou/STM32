@@ -12,7 +12,6 @@ typedef struct {
     gpio_port_t *gpio_input;
     uint16_t MOSI;
     uint16_t MISO;
-    uint16_t CS;
     uint16_t CLK;
 }sw_spi_ctx_t;
 

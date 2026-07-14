@@ -1,11 +1,15 @@
 #ifndef W25Q64FV_H_
 #define W25Q64FV_H_
 #include "spi_port.h"
+#include "middleware/spi_select_opp.h"
+
+
 
 typedef struct {
     spi_port_t* port;
-    uint8_t bit_order;
+    spi_select_port_t* select; 
     uint16_t CS;
+    uint8_t bit_order;
 }W25Q64xx_ctx_t;
 
 void W25Q64FV_init(W25Q64xx_ctx_t *ctx);
