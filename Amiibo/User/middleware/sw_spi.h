@@ -3,10 +3,6 @@
 #include "spi_port.h"
 #include "gpio_port.h"
 
-
-#define MSB 1
-#define LSB 0
-
 typedef struct {
     gpio_port_t *gpio_output;
     gpio_port_t *gpio_input;

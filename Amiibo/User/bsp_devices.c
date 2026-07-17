@@ -7,6 +7,7 @@
 #include "oled.h"
 #include "osal/OSAL.h"
 #include "W25Q64FV.h"
+#include "PN532.h"
 
 
 
@@ -22,7 +23,7 @@ static stm32_gpio_ctx_t SPI_gpio_out = {
     .gpio = spi_GPIO_PORT,
     .rcc_enable_bit = spi_BIT,
     .mode_select = spi_GPIO_MODE,
-    .use_pins = spi_bus_CLK_PIN | W25QXX_CS_PIN | spi_bus_DI_PIN
+    .use_pins = spi_bus_CLK_PIN | W25QXX_CS_PIN | spi_bus_DI_PIN | PN532_CS_PIN
 };
 static stm32_gpio_ctx_t SPI_gpio_input = {
     .gpio = spi_GPIO_PORT,
@@ -100,6 +101,15 @@ static W25Q64xx_ctx_t W25Qxx = {
     .CS = W25QXX_CS_PIN,
     .bit_order =MSB
 };
+
+static PN532_ctx_t PN532 = {
+    .port = &spi_port,
+    .select = &spi_select_port,
+    .CS = PN532_CS_PIN,
+    .bit_order = LSB
+
+};
+
 // 只有最外层的设备对象可以被外界感知
 oled_t* bsp_get_oled(void)
 {
@@ -116,6 +126,11 @@ spi_select_port_t* bsp_get_select_spi(void)
 {
     return &spi_select_port;
 }
+PN532_ctx_t* bsp_get_pn532(void)
+{
+    return &PN532;
+}
+
 /*
 // 
 at24c02_t* bsp_get_eeprom1(void)

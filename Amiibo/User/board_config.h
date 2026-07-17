@@ -43,7 +43,7 @@
 
 // =================spi设备的片选 ====================
 #define W25QXX_CS_PIN               GPIOx_PIN_11
-
+#define PN532_CS_PIN                GPIOx_PIN_12
 
 
 

@@ -4,15 +4,18 @@
 
 int main(void)
 {   
+    uint8_t data[] = {0x23,0xa0,3,4,5,6,7,77};
     oled_t *oled = bsp_get_oled();
-    uint8_t data[] = {0x23,66,3,4,5,6,7,77};
     W25Q64xx_ctx_t *W25Q64xx = bsp_get_w25Q64();
+    PN532_ctx_t* PN532 = bsp_get_pn532();
     W25Q64FV_init(W25Q64xx);
     oled_init_hal(oled);
     oled_init(oled);
     //W25Q64FV_Write(W25Q64xx,0x123,data,sizeof(data));
-     uint8_t *getbuf = W25Q64FV_Read(W25Q64xx,0x123,sizeof(data));
-    OLED_ShowHex(0,0,getbuf[1]);
+   // W25Q64FV_Read_Status_Reg1_and_Status_Reg2(W25Q64xx);
+    //uint8_t *getbuf = W25Q64FV_Read(W25Q64xx,0x123,sizeof(data));
+    //OLED_ShowHex(0,0,getbuf[1]);
+//  PN532_getgirmwareversion(PN532);
     oled_point(oled);
     while (1)
     {

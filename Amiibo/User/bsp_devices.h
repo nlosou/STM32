@@ -5,6 +5,7 @@
 #include "gpio_port.h"
 #include "W25Q64FV.h"
 #include "middleware/spi_select_opp.h"
+#include "PN532.h"
 
 
 at24c02_t* bsp_get_eeprom1(void);
@@ -12,6 +13,7 @@ oled_t* bsp_get_oled(void);
 gpio_port_t* bsp_get_spi_out(void);
 W25Q64xx_ctx_t* bsp_get_w25Q64(void);
 spi_select_port_t* bsp_get_select_spi(void);
+PN532_ctx_t* bsp_get_pn532(void);
 
 #endif
 
