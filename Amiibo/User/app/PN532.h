@@ -13,6 +13,8 @@ typedef struct {
 }PN532_ctx_t;
 uint8_t PN532_getgirmwareversion(PN532_ctx_t* PN532);
 uint8_t PN532_GetGeneralStatus(PN532_ctx_t* PN532);
+uint8_t PN532_InListPassiveTarget(PN532_ctx_t* PN532);
+uint8_t PN532_RFConfiguration(PN532_ctx_t* PN532);
 
 
 

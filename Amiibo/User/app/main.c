@@ -12,10 +12,15 @@ int main(void)
     oled_init_hal(oled);
     oled_init(oled);
     //W25Q64FV_Write(W25Q64xx,0x123,data,sizeof(data));
-   // W25Q64FV_Read_Status_Reg1_and_Status_Reg2(W25Q64xx);
+    //W25Q64FV_Read_Status_Reg1_and_Status_Reg2(W25Q64xx);
     //uint8_t *getbuf = W25Q64FV_Read(W25Q64xx,0x123,sizeof(data));
-    //OLED_ShowHex(0,0,getbuf[1]);
-//  PN532_getgirmwareversion(PN532);
+    //uint8_t *getbuf = W25Q64FV_Read_ManuID_DeviceID(W25Q64xx);
+    //OLED_ShowHex(0,0,getbuf[0]);
+    //OLED_ShowString(0,0,"Hello Noser");
+    PN532_getgirmwareversion(PN532);
+    //PN532_GetGeneralStatus(PN532);
+    //PN532_RFConfiguration(PN532);
+    //PN532_InListPassiveTarget(PN532);
     oled_point(oled);
     while (1)
     {

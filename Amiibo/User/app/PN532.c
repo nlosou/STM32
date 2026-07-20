@@ -13,6 +13,9 @@ static uint8_t  START_CODE[] = {0x00,0xFF};
 #define GetFirmwareVersion 0x02
 #define GetGeneralStatus   0x04
 
+#define RFConfiguration    0x32
+#define InListPassiveTarget 0x4A
+
 
 static uint8_t DW[20] = {0x01};
 static uint8_t DR[] = {0x11};
@@ -90,7 +93,7 @@ uint8_t PN532_getgirmwareversion(PN532_ctx_t* PN532)
         return 0;
     }
     uint8_t packet_data[]={GetFirmwareVersion};
-    uint8_t command_frame[]={PREAMBLE,START_CODE[0],START_CODE[1],2,0xFE,M_TO_S,packet_data[0],0x2a,POSTAMBLE};
+    uint8_t command_frame[]={PREAMBLE,START_CODE[0],START_CODE[1],0x02,0xFE,M_TO_S,packet_data[0],0x2a,POSTAMBLE};
     uint8_t getbuf[] = {0};
     memcpy(DW+1,command_frame,sizeof(command_frame));
     spi_msg_t msg[] = {   
@@ -119,6 +122,60 @@ uint8_t PN532_GetGeneralStatus(PN532_ctx_t* PN532)
     }
     uint8_t packet_data[]={GetGeneralStatus};
     uint8_t command_frame[]={PREAMBLE,START_CODE[0],START_CODE[1],2,0xFE,M_TO_S,packet_data[0],0x28,POSTAMBLE};
+    uint8_t getbuf[] = {0};
+    memcpy(DW+1,command_frame,sizeof(command_frame));
+    spi_msg_t msg[] = {   
+        1 + sizeof(command_frame),0,0,LSB,DW,getbuf
+    };
+
+    PN532_transmit(PN532,msg,1);
+    while(!PN532_read_status_reg(PN532))
+    {
+        
+    }
+    Master_recieve_Ack_frame(PN532);
+    while(!PN532_read_status_reg(PN532))
+    {
+        
+    }
+    Master_recieve(PN532);
+    return 0;
+}
+uint8_t PN532_InListPassiveTarget(PN532_ctx_t* PN532)
+{
+    if(PN532 == NULL) 
+    {
+        return 0;
+    }
+    uint8_t packet_data[]={InListPassiveTarget,0x01,0x00};
+    uint8_t command_frame[]={PREAMBLE,START_CODE[0],START_CODE[1],04,0xFC,M_TO_S,packet_data[0],packet_data[1],packet_data[2],0xE1,POSTAMBLE};
+    uint8_t getbuf[] = {0};
+    memcpy(DW+1,command_frame,sizeof(command_frame));
+    spi_msg_t msg[] = {   
+        1 + sizeof(command_frame),0,0,LSB,DW,getbuf
+    };
+
+    PN532_transmit(PN532,msg,1);
+    while(!PN532_read_status_reg(PN532))
+    {
+        
+    }
+    Master_recieve_Ack_frame(PN532);
+    while(!PN532_read_status_reg(PN532))
+    {
+        
+    }
+    Master_recieve(PN532);
+    return 0;
+}
+uint8_t PN532_RFConfiguration(PN532_ctx_t* PN532)
+{
+    if(PN532 == NULL) 
+    {
+        return 0;
+    }
+    uint8_t packet_data[]={RFConfiguration,0x01,0x03 ,0x01};
+    uint8_t command_frame[]={PREAMBLE,START_CODE[0],START_CODE[1],0x05,0xFB,M_TO_S,packet_data[0],packet_data[1],packet_data[2],packet_data[3],0x22,POSTAMBLE};
     uint8_t getbuf[] = {0};
     memcpy(DW+1,command_frame,sizeof(command_frame));
     spi_msg_t msg[] = {   

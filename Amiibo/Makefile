@@ -3,21 +3,18 @@ OBJCOPY = arm-none-eabi-objcopy
 SIZE = arm-none-eabi-size
 
 TARGET = main
-DEFS = -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER 
+DEFS = -DSTM32F10X_MD
 CFLAGS = -mcpu=cortex-m3 -mthumb -O2 -flto -g -Wall $(DEFS)
 
 CFLAGS += -ICMSIS
-CFLAGS += -IStdPeriph/inc
 CFLAGS += -IUser
 CFLAGS += -IUser/app
 CFLAGS += -IUser/drivers
 CFLAGS += -IUser/hal
 CFLAGS += -IUser/platform/stm32f103
-INCLUDES = -ICMSIS -IStdPeriph/inc -IUser
 
 
 SRCS = $(wildcard CMSIS/*.c) \
-       $(wildcard StdPeriph/src/*.c) \
        $(wildcard User/*.c) \
        $(wildcard User/app/*.c) \
        $(wildcard User/middleware/*.c) \
