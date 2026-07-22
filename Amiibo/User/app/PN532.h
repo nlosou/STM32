@@ -11,10 +11,11 @@ typedef struct {
     uint16_t CS;
     uint8_t bit_order;
 }PN532_ctx_t;
-uint8_t PN532_getgirmwareversion(PN532_ctx_t* PN532);
-uint8_t PN532_GetGeneralStatus(PN532_ctx_t* PN532);
-uint8_t PN532_InListPassiveTarget(PN532_ctx_t* PN532);
-uint8_t PN532_RFConfiguration(PN532_ctx_t* PN532);
+uint8_t PN532_write_card(PN532_ctx_t* PN532,uint8_t* need_write_data);
+uint8_t PN532_read_card(PN532_ctx_t* PN532);
+
+
+
 
 
 

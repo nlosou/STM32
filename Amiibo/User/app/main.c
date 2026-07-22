@@ -4,7 +4,7 @@
 
 int main(void)
 {   
-    uint8_t data[] = {0x23,0xa0,3,4,5,6,7,77};
+    uint8_t data[16] = {0x23,0xa0,3,4,5,6,7,77};
     oled_t *oled = bsp_get_oled();
     W25Q64xx_ctx_t *W25Q64xx = bsp_get_w25Q64();
     PN532_ctx_t* PN532 = bsp_get_pn532();
@@ -17,10 +17,9 @@ int main(void)
     //uint8_t *getbuf = W25Q64FV_Read_ManuID_DeviceID(W25Q64xx);
     //OLED_ShowHex(0,0,getbuf[0]);
     //OLED_ShowString(0,0,"Hello Noser");
-    PN532_getgirmwareversion(PN532);
-    //PN532_GetGeneralStatus(PN532);
-    //PN532_RFConfiguration(PN532);
-    //PN532_InListPassiveTarget(PN532);
+    //OLED_ShowString(0,0,"1");
+    //PN532_write_card(PN532,data); 
+    PN532_read_card(PN532);
     oled_point(oled);
     while (1)
     {
