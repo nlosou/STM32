@@ -18,8 +18,12 @@ int main(void)
     //OLED_ShowHex(0,0,getbuf[0]);
     //OLED_ShowString(0,0,"Hello Noser");
     //OLED_ShowString(0,0,"1");
-    //PN532_write_card(PN532,data); 
-    PN532_read_card(PN532);
+   //PN532_write_card(PN532,data); 
+    //PN532_PWD_AUTH(PN532);
+    //PN532_write_card_test(PN532,data);
+    //PN532_read_card(PN532,2);
+    PN532_read_card(PN532,0x82);
+    //PN532_write_lock(PN532,data);
     oled_point(oled);
     while (1)
     {

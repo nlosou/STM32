@@ -12,9 +12,11 @@ typedef struct {
     uint8_t bit_order;
 }PN532_ctx_t;
 uint8_t PN532_write_card(PN532_ctx_t* PN532,uint8_t* need_write_data);
-uint8_t PN532_read_card(PN532_ctx_t* PN532);
+uint8_t PN532_PWD_AUTH(PN532_ctx_t* PN532);
+uint8_t PN532_write_card_test(PN532_ctx_t* PN532,uint8_t* need_write_data);
 
-
+uint8_t PN532_write_lock(PN532_ctx_t* PN532,uint8_t* need_write_data);
+uint8_t PN532_read_card(PN532_ctx_t* PN532,uint8_t page_address);
 
 
 

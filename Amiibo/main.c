@@ -1,0 +1,10 @@
+#include <stdio.h>
+
+int main(void)
+{
+    printf("PWD0:%x\n",0xAA ^ 0xC1 ^ 0x65); 
+    printf("PWD1:%x\n",0x55 ^ 0x1A ^ 0x8E); 
+    printf("PWD2:%x\n",0xAA ^ 0x65 ^ 0x61); 
+    printf("PWD3:%x\n",0x55 ^ 0x8E ^ 0x81); 
+    return 0;
+}
