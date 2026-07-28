@@ -8,4 +8,7 @@ typedef struct {
    NTAG21x_t *card_info;
 }Amiibo_ctx_t;
 
+uint8_t* Amiibo_gen_data(Amiibo_ctx_t *Amiibo);
+uint8_t Amiibo_write(Amiibo_ctx_t* amiibo);
+uint8_t Amiibo_read(Amiibo_ctx_t* amiibo);
 #endif

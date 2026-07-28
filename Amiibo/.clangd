@@ -17,6 +17,11 @@ Diagnostics:
       performance-*,    # 性能优化检查（减少不必要的内存拷贝、低效循环）
       portability-*,    # 移植性检查（检查由于数据类型大小、字节序带来的问题，对嵌入式至关重要）
       cert-* # CERT 安全编码标准（适合对稳定性要求高的嵌入式场景）
+      clang-analyzer-core.*,
+      clang-analyzer-cplusplus.NewDelete*,
+      clang-analyzer-security.insecureAPI.*,
+      readability-redundant-smartptr-get,
+      readability-implicit-bool-conversion
     ]
     Remove: [
       # 1. 禁用魔术数字检查（嵌入式开发中操作寄存器，如 (*(volatile uint32_t *)0x40021000) 极其常见）

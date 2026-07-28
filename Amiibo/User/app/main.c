@@ -56,6 +56,7 @@ int main(void)
     oled_t *oled = bsp_get_oled();
     W25Q64xx_ctx_t *W25Q64xx = bsp_get_w25Q64();
     PN532_ctx_t* PN532 = bsp_get_pn532();
+    Amiibo_ctx_t* Amiibo = bsp_get_amiibo();
     W25Q64FV_init(W25Q64xx);
     oled_init_hal(oled);
     oled_init(oled);
@@ -72,6 +73,7 @@ int main(void)
     //PN532_read_card(PN532,0x02);
     //PN532_read_card(PN532,0x82);
     //PN532_write_lock(PN532,data);
+    Amiibo_read(Amiibo);
     oled_point(oled);
     while (1)
     {

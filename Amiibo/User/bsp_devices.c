@@ -1,3 +1,4 @@
+#include "bsp_devices.h"
 #include "board_config.h"
 #include "stm32_gpio_port.h"
 #include "./middleware/sw_I2C.h"
@@ -110,6 +111,28 @@ static PN532_ctx_t PN532 = {
 
 };
 
+static nfc_port_ctx_t  nfc_port = {
+    .ctx = &PN532,
+    .ops =&nfc_ops,
+};
+
+static NTAG21x_t NTAG215  = {
+    .ctx =&nfc_port ,
+    .CC_Address = 0x03,
+    .User_memory_Address_Start = 0x04,
+    .User_memory_Address_End = 0x81,
+    .Dynamic_lock_bytes_Address = 0x82,
+    .Configuration_pages_Start = 0x83,
+    .Configuration_pages_End = 0x86,
+    .UID_Start = 0x00,
+    .UID_End = 0x02,
+    .Page_per_bytes = 4,
+};
+
+static Amiibo_ctx_t Amiibo ={
+    .card_info = &NTAG215
+};
+
 // 只有最外层的设备对象可以被外界感知
 oled_t* bsp_get_oled(void)
 {
@@ -129,6 +152,11 @@ spi_select_port_t* bsp_get_select_spi(void)
 PN532_ctx_t* bsp_get_pn532(void)
 {
     return &PN532;
+}
+
+Amiibo_ctx_t* bsp_get_amiibo(void)
+{
+    return &Amiibo;
 }
 
 /*

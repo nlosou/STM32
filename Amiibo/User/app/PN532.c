@@ -144,7 +144,7 @@ static uint8_t PN532_GetGeneralStatus(PN532_ctx_t* PN532)
     Master_recieve(PN532,getbuf,16);
     return 0;
 }
-uint8_t* PN532_InListPassiveTarget(PN532_ctx_t* PN532,uint8_t* card_id)
+static uint8_t* PN532_InListPassiveTarget(PN532_ctx_t* PN532,uint8_t* card_id)
 {
     if(PN532 == NULL) 
     {
@@ -175,7 +175,7 @@ uint8_t* PN532_InListPassiveTarget(PN532_ctx_t* PN532,uint8_t* card_id)
     card_id[3] = getbuf[16];
     return card_id;
 }
-uint8_t PN532_SAMConfiguration(PN532_ctx_t* PN532)
+static uint8_t PN532_SAMConfiguration(PN532_ctx_t* PN532)
 {
     if(PN532 == NULL) 
     {
@@ -259,12 +259,14 @@ static uint8_t PN532_RFConfiguration(PN532_ctx_t* PN532)
 }
 
 
-uint8_t* PN532_InDataExchange(PN532_ctx_t* PN532,uint8_t* data,uint8_t datalength)
+static uint8_t* PN532_InDataExchange(void* ctx,uint8_t* data,uint8_t datalength)
 {
-    if(PN532 == NULL) 
+    if(ctx == NULL) 
     {
         return 0;
     }
+    PN532_ctx_t* PN532 = (PN532_ctx_t*)ctx;
+
     //uint8_t packet_data[256]={InDataEXchange,0x01,0x60,0x03 ,0x01,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
     uint8_t packet_data[256]={InDataEXchange};
     memcpy(packet_data+1,data,datalength);
@@ -299,12 +301,13 @@ uint8_t* PN532_InDataExchange(PN532_ctx_t* PN532,uint8_t* data,uint8_t datalengt
     return getbuf;
 }
 
-uint8_t* PN532_InCommunicateThru(PN532_ctx_t* PN532,uint8_t* data,uint8_t datalength)
+static uint8_t* PN532_InCommunicateThru(void* ctx,uint8_t* data,uint8_t datalength)
 {
-    if(PN532 == NULL) 
+    if(ctx == NULL) 
     {
         return 0;
     }
+    PN532_ctx_t* PN532 = (PN532_ctx_t*)ctx;
     //uint8_t packet_data[256]={InDataEXchange,0x01,0x60,0x03 ,0x01,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
     uint8_t packet_data[256]={InCommunicateThru};
     memcpy(packet_data+1,data,datalength);
@@ -340,8 +343,18 @@ uint8_t* PN532_InCommunicateThru(PN532_ctx_t* PN532,uint8_t* data,uint8_t datale
 }
 
 
+static uint8_t* PN532_Select_Card(void* ctx)
+{
+    static uint8_t card_id[4];
+    PN532_ctx_t* PN532 = (PN532_ctx_t*)ctx;
+    PN532_SAMConfiguration(PN532);
+    PN532_InListPassiveTarget(PN532,card_id);
+    return card_id;
+}
 
-
-
-
+const nfc_ops_t nfc_ops = {
+    .select_card = PN532_Select_Card,
+    .card_transmit = PN532_InDataExchange,
+    .card_cmd = PN532_InCommunicateThru
+};
 
