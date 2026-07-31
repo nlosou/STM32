@@ -8,9 +8,9 @@
 #define LSB 0
 
 typedef struct {
-    uint8_t len;
+    uint32_t len;
     uint8_t flags;
-    uint8_t get_buf_len;
+    uint32_t get_buf_len;
     uint8_t bit_oder;
     uint8_t *buf;
     uint8_t *getbuf;

@@ -128,6 +128,9 @@ static NTAG21x_t NTAG215  = {
     .UID_End = 0x02,
     .Page_per_bytes = 4,
 };
+static Mifare_ctx_t Mifare = {
+    .nfc = &nfc_port
+};
 
 static Amiibo_ctx_t Amiibo ={
     .card_info = &NTAG215
@@ -158,6 +161,13 @@ Amiibo_ctx_t* bsp_get_amiibo(void)
 {
     return &Amiibo;
 }
+
+Mifare_ctx_t* bsp_get_mifare(void)
+{
+    return &Mifare;
+}
+
+
 
 /*
 // 

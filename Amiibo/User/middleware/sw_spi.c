@@ -11,6 +11,7 @@ void sw_spi_init(void *ctx)
     gpio_port_init(sw_spi->gpio_output);
 }
 
+//发送一个字节
 static uint8_t sw_spi_sent_byte(void*ctx,uint8_t data,uint8_t bit_order)
 {
    //OLED_ShowHex(0,1,1);
@@ -70,18 +71,18 @@ uint32_t sw_spi_transmit(void*ctx ,spi_msg_t *msg,uint16_t num)
    gpio_port_t *port_output = sw_spi->gpio_output; 
    uint16_t clk_pin = sw_spi->CLK;
 
-        for(uint8_t cmd_count = 0 ; cmd_count < msg->len + msg->get_buf_len ; cmd_count++) 
+    for(uint32_t cmd_count = 0 ; cmd_count < msg->len + msg->get_buf_len ; cmd_count++) 
+    {
+        if(cmd_count < msg->len)
         {
-            if(cmd_count < msg->len)
-            {
-                sw_spi_sent_byte(ctx,(msg)->buf[cmd_count],msg->bit_oder);
-            }
-            else
-            {
-                //让主机产生clk给从机器
-               msg->getbuf[cmd_count - msg->len] = sw_spi_sent_byte(ctx,0x00,msg->bit_oder);
-            }
+            sw_spi_sent_byte(ctx,(msg)->buf[cmd_count],msg->bit_oder);
         }
+        else
+        {
+            //让主机产生clk给从机器
+           msg->getbuf[cmd_count - msg->len] = sw_spi_sent_byte(ctx,0x00,msg->bit_oder);
+        }
+    }
     return num;
 }
 

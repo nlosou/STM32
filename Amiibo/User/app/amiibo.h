@@ -1,7 +1,6 @@
 #ifndef AMIIBO_H_
 #define AMIIBO_H_
 
-
 #include "NTAG21x.h"
 
 typedef struct {
@@ -11,4 +10,5 @@ typedef struct {
 uint8_t* Amiibo_gen_data(Amiibo_ctx_t *Amiibo);
 uint8_t Amiibo_write(Amiibo_ctx_t* amiibo);
 uint8_t Amiibo_read(Amiibo_ctx_t* amiibo);
+
 #endif

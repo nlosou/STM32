@@ -1,6 +1,9 @@
 #include "W25Q64FV.h"
 #include <string.h>
 
+
+#define PAGE_SIZE 256
+
 void W25Q64FV_init(W25Q64xx_ctx_t *ctx)
 {
     if(ctx == NULL)
@@ -9,7 +12,6 @@ void W25Q64FV_init(W25Q64xx_ctx_t *ctx)
     }
     spi_init(ctx->port);
 }
-
 
 void W25Q64xx_transmit(W25Q64xx_ctx_t *ctx,spi_msg_t *msg,uint16_t num)
 {
@@ -73,8 +75,8 @@ uint8_t* W25Q64FV_Read_Status_Reg1_and_Status_Reg2(W25Q64xx_ctx_t *ctx)
     W25Q64xx_transmit(ctx,msg,2);
     return getbuf;
 }
-
-uint8_t* W25Q64FV_Write(W25Q64xx_ctx_t *ctx,uint32_t data_address,uint8_t data[],uint8_t length)
+//擦除4kb
+uint8_t* W25Q64FV_Erase(W25Q64xx_ctx_t *ctx,uint32_t data_address)
 {
     if(ctx == NULL) 
     {
@@ -82,31 +84,38 @@ uint8_t* W25Q64FV_Write(W25Q64xx_ctx_t *ctx,uint32_t data_address,uint8_t data[]
     }
     uint8_t Write_enable[] = {0x06};
     uint8_t Sector_Erase[] = {0x20,(data_address>>16) & 0xFF,(data_address>>8) & 0xFF,data_address & 0xFF};
-    uint8_t Page_Program[] = {0x02,(data_address>>16) & 0xFF,(data_address>>8) & 0xFF,data_address & 0xFF};
-    memcpy(Page_Program + 4,data,length);
     static uint8_t getbuf[2] = {0};
-        //擦除
+
     spi_msg_t  msg_Sector_Erase[2] = {
-         sizeof(Write_enable),  Write, 0,MSB,Write_enable,getbuf,
-
-         sizeof(Sector_Erase),  Write, 0,MSB,Sector_Erase,getbuf+1
+         sizeof(Write_enable),Write,0,MSB,Write_enable,getbuf,
+         sizeof(Sector_Erase),Write,0,MSB,Sector_Erase,getbuf+1
     };
-
-    //写入
-    spi_msg_t  msg_Page_Program[2] = {
-         sizeof(Write_enable),  Write, 0,ctx->bit_order,Write_enable,getbuf,
-
-         sizeof(Page_Program) + length,  Write, 0,ctx->bit_order,Page_Program,getbuf+1
-    };
-
-
     W25Q64xx_transmit(ctx,msg_Sector_Erase,2);
        
     while(W25Q64FV_Read_Status_Reg1_and_Status_Reg2(ctx)[0] & 0x01)
     {
 
     }
-       
+    return getbuf;
+}
+
+uint8_t* W25Q64FV_Write_Page(W25Q64xx_ctx_t *ctx,uint32_t data_address,const uint8_t data[],uint16_t length)
+{
+    if(ctx == NULL) 
+    {
+        return 0;
+    }
+    uint8_t Write_enable[] = {0x06};
+    uint8_t Page_Program[PAGE_SIZE + 4] = {0x02,(data_address>>16) & 0xFF,(data_address>>8) & 0xFF,data_address & 0xFF};
+    memcpy(Page_Program + 4,data,length);
+    static uint8_t getbuf[2] = {0};
+
+    spi_msg_t  msg_Page_Program[2] = {
+         sizeof(Write_enable),  Write, 0,ctx->bit_order,Write_enable,getbuf,
+
+         4 + length,  Write, 0,ctx->bit_order,Page_Program,getbuf+1
+    };
+    //写入
     W25Q64xx_transmit(ctx,msg_Page_Program,2);
 
     while(W25Q64FV_Read_Status_Reg1_and_Status_Reg2(ctx)[0] & 0x01)
@@ -115,7 +124,39 @@ uint8_t* W25Q64FV_Write(W25Q64xx_ctx_t *ctx,uint32_t data_address,uint8_t data[]
     }
     return getbuf;
 }
-uint8_t* W25Q64FV_Read(W25Q64xx_ctx_t *ctx,uint32_t data_address,uint8_t length)
+
+void W25Q64FV_Write(W25Q64xx_ctx_t *ctx,uint32_t data_address,const uint8_t data[],uint16_t length)
+{
+    if(ctx ==NULL)
+    {
+        return;
+    }
+    uint16_t Remaining_size = PAGE_SIZE - data_address % PAGE_SIZE;    
+    W25Q64FV_Erase(ctx,data_address);
+    while(length > 0)
+    {    
+
+        Remaining_size = PAGE_SIZE - data_address % PAGE_SIZE;    
+        if(length <= Remaining_size)
+        {
+            W25Q64FV_Write_Page(ctx,data_address,data,length);
+            data_address += length;
+            length-=length; 
+            data+=length;
+        }
+        else
+        {
+            W25Q64FV_Write_Page(ctx,data_address,data,PAGE_SIZE);
+            data_address += Remaining_size;
+            length-=Remaining_size; 
+            data+=Remaining_size;
+        }
+    }
+    
+}
+
+
+uint8_t* W25Q64FV_Read(W25Q64xx_ctx_t *ctx,uint32_t data_address,uint16_t length)
 {
     if(ctx == NULL) 
     {
@@ -123,7 +164,7 @@ uint8_t* W25Q64FV_Read(W25Q64xx_ctx_t *ctx,uint32_t data_address,uint8_t length)
     }
     //组装命令
     uint8_t Read_data[] = {0x03,(data_address>>16) & 0xFF,(data_address>>8) & 0xFF,data_address & 0xFF};
-    static uint8_t getbuf[] = {0};
+    static uint8_t getbuf[256] = {0};
     //擦除
     spi_msg_t  msg_Read_data[1] = {
          sizeof(Read_data),  Read, length,ctx->bit_order,Read_data,getbuf,
