@@ -4,7 +4,8 @@
 #include "./middleware/sw_I2C.h"
 #include "./middleware/sw_spi.h"
 #include "./middleware/spi_select.h"
-#include "at24c02.h"
+#include "./middleware/sw_uart.h"
+//#include "at24c02.h"
 #include "oled.h"
 #include "osal/OSAL.h"
 #include "W25Q64FV.h"
@@ -33,6 +34,19 @@ static stm32_gpio_ctx_t SPI_gpio_input = {
     .use_pins = spi_bus_DO_PIN
 };
 
+static stm32_gpio_ctx_t UART_RX_gpio= {
+    .gpio = UART_RX_GPIO_PORT,
+    .rcc_enable_bit = RCC_APB2ENR_IOPAEN,
+    .mode_select = OUTPUT_MODE_10MHZ_General_push_pull,
+    .use_pins =  UART_RX_PIN
+};
+
+static stm32_gpio_ctx_t UART_TX_gpio= {
+    .gpio = UART_TX_GPIO_PORT,
+    .rcc_enable_bit = RCC_APB2ENR_IOPAEN,
+    .mode_select = OUTPUT_MODE_10MHZ_General_push_pull,
+    .use_pins =  UART_TX_PIN
+};
 
 static gpio_port_t gpio_port_ctx = {
     .ctx = &i2c_gpio,
@@ -48,7 +62,28 @@ static gpio_port_t spi_gpio_port_ctx_input = {
     .ops = &stm32_gpio_ops
 };
 
+static gpio_port_t uart_rx_gpio_port_ctx = {
+    .ctx = &UART_RX_gpio,
+    .ops = &stm32_gpio_ops,
+};
 
+static gpio_port_t uart_tx_gpio_port_ctx = {
+    .ctx = &UART_TX_gpio,
+    .ops = &stm32_gpio_ops,
+};
+
+//================ 软件uart相关 =========================================
+
+static sw_uart_ctx_t sw_uart_ctx = {
+    .RX = &uart_rx_gpio_port_ctx,   
+    .TX = &uart_tx_gpio_port_ctx,   
+    .RX_PIN = UART_RX_PIN,
+    .TX_PIN = UART_TX_PIN,
+};
+static uart_port_t uart_port = {
+    .ctx = &sw_uart_ctx,
+    .ops = &uart_ops
+};
 
 //================ 软件i2c相关 =========================================
 static sw_i2c_ctx_t sw_i2c_ctx = {
@@ -167,6 +202,10 @@ Mifare_ctx_t* bsp_get_mifare(void)
     return &Mifare;
 }
 
+uart_port_t* bsg_get_uart_test(void)
+{
+    return &uart_port;
+}
 
 
 /*

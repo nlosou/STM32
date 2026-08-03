@@ -46,5 +46,10 @@
 #define PN532_CS_PIN                GPIOx_PIN_12
 
 
+// ================= 软件UART 硬件配置 =================
+#define UART_RX_GPIO_PORT         GPIOA
+#define UART_TX_GPIO_PORT         GPIOA
+#define UART_TX_PIN               GPIOx_PIN_12
+#define UART_RX_PIN               GPIOx_PIN_11
 
 #endif
