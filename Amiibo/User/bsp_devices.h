@@ -9,6 +9,7 @@
 #include "amiibo.h"
 #include "Mifare.h"
 #include "uart_port.h"
+#include "exti_port.h"
 
 
 at24c02_t* bsp_get_eeprom1(void);
@@ -20,7 +21,7 @@ PN532_ctx_t* bsp_get_pn532(void);
 Amiibo_ctx_t* bsp_get_amiibo(void);
 Mifare_ctx_t* bsp_get_mifare(void);
 uart_port_t* bsg_get_uart_test(void);
-
+exti_port_t* bsp_get_exti(void);
 #endif
 
 

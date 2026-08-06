@@ -38,6 +38,60 @@ typedef struct {
 }EXTI_TypeDef;
 
 
+typedef struct {
+    volatile uint32_t NVIC_ISER0;
+    volatile uint32_t NVIC_ISER1;
+    volatile uint32_t NVIC_ISER2;
+}NVIC_ISER_TypeDef;
+
+typedef struct {
+    volatile uint32_t NVIC_ICER0;
+    volatile uint32_t NVIC_ICER1;
+    volatile uint32_t NVIC_ICER2;
+}NVIC_ICER_TypeDef;
+
+typedef struct {
+    volatile uint32_t NVIC_ISPR0;
+    volatile uint32_t NVIC_ISPR1;
+    volatile uint32_t NVIC_ISPR2;
+}NVIC_ISPR_TypeDef;
+
+typedef struct {
+    volatile uint32_t NVIC_ICPR0;
+    volatile uint32_t NVIC_ICPR1;
+    volatile uint32_t NVIC_ICPR2;
+}NVIC_ICPR_TypeDef;
+
+typedef struct {
+    volatile uint32_t NVIC_IABR0;
+    volatile uint32_t NVIC_IABR1;
+    volatile uint32_t NVIC_IABR2;
+}NVIC_IABR_TypeDef;
+
+/*
+typedef struct {
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR0;
+}NVIC_IPR_TypeDef;
+*/
 
 
 #define RCC_BASE   (0x40021000UL)
@@ -45,6 +99,11 @@ typedef struct {
 #define GPIOB_BASE (0x40010C00UL)
 #define GPIOC_BASE (0x40011000UL)
 #define EXTI_BASE  (0x40010400UL)
+#define NVIC_ISER_BASE    (0xE000E100)
+#define NVIC_ICER_BASE    (0xE000E100 | 0x080)
+#define NVIC_ISPR_BASE    (0xE000E100 | 0x100)
+#define NVIC_ICPR_BASE    (0xE000E100 | 0x180)
+#define NVIC_IABR_BASE    (0xE000E100 | 0x200)
 
 #define RCC ((RCC_TypeDef*)RCC_BASE)
 #define GPIOA ((GPIOx_TypeDef*)GPIOA_BASE)

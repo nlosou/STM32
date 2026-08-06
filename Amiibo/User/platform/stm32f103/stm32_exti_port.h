@@ -14,8 +14,7 @@ typedef struct {
     uint32_t exti_pr_prx;
 }stm32_exti_ctx_t;
 
-
-const exti_ops_t stm32_exti_ops;
+extern const exti_ops_t stm32_exti_ops;
 
 #endif
 

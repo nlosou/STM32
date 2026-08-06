@@ -10,7 +10,7 @@
 #include "osal/OSAL.h"
 #include "W25Q64FV.h"
 #include "PN532.h"
-
+#include "stm32_exti_port.h"
 
 
 //================ gpio相关 =========================================
@@ -71,6 +71,19 @@ static gpio_port_t uart_tx_gpio_port_ctx = {
     .ctx = &UART_TX_gpio,
     .ops = &stm32_gpio_ops,
 };
+//================ EXIT相关 =========================================
+
+static stm32_exti_ctx_t exti_test_ctx = {
+    .exti = EXTI,
+    .exti_imr_mrx = EXTI_IMR_MR0,
+    .exti_ftsr_trx = EXTI_FTSR_TR0,
+};
+
+static exti_port_t exti_port = {
+    .ctx = &exti_test_ctx,
+    .ops = &stm32_exti_ops
+};
+
 
 //================ 软件uart相关 =========================================
 
@@ -205,6 +218,11 @@ Mifare_ctx_t* bsp_get_mifare(void)
 uart_port_t* bsg_get_uart_test(void)
 {
     return &uart_port;
+}
+
+exti_port_t* bsp_get_exti(void)
+{
+    return &exti_port;
 }
 
 

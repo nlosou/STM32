@@ -16,5 +16,10 @@ void stm32_exti_init(void*ctx)
    exti_ctx->exti->EXTI_FTSR |=exti_ctx->exti_ftsr_trx; 
    exti_ctx->exti->EXTI_SWIER |=exti_ctx->exti_swier_swierx; 
    exti_ctx->exti->EXTI_PR |=exti_ctx->exti_pr_prx; 
-
 }
+
+
+
+const exti_ops_t stm32_exti_ops = {
+    .init = stm32_exti_init
+};
