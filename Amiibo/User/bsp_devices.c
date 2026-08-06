@@ -11,6 +11,7 @@
 #include "W25Q64FV.h"
 #include "PN532.h"
 #include "stm32_exti_port.h"
+#include "stm32_nvic_port.h"
 
 
 //================ gpio相关 =========================================
@@ -48,6 +49,13 @@ static stm32_gpio_ctx_t UART_TX_gpio= {
     .use_pins =  UART_TX_PIN
 };
 
+static stm32_gpio_ctx_t Inteerupt_gpio= {
+    .gpio = GPIOA,
+    .rcc_enable_bit = RCC_APB2ENR_IOPAEN,
+    .mode_select =INPUT_WITH_PULLUP_PULLDOWN,
+    .use_pins = GPIOx_PIN_0 | GPIOx_PIN_1
+};
+
 static gpio_port_t gpio_port_ctx = {
     .ctx = &i2c_gpio,
     .ops = &stm32_gpio_ops
@@ -71,17 +79,42 @@ static gpio_port_t uart_tx_gpio_port_ctx = {
     .ctx = &UART_TX_gpio,
     .ops = &stm32_gpio_ops,
 };
+
+static gpio_port_t Interrupt_gpio_ctx = {
+    .ctx = &Inteerupt_gpio,
+    .ops = &stm32_gpio_ops
+};
+
 //================ EXIT相关 =========================================
 
 static stm32_exti_ctx_t exti_test_ctx = {
     .exti = EXTI,
     .exti_imr_mrx = EXTI_IMR_MR0,
     .exti_ftsr_trx = EXTI_FTSR_TR0,
+    .exti_pr_prx = EXTI_PR_PR0
 };
 
 static exti_port_t exti_port = {
     .ctx = &exti_test_ctx,
     .ops = &stm32_exti_ops
+};
+
+
+//================ NVIC相关 =========================================
+
+static stm32_nvic_ctx_t nvic_test_ctx = {
+    .nvic_iser = NVIC_ISER,
+    .nvic_icer = NVIC_ICER,
+    .nvic_ispr = NVIC_ISPR,
+    .nvic_icpr = NVIC_ICPR,
+    .nvic_iabr = NVIC_IABR,
+    .Interrupt_position = 6
+};
+
+
+static nvic_port_t nvic_port = {
+    .ctx = &nvic_test_ctx,
+    .ops = &stm32_nvic_ops
 };
 
 
@@ -225,6 +258,15 @@ exti_port_t* bsp_get_exti(void)
     return &exti_port;
 }
 
+nvic_port_t* bsp_get_nvic(void)
+{
+    return &nvic_port;
+}
+
+gpio_port_t* bsp_get_gpio(void)
+{
+    return &Interrupt_gpio_ctx;
+}
 
 /*
 // 

@@ -68,30 +68,29 @@ typedef struct {
     volatile uint32_t NVIC_IABR2;
 }NVIC_IABR_TypeDef;
 
-/*
 typedef struct {
     volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
-    volatile uint32_t NVIC_IPR0;
+    volatile uint32_t NVIC_IPR1;
+    volatile uint32_t NVIC_IPR2;
+    volatile uint32_t NVIC_IPR3;
+    volatile uint32_t NVIC_IPR4;
+    volatile uint32_t NVIC_IPR5;
+    volatile uint32_t NVIC_IPR6;
+    volatile uint32_t NVIC_IPR7;
+    volatile uint32_t NVIC_IPR8;
+    volatile uint32_t NVIC_IPR9;
+    volatile uint32_t NVIC_IPR10;
+    volatile uint32_t NVIC_IPR11;
+    volatile uint32_t NVIC_IPR12;
+    volatile uint32_t NVIC_IPR13;
+    volatile uint32_t NVIC_IPR14;
+    volatile uint32_t NVIC_IPR15;
+    volatile uint32_t NVIC_IPR16;
+    volatile uint32_t NVIC_IPR17;
+    volatile uint32_t NVIC_IPR18;
+    volatile uint32_t NVIC_IPR19;
+    volatile uint32_t NVIC_IPR20;
 }NVIC_IPR_TypeDef;
-*/
 
 
 #define RCC_BASE   (0x40021000UL)
@@ -104,12 +103,24 @@ typedef struct {
 #define NVIC_ISPR_BASE    (0xE000E100 | 0x100)
 #define NVIC_ICPR_BASE    (0xE000E100 | 0x180)
 #define NVIC_IABR_BASE    (0xE000E100 | 0x200)
+#define NVIC_IPR_BASE     (0xE000E100 | 0x300)
+#define NVIC_STIR_BASE     (0xE000E100 | 0x300)
+
 
 #define RCC ((RCC_TypeDef*)RCC_BASE)
 #define GPIOA ((GPIOx_TypeDef*)GPIOA_BASE)
 #define GPIOB ((GPIOx_TypeDef*)GPIOB_BASE)
 #define GPIOC ((GPIOx_TypeDef*)GPIOC_BASE)
 #define EXTI  ((EXTI_TypeDef*)EXTI_BASE)
+#define NVIC_ISER ((NVIC_ISER_TypeDef*)NVIC_ISER_BASE)
+#define NVIC_ICER ((NVIC_ICER_TypeDef*)NVIC_ICER_BASE)
+#define NVIC_ISPR ((NVIC_ISPR_TypeDef*)NVIC_ISPR_BASE)
+#define NVIC_ICPR ((NVIC_ICPR_TypeDef*)NVIC_ICPR_BASE)
+#define NVIC_IABR ((NVIC_IABR_TypeDef*)NVIC_IABR_BASE)
+#define NVIC_IPR ((NVIC_IPR_TypeDef*)NVIC_IPR_BASE)
+#define NVIC_STIR ((NVIC_STIR_TypeDef*)NVIC_STIR_BASE)
+
+
 
 #define RCC_APB2ENR_IOPAEN (1UL << 2)
 #define RCC_APB2ENR_IOPBEN (1UL << 3)

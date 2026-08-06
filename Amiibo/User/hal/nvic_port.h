@@ -5,12 +5,12 @@
 
 typedef struct {
     void (*init)(void*ctx);
-}nvic_ops;
+}nvic_ops_t;
 
 
 typedef struct {
     void *ctx;
-    const nvic_ops *ops;
+    const nvic_ops_t *ops;
 }nvic_port_t;
 
 
