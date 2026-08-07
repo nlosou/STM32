@@ -1,6 +1,7 @@
 #include "bsp_devices.h"
 #include "test_data.h"
 #include <stdint.h>
+#include "stm32f10x_it.h"
 
 
 
@@ -22,9 +23,9 @@ int main(void)
     exti_port_t *exti = bsp_get_exti();
     nvic_port_t *nvic = bsp_get_nvic();
     gpio_port_t *gpio = bsp_get_gpio();
+    gpio_port_init(gpio);
     exti_init(exti);
     nvic_init(nvic);
-    gpio_port_init(gpio);
 
    //gpio_port_write(gpio,1,GPIO_LEVEL_HIGH);
     /*
@@ -36,6 +37,11 @@ int main(void)
     while(1)
     {
          gpio_port_read(gpio,1);
+         if(count == 1)
+         {
+            OLED_ShowString(0,0,"Interrupt_ok");
+         }
+        //OLED_ShowHex(0,0,count);
          oled_point(oled);
     }
     return 0;

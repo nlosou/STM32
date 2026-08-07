@@ -92,6 +92,16 @@ typedef struct {
     volatile uint32_t NVIC_IPR20;
 }NVIC_IPR_TypeDef;
 
+typedef struct {
+    volatile uint32_t AFIO_EVCR;
+    volatile uint32_t AFIO_MAPR;
+    volatile uint32_t AFIO_EXTICR1;
+    volatile uint32_t AFIO_EXTICR2;
+    volatile uint32_t AFIO_EXTICR3;
+    volatile uint32_t AFIO_EXTICR4;
+    volatile uint32_t AFIO_MAPR2;
+}AFIO_TypeDef;
+
 
 #define RCC_BASE   (0x40021000UL)
 #define GPIOA_BASE (0x40010800UL)
@@ -104,8 +114,8 @@ typedef struct {
 #define NVIC_ICPR_BASE    (0xE000E100 | 0x180)
 #define NVIC_IABR_BASE    (0xE000E100 | 0x200)
 #define NVIC_IPR_BASE     (0xE000E100 | 0x300)
-#define NVIC_STIR_BASE     (0xE000E100 | 0x300)
-
+#define NVIC_STIR_BASE     (0xE000E100 | 0xE00)
+#define AFIO_BASE         (0x40010000)
 
 #define RCC ((RCC_TypeDef*)RCC_BASE)
 #define GPIOA ((GPIOx_TypeDef*)GPIOA_BASE)
@@ -119,6 +129,7 @@ typedef struct {
 #define NVIC_IABR ((NVIC_IABR_TypeDef*)NVIC_IABR_BASE)
 #define NVIC_IPR ((NVIC_IPR_TypeDef*)NVIC_IPR_BASE)
 #define NVIC_STIR ((NVIC_STIR_TypeDef*)NVIC_STIR_BASE)
+#define AFIO    ((AFIO_TypeDef*)AFIO_BASE)
 
 
 

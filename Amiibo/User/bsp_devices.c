@@ -89,9 +89,11 @@ static gpio_port_t Interrupt_gpio_ctx = {
 
 static stm32_exti_ctx_t exti_test_ctx = {
     .exti = EXTI,
+    .afio = AFIO,
     .exti_imr_mrx = EXTI_IMR_MR0,
     .exti_ftsr_trx = EXTI_FTSR_TR0,
-    .exti_pr_prx = EXTI_PR_PR0
+    .exti_pr_prx = EXTI_PR_PR0,
+    .select_interrupt_source = 0x00,
 };
 
 static exti_port_t exti_port = {
@@ -99,18 +101,16 @@ static exti_port_t exti_port = {
     .ops = &stm32_exti_ops
 };
 
-
 //================ NVIC相关 =========================================
 
 static stm32_nvic_ctx_t nvic_test_ctx = {
+    .Interrupt_position = 6,
     .nvic_iser = NVIC_ISER,
     .nvic_icer = NVIC_ICER,
     .nvic_ispr = NVIC_ISPR,
     .nvic_icpr = NVIC_ICPR,
-    .nvic_iabr = NVIC_IABR,
-    .Interrupt_position = 6
+    .nvic_iabr = NVIC_IABR
 };
-
 
 static nvic_port_t nvic_port = {
     .ctx = &nvic_test_ctx,

@@ -23,7 +23,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
-#include "oled.h"
 
 /** @addtogroup STM32F10x_StdPeriph_Template
   * @{
@@ -157,12 +156,14 @@ void SysTick_Handler(void)
   * @}
   */ 
 
-
+uint32_t count = 0;
 
 
 void EXTI0_IRQHandler(void)
 {
-    OLED_ShowString(0,0,"hello");
+    //OLED_ShowString(0,0,"hello");
+    count = 1;
+    *(volatile uint32_t*)(0x40010400UL | 0x14)= 0x01;
 }
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
