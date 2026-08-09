@@ -3,6 +3,7 @@
 #include "stm32f10x_sfr.h"
 #include "exti_port.h"
 
+#define CLEAR_EXTI_PR(x) (*(volatile uint32_t*)(EXTI_BASE + 0x14) = x)
 
 typedef struct {
     EXTI_TypeDef *exti;

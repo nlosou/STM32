@@ -22,8 +22,6 @@ void OLED_DrawPoint(uint8_t x, uint8_t y, uint8_t color)
     }
 }
 
-
-
 /**
  *@brief 在oled上打印字符
  *@param row表示行范围0～4,colum为列0～16列
@@ -210,7 +208,7 @@ uint16_t oled_clear(oled_t* oled)
    }
    uint8_t data[1025];
    data[0] = 0x40;
-   memset(&data[1],0x00,1024);
+   memset(data + 1,0x00,1024);
    i2c_msg_t msgs[1] = {
        oled->dev_address,0,sizeof(data),data
    };
@@ -227,7 +225,6 @@ uint16_t oled_point(oled_t* oled)
    uint8_t pack_flush_cmds[] = {
     0x00,       
     0x20, 0x00, 
-    
     0x21, 0x00, 0x7F, 
     0x22, 0x00, 0x07
    };

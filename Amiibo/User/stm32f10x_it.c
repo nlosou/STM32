@@ -163,7 +163,7 @@ void EXTI0_IRQHandler(void)
 {
     //OLED_ShowString(0,0,"hello");
     count = 1;
-    *(volatile uint32_t*)(0x40010400UL | 0x14)= 0x01;
+    CLEAR_EXTI_PR(0x01); 
 }
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

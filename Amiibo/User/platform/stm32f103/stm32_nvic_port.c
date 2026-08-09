@@ -1,5 +1,4 @@
 #include "stm32_nvic_port.h"
-#include "oled.h"
 
 
 void stm32_nvic_iser(void* ctx)
@@ -9,7 +8,6 @@ void stm32_nvic_iser(void* ctx)
         return;
     }
     stm32_nvic_ctx_t* nvic_ctx =(stm32_nvic_ctx_t*)(ctx);
-    OLED_ShowHex(0,0,(nvic_ctx->Interrupt_position));
     if(nvic_ctx->Interrupt_position <=31)
     {
         nvic_ctx->nvic_iser->NVIC_ISER0 = 1 << nvic_ctx->Interrupt_position;
