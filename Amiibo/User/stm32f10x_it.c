@@ -158,6 +158,7 @@ void SysTick_Handler(void)
 
 uint32_t count = 0;
 
+uint32_t flag = 0;
 
 void EXTI0_IRQHandler(void)
 {
@@ -165,5 +166,9 @@ void EXTI0_IRQHandler(void)
     count = 1;
     CLEAR_EXTI_PR(0x01); 
 }
-
+void TIM1_UP_IRQHandler(void)
+{
+   flag++;
+   CLEAR_UIF();
+}
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

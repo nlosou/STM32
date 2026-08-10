@@ -12,6 +12,7 @@
 #include "PN532.h"
 #include "stm32_exti_port.h"
 #include "stm32_nvic_port.h"
+#include "stm32_timer_port.h"
 
 
 //================ gpio相关 =========================================
@@ -52,7 +53,7 @@ static stm32_gpio_ctx_t UART_TX_gpio= {
 static stm32_gpio_ctx_t Inteerupt_gpio= {
     .gpio = GPIOA,
     .rcc_enable_bit = RCC_APB2ENR_IOPAEN,
-    .mode_select =INPUT_WITH_PULLUP_PULLDOWN,
+    .mode_select =OUTPUT_MODE_10MHZ_General_push_pull,
     .use_pins = GPIOx_PIN_0 | GPIOx_PIN_1
 };
 
@@ -101,10 +102,27 @@ static exti_port_t exti_port = {
     .ops = &stm32_exti_ops
 };
 
+
+//================ TIM相关 =========================================
+
+
+static stm32_timer_ctx_t timer_test_ctx = {
+    .tim = TIM1_TIMER,
+    .rcc_enable_bit = 0x01 << 11,
+    .Timx_arr = 1000,
+    .Timx_dier = 0x01
+};
+
+
+static Timer_port_t tim1_port = {
+    .ctx = &timer_test_ctx,
+    .ops = &stm32_timer_ops
+};
+
 //================ NVIC相关 =========================================
 
 static stm32_nvic_ctx_t nvic_test_ctx = {
-    .Interrupt_position = 6,
+    .Interrupt_position = 25,
     .nvic_iser = NVIC_ISER,
     .nvic_icer = NVIC_ICER,
     .nvic_ispr = NVIC_ISPR,
@@ -266,6 +284,12 @@ nvic_port_t* bsp_get_nvic(void)
 gpio_port_t* bsp_get_gpio(void)
 {
     return &Interrupt_gpio_ctx;
+}
+
+
+Timer_port_t* bsp_get_tim(void)
+{
+    return &tim1_port;
 }
 
 /*

@@ -29,6 +29,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32_exti_port.h"
+#include "stm32_timer_port.h"
 
 
 /* Exported types ------------------------------------------------------------*/
@@ -46,7 +47,9 @@ void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
 void EXTI0_IRQHandler(void);
+void TIM1_UP_IRQHandler(void);
 extern uint32_t count;
+extern uint32_t flag;
 
 #ifdef __cplusplus
 }

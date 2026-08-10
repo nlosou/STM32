@@ -103,33 +103,58 @@ typedef struct {
 }AFIO_TypeDef;
 
 
-#define RCC_BASE   (0x40021000UL)
-#define GPIOA_BASE (0x40010800UL)
-#define GPIOB_BASE (0x40010C00UL)
-#define GPIOC_BASE (0x40011000UL)
-#define EXTI_BASE  (0x40010400UL)
-#define NVIC_ISER_BASE    (0xE000E100)
-#define NVIC_ICER_BASE    (0xE000E100 | 0x080)
-#define NVIC_ISPR_BASE    (0xE000E100 | 0x100)
-#define NVIC_ICPR_BASE    (0xE000E100 | 0x180)
-#define NVIC_IABR_BASE    (0xE000E100 | 0x200)
-#define NVIC_IPR_BASE     (0xE000E100 | 0x300)
-#define NVIC_STIR_BASE     (0xE000E100 | 0xE00)
-#define AFIO_BASE         (0x40010000)
+typedef struct {
+    volatile uint32_t TIMx_CR1;
+    volatile uint32_t TIMx_CR2;
+    volatile uint32_t TIMx_SMCR;
+    volatile uint32_t TIMx_DIER;
+    volatile uint32_t TIMx_SR;
+    volatile uint32_t TIMx_EGR;
+    volatile uint32_t TIMx_CCMR1;
+    volatile uint32_t TIMx_CCMR2;
+    volatile uint32_t TIMx_CCER;
+    volatile uint32_t TIMx_CNT;
+    volatile uint32_t TIMx_PSC;
+    volatile uint32_t TIMx_ARR;
+    volatile uint32_t TIMx_RCR;
+    volatile uint32_t TIMx_CCR1;
+    volatile uint32_t TIMx_CCR2;
+    volatile uint32_t TIMx_CCR3;
+    volatile uint32_t TIMx_CCR4;
+    volatile uint32_t TIMx_BDTR;
+    volatile uint32_t TIMx_DCR;
+    volatile uint32_t TIMx_DMAR;
+}TIM_TypeDef;
 
-#define RCC ((RCC_TypeDef*)RCC_BASE)
-#define GPIOA ((GPIOx_TypeDef*)GPIOA_BASE)
-#define GPIOB ((GPIOx_TypeDef*)GPIOB_BASE)
-#define GPIOC ((GPIOx_TypeDef*)GPIOC_BASE)
-#define EXTI  ((EXTI_TypeDef*)EXTI_BASE)
-#define NVIC_ISER ((NVIC_ISER_TypeDef*)NVIC_ISER_BASE)
-#define NVIC_ICER ((NVIC_ICER_TypeDef*)NVIC_ICER_BASE)
-#define NVIC_ISPR ((NVIC_ISPR_TypeDef*)NVIC_ISPR_BASE)
-#define NVIC_ICPR ((NVIC_ICPR_TypeDef*)NVIC_ICPR_BASE)
-#define NVIC_IABR ((NVIC_IABR_TypeDef*)NVIC_IABR_BASE)
-#define NVIC_IPR ((NVIC_IPR_TypeDef*)NVIC_IPR_BASE)
-#define NVIC_STIR ((NVIC_STIR_TypeDef*)NVIC_STIR_BASE)
-#define AFIO    ((AFIO_TypeDef*)AFIO_BASE)
+#define RCC_BASE                          (0x40021000UL)
+#define GPIOA_BASE                        (0x40010800UL)
+#define GPIOB_BASE                        (0x40010C00UL)
+#define GPIOC_BASE                        (0x40011000UL)
+#define EXTI_BASE                         (0x40010400UL)
+#define NVIC_ISER_BASE                    (0xE000E100)
+#define NVIC_ICER_BASE                    (0xE000E100 | 0x080)
+#define NVIC_ISPR_BASE                    (0xE000E100 | 0x100)
+#define NVIC_ICPR_BASE                    (0xE000E100 | 0x180)
+#define NVIC_IABR_BASE                    (0xE000E100 | 0x200)
+#define NVIC_IPR_BASE                     (0xE000E100 | 0x300)
+#define NVIC_STIR_BASE                    (0xE000E100 | 0xE00)
+#define AFIO_BASE                         (0x40010000)
+#define TIM1_TIMER_BASE                   (0x40012C00UL)
+
+#define RCC                               ((RCC_TypeDef*)RCC_BASE)
+#define GPIOA                             ((GPIOx_TypeDef*)GPIOA_BASE)
+#define GPIOB                             ((GPIOx_TypeDef*)GPIOB_BASE)
+#define GPIOC                             ((GPIOx_TypeDef*)GPIOC_BASE)
+#define EXTI                              ((EXTI_TypeDef*)EXTI_BASE)
+#define NVIC_ISER                         ((NVIC_ISER_TypeDef*)NVIC_ISER_BASE)
+#define NVIC_ICER                         ((NVIC_ICER_TypeDef*)NVIC_ICER_BASE)
+#define NVIC_ISPR                         ((NVIC_ISPR_TypeDef*)NVIC_ISPR_BASE)
+#define NVIC_ICPR                         ((NVIC_ICPR_TypeDef*)NVIC_ICPR_BASE)
+#define NVIC_IABR                         ((NVIC_IABR_TypeDef*)NVIC_IABR_BASE)
+#define NVIC_IPR                          ((NVIC_IPR_TypeDef*)NVIC_IPR_BASE)
+#define NVIC_STIR                         ((NVIC_STIR_TypeDef*)NVIC_STIR_BASE)
+#define AFIO                              ((AFIO_TypeDef*)AFIO_BASE)
+#define TIM1_TIMER                        ((TIM_TypeDef*)TIM1_TIMER_BASE)
 
 
 
@@ -138,7 +163,7 @@ typedef struct {
 #define RCC_APB2ENR_IOPCEN (1UL << 4)
 
 
-//select mode
+//gpio_select mode
 #define ANALOG_MODE                (0x00)
 #define FLOATING_INPUT             (0x04)
 #define INPUT_WITH_PULLUP_PULLDOWN (0x08)
@@ -153,6 +178,11 @@ typedef struct {
 #define OUTPUT_MODE_50MHZ_General_push_pull     (0x03)
 #define OUTPUT_MODE_50MHZ_General_open_drain    (0x07)
 
+//time
+#define COUNTER_AS_UPCOUNTER                      (~(0x01 << 4))
+#define COUNTER_AS_DOWNCOUNTER                    ((0x01 << 4))
+#define COUNTER_ENABLE                            (0x01 << 0)
+#define UPDATEP_INTTERRUPT_ENABLE                 (0x01 << 0)
 
 //gpio_pin
 #define GPIOx_PIN_0   (1<<0)
