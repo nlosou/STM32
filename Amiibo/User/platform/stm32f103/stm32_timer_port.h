@@ -5,6 +5,7 @@
 
 
 #define CLEAR_UIF() (*(volatile uint32_t*)(TIM1_TIMER_BASE + 0x10) = 0x00)
+#define CLOSE_TIM() (*(volatile uint32_t*)(TIM1_TIMER_BASE) &= ~0x01)
 
 typedef struct {
    TIM_TypeDef* tim;     

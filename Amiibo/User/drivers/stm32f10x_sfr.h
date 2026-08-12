@@ -161,6 +161,7 @@ typedef struct {
 #define RCC_APB2ENR_IOPAEN (1UL << 2)
 #define RCC_APB2ENR_IOPBEN (1UL << 3)
 #define RCC_APB2ENR_IOPCEN (1UL << 4)
+#define RCC_APB2_ENABLE_TIM1 (1UL << 11)
 
 
 //gpio_select mode

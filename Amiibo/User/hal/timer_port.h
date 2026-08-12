@@ -5,6 +5,8 @@
 typedef struct{
     void (*init)(void*ctx);
     void (*start_count)(void*ctx);
+    void (*close_count)(void*ctx);
+    void (*update_ck_cnt)(void*ctx);
 }Timer_ops_t;
 
 
@@ -30,4 +32,20 @@ static inline void Timer_start(Timer_port_t *port)
     }
 }
 
+static inline void Timer_close(Timer_port_t *port)
+{
+    if(port!=NULL && port->ops!=NULL && port->ctx!=NULL && port->ops->close_count!=NULL)
+    {
+        port->ops->close_count(port->ctx);
+    }
+}
+
+static inline void Timer_update_ck_cnt(Timer_port_t* port)
+{
+    if(port!=NULL && port->ops!=NULL && port->ctx!=NULL && port->ops->update_ck_cnt!=NULL)
+    {
+        port->ops->update_ck_cnt(port->ctx);
+    }
+
+}
 #endif

@@ -106,16 +106,32 @@ static exti_port_t exti_port = {
 //================ TIM相关 =========================================
 
 
+//配置ck_cnt会被配置为0.001Mhz,每1000ms进入一次中断
 static stm32_timer_ctx_t timer_test_ctx = {
     .tim = TIM1_TIMER,
-    .rcc_enable_bit = 0x01 << 11,
+    .rcc_enable_bit = RCC_APB2_ENABLE_TIM1,
     .Timx_arr = 1000,
-    .Timx_dier = 0x01
+    .Timx_dier = 0x01,
+    .Timx_psc = 0x2327
 };
 
 
+//配置ck_cnt会被配置为1Mhz,每104us进入一次中断
+static stm32_timer_ctx_t timer_uart_ctx = {
+    .tim = TIM1_TIMER,
+    .rcc_enable_bit = RCC_APB2_ENABLE_TIM1,
+    .Timx_arr = 104,
+    .Timx_dier = 0x01,
+    .Timx_psc = 0x47
+};
+
 static Timer_port_t tim1_port = {
     .ctx = &timer_test_ctx,
+    .ops = &stm32_timer_ops
+};
+
+static Timer_port_t tim1_uart_port = {
+    .ctx = &timer_uart_ctx,
     .ops = &stm32_timer_ops
 };
 
@@ -141,6 +157,7 @@ static nvic_port_t nvic_port = {
 static sw_uart_ctx_t sw_uart_ctx = {
     .RX = &uart_rx_gpio_port_ctx,   
     .TX = &uart_tx_gpio_port_ctx,   
+    .timer = &tim1_uart_port,
     .RX_PIN = UART_RX_PIN,
     .TX_PIN = UART_TX_PIN,
 };
@@ -266,7 +283,7 @@ Mifare_ctx_t* bsp_get_mifare(void)
     return &Mifare;
 }
 
-uart_port_t* bsg_get_uart_test(void)
+uart_port_t* bsp_get_uart_test(void)
 {
     return &uart_port;
 }
@@ -289,7 +306,8 @@ gpio_port_t* bsp_get_gpio(void)
 
 Timer_port_t* bsp_get_tim(void)
 {
-    return &tim1_port;
+//    return &tim1_port ;
+      return &tim1_uart_port;
 }
 
 /*

@@ -22,6 +22,12 @@ void OLED_DrawPoint(uint8_t x, uint8_t y, uint8_t color)
     }
 }
 
+
+
+
+//TODO 要增加显示十进制的函数
+//TODO 要增加显示汉字的函数
+//
 /**
  *@brief 在oled上打印字符
  *@param row表示行范围0～4,colum为列0～16列
@@ -200,6 +206,7 @@ uint16_t oled_init(oled_t* oled)
 
 
 //清屏
+//FIXME 当oled显示数据时,使用该函数无效
 uint16_t oled_clear(oled_t* oled)
 {
     if(oled == NULL) 

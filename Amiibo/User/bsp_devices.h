@@ -21,7 +21,7 @@ spi_select_port_t* bsp_get_select_spi(void);
 PN532_ctx_t* bsp_get_pn532(void);
 Amiibo_ctx_t* bsp_get_amiibo(void);
 Mifare_ctx_t* bsp_get_mifare(void);
-uart_port_t* bsg_get_uart_test(void);
+uart_port_t* bsp_get_uart_test(void);
 exti_port_t* bsp_get_exti(void);
 nvic_port_t* bsp_get_nvic(void);
 gpio_port_t* bsp_get_gpio(void);

@@ -49,7 +49,7 @@ void SysTick_Handler(void);
 void EXTI0_IRQHandler(void);
 void TIM1_UP_IRQHandler(void);
 extern uint32_t count;
-extern uint32_t flag;
+extern volatile uint32_t flag;
 
 #ifdef __cplusplus
 }
