@@ -39,7 +39,7 @@ static stm32_gpio_ctx_t SPI_gpio_input = {
 static stm32_gpio_ctx_t UART_RX_gpio= {
     .gpio = UART_RX_GPIO_PORT,
     .rcc_enable_bit = RCC_APB2ENR_IOPAEN,
-    .mode_select = OUTPUT_MODE_10MHZ_General_push_pull,
+    .mode_select = INPUT_WITH_PULLUP_PULLDOWN,
     .use_pins =  UART_RX_PIN
 };
 
@@ -116,7 +116,7 @@ static stm32_timer_ctx_t timer_test_ctx = {
 };
 
 
-//配置ck_cnt会被配置为1Mhz,每104us进入一次中断
+//配置ck_cnt会被配置为1Mhz,每104us进入一次中断,对于uart来说,就相当于波特率9600
 static stm32_timer_ctx_t timer_uart_ctx = {
     .tim = TIM1_TIMER,
     .rcc_enable_bit = RCC_APB2_ENABLE_TIM1,

@@ -6,7 +6,7 @@
 int main(void)
 {   
     
-    uint16_t data = 0xAA;
+    uint16_t data = 0x41;
     uart_msg_t msg = {
         .mode = Half_duplex,
         .parity_bits = parity_bits_off,
@@ -25,9 +25,9 @@ int main(void)
     //exti_init(exti);
     nvic_init(nvic);
     //oled_point(oled);
-    uart_transmit(uart,&msg,1);
     while(1)
     {
+        uart_transmit(uart,&msg,1);
     }
     return 0;
 }

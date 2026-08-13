@@ -83,7 +83,7 @@ void sw_uart_send_data(void*ctx ,uint16_t transfer_data)
     }
 }
 
-uint8_t sw_uart_recieve_data(void*ctx ,uint8_t transfer_data)
+uint8_t sw_uart_recieve_data(void*ctx)
 {
     if(ctx == NULL)
     {
@@ -115,6 +115,7 @@ uint8_t sw_uart_transmit(void*ctx,uart_msg_t* msg,uint16_t msg_num)
     for(uint8_t msg_num_idx = 0 ; msg_num_idx < msg_num ; msg_num_idx ++)  
     {
             sw_uart_send_data(ctx,*(msg[msg_num_idx].tranfer_buf));
+            //sw_uart_recieve_data(ctx);
     }
     return 1;
 }
