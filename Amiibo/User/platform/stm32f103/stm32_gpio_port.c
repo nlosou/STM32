@@ -20,26 +20,27 @@ static void stm32_gpioa__init(void *ctx)
     {
         if((gpio_ctx->use_pins >> idx) & 0x01)
         {
+                if(gpio_ctx->mode_select == INPUT_WITH_PULLUP_PULLDOWN)
+                {
+                    gpio_ctx->gpio->ODR |=(BASE_ONE << idx);
+                }
+                else if(gpio_ctx->mode_select == OUTPUT_MODE_10MHZ_General_push_pull)
+                {
+                    gpio_ctx->gpio->BSRR |= BASE_ONE << idx;
+                }
             if(idx <=7)
             {
                 uint32_t mask = BASE_MASK << (idx*4);
                 gpio_ctx->gpio->CRL&=~mask;
                 gpio_ctx->gpio->CRL|= gpio_ctx->mode_select << (idx*4);
-
-                if(gpio_ctx->mode_select == INPUT_WITH_PULLUP_PULLDOWN)
-                {
-                    gpio_ctx->gpio->ODR |=(BASE_ONE << idx);
-                }
             }
             if(idx>=8 && idx<=15)
             {
+           //TODO:这里先这样做,以解决PA12,在松开RST后会被拉低的情况
+
                 uint32_t mask = BASE_MASK << ((idx - 8))*4;
                 gpio_ctx->gpio->CRH&=~mask;
                 gpio_ctx->gpio->CRH|= gpio_ctx->mode_select << (idx - 8)*4;
-                if(gpio_ctx->mode_select == INPUT_WITH_PULLUP_PULLDOWN)
-                {
-                    gpio_ctx->gpio->ODR |=(BASE_ONE << idx);
-                }
             }
         }
     }
