@@ -1,7 +1,7 @@
 #include "sw_uart.h"
 #include "oled.h"
 
-void sw_uart_init(void* ctx)
+static void sw_uart_init(void* ctx)
 {
    if(ctx == NULL) 
    {
@@ -10,10 +10,13 @@ void sw_uart_init(void* ctx)
    
    sw_uart_ctx_t* sw_uart = (sw_uart_ctx_t*)(ctx);
    //gpio_port_write(sw_uart->TX,sw_uart->TX_PIN,GPIO_LEVEL_HIGH);
+   exti_init(sw_uart->exti);
    gpio_port_init(sw_uart->RX);
    gpio_port_init(sw_uart->TX);
    Timer_init(sw_uart->timer);
    Timer_update_ck_cnt(sw_uart->timer);
+   nvic_init(sw_uart->nvic_exti);
+   nvic_init(sw_uart->nvic_timer);
 }
 
 
@@ -54,7 +57,7 @@ static void sw_uart_stop_bit(void*ctx)
    gpio_port_write(port,TX_PIN,GPIO_LEVEL_HIGH);
 }
 
-void sw_uart_send_data(void*ctx ,uint16_t transfer_data)
+static void sw_uart_send_data(void*ctx ,uint16_t transfer_data)
 {
     if(ctx == NULL)
     {
@@ -81,9 +84,10 @@ void sw_uart_send_data(void*ctx ,uint16_t transfer_data)
             flag = 0;
         }
     }
+    Timer_close(sw_uart->timer);
 }
 
-uint8_t sw_uart_recieve_data(void*ctx)
+static uint8_t sw_uart_recieve_data(void*ctx)
 {
     if(ctx == NULL)
     {
@@ -93,29 +97,46 @@ uint8_t sw_uart_recieve_data(void*ctx)
     sw_uart_ctx_t* sw_uart = (sw_uart_ctx_t*)(ctx);
     gpio_port_t* port = sw_uart->RX;
     uint16_t RX_PIN = sw_uart->RX_PIN;
+    
 
 //TODO:临时使用while
-    while(gpio_port_read(port,RX_PIN) & 0x01)
-    {
-        for(uint8_t idx = 0 ; idx < 8 ; idx++)
+    
+    uint16_t tmep_bit = 0x00;                      //默认填入开始位
+    uint8_t idx = 0;   
+          
+        Timer_start(sw_uart->timer);
+        while(idx < 10)
         {
-            receive_data|=gpio_port_read(port,RX_PIN) << idx;
+            if(flag)
+            {
+                tmep_bit|= gpio_port_read(port,RX_PIN)>>(idx++);
+                flag = 0;
+            }
         }
-    }
-    return receive_data;
+        Timer_close(sw_uart->timer);
+
+    return tmep_bit;
 }
 
-uint8_t sw_uart_transmit(void*ctx,uart_msg_t* msg,uint16_t msg_num)
+static uint8_t sw_uart_transmit(void*ctx,uart_msg_t* msg,uint16_t msg_num)
 {
     if(ctx == NULL)
     {
         return 0;
     }
 
-    for(uint8_t msg_num_idx = 0 ; msg_num_idx < msg_num ; msg_num_idx ++)  
+    for(uint16_t msg_num_idx = 0 ; msg_num_idx < msg_num ; msg_num_idx ++)  
     {
-            sw_uart_send_data(ctx,*(msg[msg_num_idx].tranfer_buf));
-            //sw_uart_recieve_data(ctx);
+            for(uint16_t trnasfer_buf_idx = 0 ; trnasfer_buf_idx < msg->tranfer_buf_len; trnasfer_buf_idx++)
+            {
+                sw_uart_send_data(ctx,(msg[msg_num_idx].tranfer_buf[trnasfer_buf_idx]));
+            }
+           if(uart_come)
+           {
+               //msg->recieve_buf[0]=sw_uart_recieve_data(ctx);
+               msg->recieve_buf[0]=0xAA;
+               uart_come = 0;
+           }
     }
     return 1;
 }
