@@ -23,6 +23,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
+#include "middleware/sw_uart.h"
 
 /** @addtogroup STM32F10x_StdPeriph_Template
   * @{
@@ -159,6 +160,14 @@ void SysTick_Handler(void)
 uint32_t count = 0;
 
 volatile uint32_t flag = 0;
+volatile uint8_t  uart_come = 0;
+volatile uint8_t  uart_transfer_idx = 0;
+volatile uint8_t get_pin_level =0;
+//TODO:这里有问题?可以在中断函数里引入sw_uart.h文件吗?还是得专门用一个.h文件来保持枚举类型的状态?
+volatile Uart_recieve_sate sw_uart_recieve_state = Idel;
+
+volatile uint8_t uart_receive_data = 0;
+volatile uint8_t bit_idx = 0;
 
 void EXTI0_IRQHandler(void)
 {
@@ -166,10 +175,60 @@ void EXTI0_IRQHandler(void)
     count = 1;
     CLEAR_EXTI_PR(0x01); 
 }
+//uart的rx接收数据 
+void EXTI2_IRQHandler(void)//下降沿触发
+{
+    STM32_FAST_SET_GPIOA_PIN_LOW(1<<0);
+    CLEAR_UIF();
+    CLEAR_CNT();
+    sw_uart_recieve_state = Wait_start_bit;
+    TIMER_SET_ARR(52);
+    OPEN_TIM1();
+    CLOSE_EXTIx(1<<2);
+    CLEAR_EXTI_PR(0x01 << 2);   
+}
+
+//用于每104us,改变一次flag
 void TIM1_UP_IRQHandler(void)
 {
+    
     CLEAR_UIF();
-    //CLOSE_TIM();
-    flag^=1;
+    if(sw_uart_recieve_state == Wait_start_bit)
+    {
+        STM32_FAST_SET_GPIOA_PIN_HIGH(1<<0);
+        sw_uart_recieve_state = Check_start_bit; 
+        get_pin_level = STM32_FAST_GET_GPIOA_PIN_LEVEL(1<<2);
+        if(get_pin_level)
+        {
+            sw_uart_recieve_state = Idel;
+            CLOSE_TIM1();
+            CLEAR_EXTI_PR(0x01 << 2);   
+            OPEN_EXTIx(1<<2);
+        }
+        else
+        {
+            CLOSE_EXTIx(1<<2);
+            CLEAR_EXTI_PR(0x01 << 2);   
+            TIMER_SET_ARR(104);
+            CLEAR_CNT();
+            sw_uart_recieve_state = Sampling;
+        }
+    }
+    else if(sw_uart_recieve_state == Sampling)
+    {
+        STM32_FAST_SET_GPIOA_PIN_LOW(1<<0);
+        get_pin_level = STM32_FAST_GET_GPIOA_PIN_LEVEL(1<<2);
+        
+        uart_receive_data|=get_pin_level << (bit_idx++);
+        if(bit_idx>7)
+        {
+            bit_idx = 0;
+            CLOSE_TIM1();
+            OPEN_EXTIx(1<<2);
+            sw_uart_recieve_state = Completed;
+            flag=1;
+        }
+        STM32_FAST_SET_GPIOA_PIN_HIGH(1<<0);
+    }
 }
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

@@ -1,12 +1,15 @@
 #ifndef TIMER_PORT_H
 #define TIMER_PORT_H
 #include <stddef.h>
-
+#include <stdint.h>
 typedef struct{
     void (*init)(void*ctx);
     void (*start_count)(void*ctx);
     void (*close_count)(void*ctx);
+    void (*clear_count)(void*ctx);
     void (*update_ck_cnt)(void*ctx);
+    void (*set_arrtime)(void*ctx,uint32_t time);
+    void (*clear_uif)(void*ctx);
 }Timer_ops_t;
 
 
@@ -48,4 +51,29 @@ static inline void Timer_update_ck_cnt(Timer_port_t* port)
     }
 
 }
+static inline void Timer_clear_count(Timer_port_t*port)
+{
+    if(port!=NULL && port->ops!=NULL && port->ctx!=NULL && port->ops->clear_count!=NULL)
+    {
+        port->ops->clear_count(port->ctx);
+    }
+
+}
+static inline void Timer_set_arr_time(Timer_port_t*port,uint32_t time)
+{
+    if(port!=NULL && port->ops!=NULL && port->ctx!=NULL && port->ops->set_arrtime!=NULL)
+    {
+        port->ops->set_arrtime(port->ctx,time);
+    }
+}
+static inline void Timer_clear_uif(Timer_port_t*port)
+{
+    if(port!=NULL && port->ops!=NULL && port->ctx!=NULL && port->ops->clear_uif!=NULL)
+    {
+        port->ops->clear_uif(port->ctx);
+    }
+}
+
+
+
 #endif

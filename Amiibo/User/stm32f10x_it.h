@@ -30,6 +30,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32_exti_port.h"
 #include "stm32_timer_port.h"
+#include "stm32_gpio_port.h"
 
 
 /* Exported types ------------------------------------------------------------*/
@@ -47,9 +48,13 @@ void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
 void EXTI0_IRQHandler(void);
+void EXTI2_IRQHandler(void);
 void TIM1_UP_IRQHandler(void);
 extern uint32_t count;
 extern volatile uint32_t flag;
+extern volatile uint8_t uart_come;
+extern volatile uint8_t uart_transfer_idx;
+extern volatile uint8_t get_pin_level ;
 
 #ifdef __cplusplus
 }

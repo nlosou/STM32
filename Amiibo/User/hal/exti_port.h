@@ -6,6 +6,8 @@
 typedef struct {
     void (*init)(void*ctx);
     void (*clear)(void*ctx);
+    void (*close)(void*ctx);
+    void (*start)(void*ctx);
 }exti_ops_t;
 
 typedef struct {
@@ -29,6 +31,20 @@ static inline void  exti_clear(exti_port_t *port)
     }
 }
 
+static inline void exti_close(exti_port_t *port)
+{
+    if(port!=NULL && port->ops->close!=NULL && port->ctx!=NULL)
+    {
+       port->ops->close(port->ctx);  
+    }
+}
 
+static inline void exti_open(exti_port_t *port)
+{
+    if(port!=NULL && port->ops->close!=NULL && port->ctx!=NULL)
+    {
+       port->ops->start(port->ctx);  
+    }
+}
 
 #endif

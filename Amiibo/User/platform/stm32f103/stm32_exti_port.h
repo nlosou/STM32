@@ -4,7 +4,8 @@
 #include "exti_port.h"
 
 #define CLEAR_EXTI_PR(x) (*(volatile uint32_t*)(EXTI_BASE + 0x14) = x)
-
+#define OPEN_EXTIx(x)   (*(volatile uint32_t*)(EXTI_BASE + 0x00)|=x )
+#define CLOSE_EXTIx(x)   (*(volatile uint32_t*)(EXTI_BASE + 0x00)&=~(x) )
 typedef struct {
     EXTI_TypeDef *exti;
     AFIO_TypeDef *afio;

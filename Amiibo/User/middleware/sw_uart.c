@@ -1,6 +1,8 @@
 #include "sw_uart.h"
 #include "oled.h"
 
+
+
 static void sw_uart_init(void* ctx)
 {
    if(ctx == NULL) 
@@ -9,14 +11,14 @@ static void sw_uart_init(void* ctx)
    }
    
    sw_uart_ctx_t* sw_uart = (sw_uart_ctx_t*)(ctx);
-   //gpio_port_write(sw_uart->TX,sw_uart->TX_PIN,GPIO_LEVEL_HIGH);
-   exti_init(sw_uart->exti);
+   gpio_port_write(sw_uart->TX,sw_uart->TX_PIN,GPIO_LEVEL_HIGH);
    gpio_port_init(sw_uart->RX);
    gpio_port_init(sw_uart->TX);
    Timer_init(sw_uart->timer);
    Timer_update_ck_cnt(sw_uart->timer);
    nvic_init(sw_uart->nvic_exti);
    nvic_init(sw_uart->nvic_timer);
+   exti_init(sw_uart->exti);
 }
 
 
@@ -73,9 +75,8 @@ static void sw_uart_send_data(void*ctx ,uint16_t transfer_data)
     {
         tmep_bit[idx + 1] = (transfer_data >>idx) & 0x01 ;
     }
-
-    uint8_t idx = 0;   
     Timer_start(sw_uart->timer);
+    uint8_t idx = 0;
     while(idx < 10)
     {
         if(flag)
@@ -85,37 +86,33 @@ static void sw_uart_send_data(void*ctx ,uint16_t transfer_data)
         }
     }
     Timer_close(sw_uart->timer);
+    /*
+    Timer_start(sw_uart->timer);
+    if(flag)
+    {
+        gpio_port_write(port,TX_PIN,tmep_bit[uart_transfer_idx]);
+        flag = 0;
+    }
+    Timer_close(sw_uart->timer);
+    */
 }
 
-static uint8_t sw_uart_recieve_data(void*ctx)
+static void sw_uart_recieve_data(void*ctx,uint16_t* receive_data)
 {
     if(ctx == NULL)
     {
-        return 0;
+        return;
     }
-    uint8_t receive_data = 0x00; 
-    sw_uart_ctx_t* sw_uart = (sw_uart_ctx_t*)(ctx);
-    gpio_port_t* port = sw_uart->RX;
-    uint16_t RX_PIN = sw_uart->RX_PIN;
-    
 
-//TODO:临时使用while
+    if(flag)
+    {
+        *receive_data = uart_receive_data;
+        uart_receive_data = 0;
+        bit_idx = 0;
+        flag = 0;
+        
+    }
     
-    uint16_t tmep_bit = 0x00;                      //默认填入开始位
-    uint8_t idx = 0;   
-          
-        Timer_start(sw_uart->timer);
-        while(idx < 10)
-        {
-            if(flag)
-            {
-                tmep_bit|= gpio_port_read(port,RX_PIN)>>(idx++);
-                flag = 0;
-            }
-        }
-        Timer_close(sw_uart->timer);
-
-    return tmep_bit;
 }
 
 static uint8_t sw_uart_transmit(void*ctx,uart_msg_t* msg,uint16_t msg_num)
@@ -125,30 +122,20 @@ static uint8_t sw_uart_transmit(void*ctx,uart_msg_t* msg,uint16_t msg_num)
         return 0;
     }
 
+    /*
     for(uint16_t msg_num_idx = 0 ; msg_num_idx < msg_num ; msg_num_idx ++)  
     {
             for(uint16_t trnasfer_buf_idx = 0 ; trnasfer_buf_idx < msg->tranfer_buf_len; trnasfer_buf_idx++)
             {
                 sw_uart_send_data(ctx,(msg[msg_num_idx].tranfer_buf[trnasfer_buf_idx]));
             }
-           if(uart_come)
-           {
-               //msg->recieve_buf[0]=sw_uart_recieve_data(ctx);
-               msg->recieve_buf[0]=0xAA;
-               uart_come = 0;
-           }
     }
+    */
+    sw_uart_recieve_data(ctx,msg->recieve_buf);
     return 1;
 }
-
 
 const uart_ops_t uart_ops = {
     .init = sw_uart_init,
     .transmit = sw_uart_transmit
 };
-
-
-
-
-
-
