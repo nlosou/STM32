@@ -55,6 +55,7 @@ extern volatile uint32_t flag;
 extern volatile uint8_t uart_come;
 extern volatile uint8_t uart_transfer_idx;
 extern volatile uint8_t get_pin_level ;
+extern volatile uint8_t fetch_complete;
 
 #ifdef __cplusplus
 }

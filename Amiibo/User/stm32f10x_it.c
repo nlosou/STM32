@@ -168,6 +168,7 @@ volatile Uart_recieve_sate sw_uart_recieve_state = Idel;
 
 volatile uint8_t uart_receive_data = 0;
 volatile uint8_t bit_idx = 0;
+volatile uint8_t fetch_complete = 0;
 
 static inline void sw_uart_tick(void)
 {
@@ -183,7 +184,6 @@ static inline void sw_uart_rx_process(void)
     CLEAR_UIF();
     if(sw_uart_recieve_state == Wait_start_bit)
     {
-        STM32_FAST_SET_GPIOA_PIN_HIGH(1<<0);
         sw_uart_recieve_state = Check_start_bit; 
         get_pin_level = STM32_FAST_GET_GPIOA_PIN_LEVEL(1<<2);
         if(get_pin_level)
@@ -213,7 +213,7 @@ static inline void sw_uart_rx_process(void)
             CLOSE_TIM1();
             OPEN_EXTIx(1<<2);
             sw_uart_recieve_state = Completed;
-            flag=1;
+            fetch_complete = 1;
         }
     }
 }
@@ -234,6 +234,7 @@ void EXTI2_IRQHandler(void)//下降沿触发
 
 void TIM1_UP_IRQHandler(void)
 {
+   flag = 1;
    sw_uart_rx_process(); 
 }
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

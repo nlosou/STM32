@@ -17,7 +17,7 @@ typedef enum mode{
 }Communicate_mode;
 
 typedef struct {
-    uint16_t* tranfer_buf;
+    uint16_t tranfer_buf;
     uint16_t* recieve_buf;
     uint16_t tranfer_buf_len;
     uint16_t recieve_buf_len;
