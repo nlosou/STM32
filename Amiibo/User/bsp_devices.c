@@ -88,17 +88,17 @@ static gpio_port_t Interrupt_gpio_ctx = {
 
 //================ EXIT相关 =========================================
 
-static stm32_exti_ctx_t exti_test_ctx = {
+static stm32_exti_ctx_t exti_uart_ctx = {
     .exti = EXTI,
     .afio = AFIO,
-    .exti_imr_mrx = EXTI_IMR_MR0,
-    .exti_ftsr_trx = EXTI_FTSR_TR0,
-    .exti_pr_prx = EXTI_PR_PR0,
+    .exti_imr_mrx = EXTI_IMR_MR2,
+    .exti_ftsr_trx = EXTI_FTSR_TR2,
+    .exti_pr_prx = EXTI_PR_PR2,
     .select_interrupt_source = 0x00,
 };
 
-static exti_port_t exti_port = {
-    .ctx = &exti_test_ctx,
+static exti_port_t exti_uart_port = {
+    .ctx = &exti_uart_ctx,
     .ops = &stm32_exti_ops
 };
 
@@ -117,9 +117,18 @@ static stm32_timer_ctx_t timer_test_ctx = {
 
 
 //配置ck_cnt会被配置为1Mhz,每104us进入一次中断,对于uart来说,就相当于波特率9600
-static stm32_timer_ctx_t timer_uart_ctx = {
-    .tim = TIM1_TIMER,
-    .rcc_enable_bit = RCC_APB2_ENABLE_TIM1,
+static stm32_timer_ctx_t timer_uart_rx_ctx = {
+    .tim = TIM2_TIMER,
+    .rcc_enable_bit = RCC_APB1_ENABLE_TIM2,
+    .Timx_arr = 104,
+    .Timx_dier = 0x01,
+    .Timx_psc = 0x47
+};
+
+//配置ck_cnt会被配置为1Mhz,每104us进入一次中断,对于uart来说,就相当于波特率9600
+static stm32_timer_ctx_t timer_uart_tx_ctx = {
+    .tim = TIM3_TIMER,
+    .rcc_enable_bit = RCC_APB1_ENABLE_TIM3,
     .Timx_arr = 104,
     .Timx_dier = 0x01,
     .Timx_psc = 0x47
@@ -130,15 +139,20 @@ static Timer_port_t tim1_port = {
     .ops = &stm32_timer_ops
 };
 
-static Timer_port_t tim1_uart_port = {
-    .ctx = &timer_uart_ctx,
+static Timer_port_t tim1_uart_rx_port = {
+    .ctx = &timer_uart_rx_ctx,
+    .ops = &stm32_timer_ops
+};
+
+static Timer_port_t tim8_uart_tx_port = {
+    .ctx = &timer_uart_tx_ctx,
     .ops = &stm32_timer_ops
 };
 
 //================ NVIC相关 =========================================
 
-static stm32_nvic_ctx_t nvic_test_ctx = {
-    .Interrupt_position = 25,
+static stm32_nvic_ctx_t nvic_uart_timer_rx_ctx = {
+    .Interrupt_position = 28,
     .nvic_iser = NVIC_ISER,
     .nvic_icer = NVIC_ICER,
     .nvic_ispr = NVIC_ISPR,
@@ -146,8 +160,37 @@ static stm32_nvic_ctx_t nvic_test_ctx = {
     .nvic_iabr = NVIC_IABR
 };
 
-static nvic_port_t nvic_port = {
-    .ctx = &nvic_test_ctx,
+static stm32_nvic_ctx_t nvic_uart_timer_tx_ctx = {
+    .Interrupt_position = 29,
+    .nvic_iser = NVIC_ISER,
+    .nvic_icer = NVIC_ICER,
+    .nvic_ispr = NVIC_ISPR,
+    .nvic_icpr = NVIC_ICPR,
+    .nvic_iabr = NVIC_IABR
+};
+
+
+static stm32_nvic_ctx_t nvic_uart_exti_ctx = {
+    .Interrupt_position = 8,
+    .nvic_iser = NVIC_ISER,
+    .nvic_icer = NVIC_ICER,
+    .nvic_ispr = NVIC_ISPR,
+    .nvic_icpr = NVIC_ICPR,
+    .nvic_iabr = NVIC_IABR
+};
+
+static nvic_port_t nvic_uart_timer_tx_port = {
+    .ctx = &nvic_uart_timer_tx_ctx,
+    .ops = &stm32_nvic_ops
+};
+
+static nvic_port_t nvic_uart_timer_rx_port = {
+    .ctx = &nvic_uart_timer_rx_ctx,
+    .ops = &stm32_nvic_ops
+};
+
+static nvic_port_t nvic_uart_exti_port = {
+    .ctx = &nvic_uart_exti_ctx,
     .ops = &stm32_nvic_ops
 };
 
@@ -157,7 +200,12 @@ static nvic_port_t nvic_port = {
 static sw_uart_ctx_t sw_uart_ctx = {
     .RX = &uart_rx_gpio_port_ctx,   
     .TX = &uart_tx_gpio_port_ctx,   
-    .timer = &tim1_uart_port,
+    .time_rx = &tim1_uart_rx_port,
+    .time_tx = &tim8_uart_tx_port,
+    .exti = &exti_uart_port,
+    .nvic_exti = &nvic_uart_exti_port,
+    .nvic_timer_tx = &nvic_uart_timer_tx_port,
+    .nvic_timer_rx = &nvic_uart_timer_rx_port,
     .RX_PIN = UART_RX_PIN,
     .TX_PIN = UART_TX_PIN,
 };
@@ -287,29 +335,33 @@ uart_port_t* bsp_get_uart_test(void)
 {
     return &uart_port;
 }
-
+/*
 exti_port_t* bsp_get_exti(void)
 {
     return &exti_port;
 }
+*/
 
+/*
 nvic_port_t* bsp_get_nvic(void)
 {
     return &nvic_port;
 }
 
+*/
 gpio_port_t* bsp_get_gpio(void)
 {
     return &Interrupt_gpio_ctx;
 }
 
 
+/*
 Timer_port_t* bsp_get_tim(void)
 {
 //    return &tim1_port ;
       return &tim1_uart_port;
 }
-
+*/
 /*
 // 
 at24c02_t* bsp_get_eeprom1(void)

@@ -4,7 +4,8 @@ SIZE = arm-none-eabi-size
 
 TARGET = main
 DEFS = -DSTM32F10X_MD
-CFLAGS = -mcpu=cortex-m3 -mthumb -O2 -flto -g -Wall $(DEFS)
+#CFLAGS = -mcpu=cortex-m3 -mthumb -O2 -flto -g -Wall $(DEFS)
+CFLAGS = -mcpu=cortex-m3 -mthumb -O0 -g -Wall $(DEFS)
 
 CFLAGS += -ICMSIS
 CFLAGS += -IUser

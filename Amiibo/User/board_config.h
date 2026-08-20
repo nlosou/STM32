@@ -50,6 +50,6 @@
 #define UART_RX_GPIO_PORT         GPIOA
 #define UART_TX_GPIO_PORT         GPIOA
 #define UART_TX_PIN               GPIOx_PIN_0
-#define UART_RX_PIN               GPIOx_PIN_1
+#define UART_RX_PIN               GPIOx_PIN_2
 
 #endif

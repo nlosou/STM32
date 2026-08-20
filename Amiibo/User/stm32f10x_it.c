@@ -219,9 +219,24 @@ void EXTI2_IRQHandler(void)//下降沿触发
 
 void TIM1_UP_IRQHandler(void)
 {
-   flag = 1;
    CLEAR_UIF();
    sw_uart_rx_process();
    
+}
+void TIM8_UP_IRQHandler(void)
+{
+   flag = 1;
+   CLEAR_TIM8_UIF();
+}
+
+void TIM2_IRQHandle(void)
+{
+   flag = 1;
+   CLEAR_TIM2_UIF();
+}
+void TIM3_IRQHandle(void)
+{
+   flag = 1;
+   CLEAR_TIM3_UIF();
 }
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

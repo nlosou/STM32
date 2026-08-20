@@ -20,18 +20,17 @@ int main(void)
         .recieve_buf = buf,
         .tranfer_buf_len = 0 ,
     };
-
     //CLOSE_EXTIx(1<<2);
     //CLEAR_EXTI_PR(0x01 << 2);   
-
     while(1)
     {
         
         uart_transmit(uart,&msg,1);
+        msg.tranfer_buf = *msg.recieve_buf;
         tmep = msg.recieve_buf[0];
 
         OLED_ShowHex(0,0,tmep);
-        tmep = 0xFF;
+        tmep = 0x00;
         OLED_ShowString(0,1,"uart_data_come");
         OLED_ShowHex(6,0,uart_transfer_idx);
 

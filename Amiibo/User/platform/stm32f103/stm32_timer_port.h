@@ -10,6 +10,9 @@
 #define CLOSE_TIM1() (*(volatile uint32_t*)(TIM1_TIMER_BASE + 0x00)&=~0x01)
 #define CLEAR_CNT()  (*(volatile uint32_t*)(TIM1_TIMER_BASE + 36) = 0x00)
 #define TIMER_SET_ARR(x)   (*(volatile uint32_t*)(TIM1_TIMER_BASE + 44) = x - 1)
+#define CLEAR_TIM8_UIF() (*(volatile uint32_t*)(TIM8_TIMER_BASE + 0x10) = 0x00)
+#define CLEAR_TIM2_UIF() (*(volatile uint32_t*)(TIM2_TIMER_BASE + 0x10) = 0x00)
+#define CLEAR_TIM3_UIF() (*(volatile uint32_t*)(TIM3_TIMER_BASE + 0x10) = 0x00)
 
 
 typedef struct {

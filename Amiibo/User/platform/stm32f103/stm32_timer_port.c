@@ -9,7 +9,7 @@ static void stm32_timer_init(void*ctx)
     }
     
     stm32_timer_ctx_t* tim1 = (stm32_timer_ctx_t*)ctx;
-    RCC->APB2ENR|= tim1->rcc_enable_bit;
+    RCC->APB1ENR|= tim1->rcc_enable_bit;
     //现在将APB2的时钟频率除以16,最终ck_psc会获得9Mhz
     //TODO APB2 分频属于系统时钟树配置，后续移到 RCC/Clock 初始化模块，Timer 驱动只负责读取并使用已经确定的 TIMx 时钟。
     //RCC->CFGR&= ~(0x07 << 11) ;

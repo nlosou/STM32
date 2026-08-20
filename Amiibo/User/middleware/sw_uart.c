@@ -84,8 +84,8 @@ static uint8_t sw_uart_transmit(void*ctx,uart_msg_t* msg,uint16_t msg_num)
     {
         return 0;
     }
-    //sw_uart_send_data(ctx,0x41);
-    sw_uart_recieve_data(ctx,msg->recieve_buf);
+    sw_uart_send_data(ctx,0x41);
+    //sw_uart_recieve_data(ctx,msg->recieve_buf);
     //TODO 暂时这样写,应该使用状态机组织TX和RX
     if(tmep)
     {

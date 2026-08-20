@@ -140,6 +140,11 @@ typedef struct {
 #define NVIC_STIR_BASE                    (0xE000E100 | 0xE00)
 #define AFIO_BASE                         (0x40010000)
 #define TIM1_TIMER_BASE                   (0x40012C00UL)
+#define TIM8_TIMER_BASE                   (0x40013400UL)
+
+#define TIM2_TIMER_BASE                   (0x40000000UL)
+#define TIM3_TIMER_BASE                   (0x40000400UL)
+
 
 #define RCC                               ((RCC_TypeDef*)RCC_BASE)
 #define GPIOA                             ((GPIOx_TypeDef*)GPIOA_BASE)
@@ -155,6 +160,9 @@ typedef struct {
 #define NVIC_STIR                         ((NVIC_STIR_TypeDef*)NVIC_STIR_BASE)
 #define AFIO                              ((AFIO_TypeDef*)AFIO_BASE)
 #define TIM1_TIMER                        ((TIM_TypeDef*)TIM1_TIMER_BASE)
+#define TIM8_TIMER                        ((TIM_TypeDef*)TIM8_TIMER_BASE)
+#define TIM2_TIMER                        ((TIM_TypeDef*)TIM2_TIMER_BASE)
+#define TIM3_TIMER                        ((TIM_TypeDef*)TIM3_TIMER_BASE)
 
 
 
@@ -162,7 +170,9 @@ typedef struct {
 #define RCC_APB2ENR_IOPBEN (1UL << 3)
 #define RCC_APB2ENR_IOPCEN (1UL << 4)
 #define RCC_APB2_ENABLE_TIM1 (1UL << 11)
-
+#define RCC_APB2_ENABLE_TIM8 (1UL << 13)
+#define RCC_APB1_ENABLE_TIM2 (1UL << 0)
+#define RCC_APB1_ENABLE_TIM3 (1UL << 1)
 
 //gpio_select mode
 #define ANALOG_MODE                (0x00)
