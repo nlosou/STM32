@@ -157,19 +157,6 @@ void SysTick_Handler(void)
   * @}
   */ 
 
-uint32_t count = 0;
-
-volatile uint32_t flag = 0;
-volatile uint8_t  uart_come = 0;
-volatile uint8_t  uart_transfer_idx = 0;
-volatile uint8_t get_pin_level =0;
-//TODO:这里有问题?可以在中断函数里引入sw_uart.h文件吗?还是得专门用一个.h文件来保持枚举类型的状态?
-volatile Uart_recieve_sate sw_uart_recieve_state = Idel;
-
-volatile uint8_t uart_receive_data = 0;
-volatile uint8_t bit_idx = 0;
-volatile uint8_t fetch_complete = 0;
-
 static inline void sw_uart_tick(void)
 {
     CLEAR_UIF();
@@ -181,7 +168,6 @@ static inline void sw_uart_tick(void)
 
 static inline void sw_uart_rx_process(void)
 {
-    CLEAR_UIF();
     if(sw_uart_recieve_state == Wait_start_bit)
     {
         sw_uart_recieve_state = Check_start_bit; 
@@ -221,7 +207,6 @@ static inline void sw_uart_rx_process(void)
 void EXTI0_IRQHandler(void)
 {
     //OLED_ShowString(0,0,"hello");
-    count = 1;
     CLEAR_EXTI_PR(0x01); 
 }
 //uart的rx接收数据 
@@ -235,6 +220,8 @@ void EXTI2_IRQHandler(void)//下降沿触发
 void TIM1_UP_IRQHandler(void)
 {
    flag = 1;
-   sw_uart_rx_process(); 
+   CLEAR_UIF();
+   sw_uart_rx_process();
+   
 }
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
