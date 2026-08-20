@@ -229,12 +229,12 @@ void TIM8_UP_IRQHandler(void)
    CLEAR_TIM8_UIF();
 }
 
-void TIM2_IRQHandle(void)
+void TIM2_IRQHandler(void)
 {
    flag = 1;
    CLEAR_TIM2_UIF();
 }
-void TIM3_IRQHandle(void)
+void TIM3_IRQHandler(void)
 {
    flag = 1;
    CLEAR_TIM3_UIF();
