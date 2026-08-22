@@ -20,13 +20,22 @@ static void stm32_timer_init(void*ctx)
 
 }
 
+static void stm32_timer_clear_uif(void*ctx)
+{
+    if(ctx == NULL)
+    {
+        return;
+    }
+    stm32_timer_ctx_t* tim1 = (stm32_timer_ctx_t*)ctx;
+    tim1->tim->TIMx_SR = 0x00;
+}
 static void stm32_timer_start(void*ctx)
 {
     if(ctx == NULL)
     {
         return;
     }
-    CLEAR_UIF();
+    stm32_timer_clear_uif(ctx);
     stm32_timer_ctx_t* tim1 = (stm32_timer_ctx_t*)ctx;
     //TODO 后续 把0x01整理成宏
     tim1->tim->TIMx_CR1|=0x01;
@@ -42,8 +51,7 @@ static void stm32_timer_close(void*ctx)
     stm32_timer_ctx_t* tim1 = (stm32_timer_ctx_t*)ctx;
     //TODO 后续 把0x01整理成宏
     tim1->tim->TIMx_CR1&=~0x01;
-    CLEAR_UIF();
-
+    stm32_timer_clear_uif(ctx);
 }
 
 static void stm32_timer_ug(void*ctx)
@@ -55,7 +63,7 @@ static void stm32_timer_ug(void*ctx)
     stm32_timer_ctx_t* tim1 = (stm32_timer_ctx_t*)ctx;
     //TODO 后续 把0x01整理成宏
     tim1->tim->TIMx_EGR|=0x01;
-    CLEAR_UIF();
+    stm32_timer_clear_uif(ctx);
 }
 
 static void stm32_timer_count_clear(void*ctx)
@@ -77,17 +85,6 @@ static void stm32_timer_set_arr(void*ctx,uint32_t arr)
     stm32_timer_ctx_t* tim1 = (stm32_timer_ctx_t*)ctx;
     tim1->tim->TIMx_ARR = arr-1;
 }
-
-static void stm32_timer_clear_uif(void*ctx)
-{
-    if(ctx == NULL)
-    {
-        return;
-    }
-    stm32_timer_ctx_t* tim1 = (stm32_timer_ctx_t*)ctx;
-    tim1->tim->TIMx_SR = 0x00;
-}
-
 
 const Timer_ops_t stm32_timer_ops = {
     .init = stm32_timer_init,

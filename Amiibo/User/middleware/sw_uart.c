@@ -2,15 +2,17 @@
 
 
 
-volatile Uart_recieve_sate sw_uart_recieve_state = Idel;
+volatile Uart_rx_sate sw_uart_recieve_state = Idel;
 volatile uint8_t uart_receive_data = 0x00;
 volatile uint8_t bit_idx = 0;
-uint8_t tmep = 0;
 volatile uint32_t flag = 0;
 volatile uint8_t fetch_complete = 0;
 volatile uint8_t  uart_transfer_idx = 0;
 volatile uint8_t get_pin_level =0;
+volatile uint8_t Uart_tx_busy = 0;
+volatile uint8_t Uart_tx_idx = 0;
 
+uint8_t TX_tmep_bit[10] = {0};                      //默认填入开始位
 
 static void sw_uart_init(void* ctx)
 {
@@ -42,24 +44,16 @@ static void sw_uart_send_data(void*ctx ,uint16_t transfer_data)
     sw_uart_ctx_t* sw_uart = (sw_uart_ctx_t*)(ctx);
     gpio_port_t* port = sw_uart->TX;
     uint16_t TX_PIN = sw_uart->TX_PIN;
-    uint8_t tmep_bit[10] = {0};                      //默认填入开始位
-    tmep_bit[9] = 1;                                //填入停止位
+        
+    //预处理
+    TX_tmep_bit[9] = 1;                                //填入停止位
     for(uint8_t idx = 0 ; idx < 8 ; idx++)
     {
-        tmep_bit[idx + 1] = (transfer_data >>idx) & 0x01 ;
+        TX_tmep_bit[idx + 1] = (transfer_data >>idx) & 0x01 ;
     }
-    uint8_t idx = 0;
+    Uart_tx_busy = 1;
+    Uart_tx_idx = 0;
     Timer_start(sw_uart->time_tx);
-    while(idx < 10)
-    {
-        if(flag)
-        {
-            gpio_port_write(port,TX_PIN,tmep_bit[idx++]);
-            flag = 0;
-        }
-    }
-    tmep = 1;
-    Timer_close(sw_uart->time_tx);
 }
 
 static void sw_uart_recieve_data(void*ctx,uint16_t* receive_data)
@@ -84,13 +78,9 @@ static uint8_t sw_uart_transmit(void*ctx,uart_msg_t* msg,uint16_t msg_num)
     {
         return 0;
     }
-    sw_uart_send_data(ctx,0x41);
-    //sw_uart_recieve_data(ctx,msg->recieve_buf);
+    sw_uart_send_data(ctx,*msg->recieve_buf);
+    sw_uart_recieve_data(ctx,msg->recieve_buf);
     //TODO 暂时这样写,应该使用状态机组织TX和RX
-    if(tmep)
-    {
-        tmep =0;
-    }
     return 1;
 }
 

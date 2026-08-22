@@ -159,23 +159,22 @@ void SysTick_Handler(void)
 
 static inline void sw_uart_tick(void)
 {
-    CLEAR_UIF();
-    CLEAR_CNT();
+    CLEAR_TIM2_UIF();
+    CLEAR_TIM2_CNT();
     sw_uart_recieve_state = Wait_start_bit;
-    TIMER_SET_ARR(52);
-    OPEN_TIM1();
+    TIMER_SET_TIM2_ARR(52);
+    OPEN_TIM2();
 }
 
 static inline void sw_uart_rx_process(void)
 {
     if(sw_uart_recieve_state == Wait_start_bit)
     {
-        sw_uart_recieve_state = Check_start_bit; 
         get_pin_level = STM32_FAST_GET_GPIOA_PIN_LEVEL(1<<2);
         if(get_pin_level)
         {
             sw_uart_recieve_state = Idel;
-            CLOSE_TIM1();
+            CLOSE_TIM2();
             CLEAR_EXTI_PR(0x01 << 2);   
             OPEN_EXTIx(1<<2);
         }
@@ -183,8 +182,8 @@ static inline void sw_uart_rx_process(void)
         {
             CLOSE_EXTIx(1<<2);
             CLEAR_EXTI_PR(0x01 << 2);   
-            TIMER_SET_ARR(104);
-            CLEAR_CNT();
+            TIMER_SET_TIM2_ARR(104);
+            CLEAR_TIM2_CNT();
             sw_uart_recieve_state = Sampling;
         }
     }
@@ -196,7 +195,7 @@ static inline void sw_uart_rx_process(void)
         if(bit_idx>7)
         {
             bit_idx = 0;
-            CLOSE_TIM1();
+            CLOSE_TIM2();
             OPEN_EXTIx(1<<2);
             sw_uart_recieve_state = Completed;
             fetch_complete = 1;
@@ -217,26 +216,33 @@ void EXTI2_IRQHandler(void)//下降沿触发
     CLEAR_EXTI_PR(0x01 << 2);   
 }
 
-void TIM1_UP_IRQHandler(void)
-{
-   CLEAR_UIF();
-   sw_uart_rx_process();
-   
-}
-void TIM8_UP_IRQHandler(void)
-{
-   flag = 1;
-   CLEAR_TIM8_UIF();
-}
-
+//Uart的RX
 void TIM2_IRQHandler(void)
 {
-   flag = 1;
    CLEAR_TIM2_UIF();
+   sw_uart_rx_process();
 }
+
+//Uart的TX
 void TIM3_IRQHandler(void)
 {
-   flag = 1;
    CLEAR_TIM3_UIF();
+   if(Uart_tx_idx>9)
+   {
+       Uart_tx_busy = 0;
+       CLOSE_TIM3();
+   }
+   if(Uart_tx_busy)
+   {
+        if(TX_tmep_bit[Uart_tx_idx++])
+        {
+            STM32_FAST_SET_GPIOA_PIN_HIGH(1<<0);
+        }
+        else
+        {
+
+            STM32_FAST_SET_GPIOA_PIN_LOW(1<<0);
+        }
+   }
 }
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

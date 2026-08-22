@@ -23,19 +23,30 @@ typedef struct {
 typedef enum {
     Idel,
     Wait_start_bit,
-    Check_start_bit,
     Sampling,
     Completed
-}Uart_recieve_sate;
+}Uart_rx_sate;
 
-extern const uart_ops_t uart_ops;
-extern volatile Uart_recieve_sate sw_uart_recieve_state;
-extern volatile uint8_t uart_receive_data;
-extern volatile uint8_t bit_idx;
-extern volatile uint32_t flag;
-extern volatile uint8_t fetch_complete;
-extern volatile uint8_t  uart_transfer_idx;
-extern volatile uint8_t get_pin_level;
+typedef enum {
+    TX_IDLE,
+    TX_START,
+    TX_DATA,
+    TX_STOP,
+    TX_COMPLETE,
+}Uart_tx_sate;
 
+extern const                uart_ops_t uart_ops;
+extern volatile             Uart_rx_sate sw_uart_recieve_state;
+extern volatile             Uart_tx_sate sw_uart_sate;
 
+extern volatile uint8_t     Uart_tx_busy;
+extern volatile uint8_t     Uart_tx_idx;
+extern volatile uint8_t     uart_receive_data;
+extern volatile uint8_t     bit_idx;
+extern volatile uint8_t     fetch_complete;
+extern volatile uint8_t     uart_transfer_idx;
+extern volatile uint8_t     get_pin_level;
+extern volatile uint32_t    flag;
+
+extern uint8_t TX_tmep_bit[10];                      //默认填入开始位
 #endif
